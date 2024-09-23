@@ -44,6 +44,22 @@ def add_to_watchlist(user_data, movie):
 # add_to_watchlist( usr, "soe " )
 
 
+# value "title" == str, and this reprsents movies watched
+# if title is in a movive from watchlist
+#   add that movie to watchlist
+#  return user_daa
+# if title is NOT a movie in the users watchlist
+# retrun the user-data
+def watch_movie(user_data, title):
+    for movie in user_data["watchlist"]:
+        if movie["title"] == title:
+            user_data["watchlist"].remove(movie)
+            user_data["watched"].append(movie)
+            break 
+    return user_data
+
+        
+    
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
