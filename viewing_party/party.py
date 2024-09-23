@@ -14,35 +14,49 @@ def create_movie(title, genre, rating):
     
     return movie_dict
 
-create_movie("happy feet", "Drama", 5)
-create_movie("", "Drama", 5)
 
+def add_to_watched(user_data, movie):
+    # user_data 
+    # empty list = no movies wathced
+    # user_data = {
+    #     "watched" : [
+    #         {
+    #             "title": "Title A",
+    #             "genre": "Horror",
+    #             "rating": 3.5
+    #         },
+    #         {
+    #             "title": "Title A",
+    #             "genre": "Horror",
+    #             "rating": 3.5
+    #         },
+    #         {
+    #             "title": "Title A",
+    #             "genre": "Horror",
+    #             "rating": 3.5
+    #         }
+    #     ]
+    # }
+    # return the user_data
 
+    user_data = {
+        "watched": []
+    }
 
-# def add_to_watched(user_data, movie):
-#     # user_data 
-#     # empty list = no movies wathced
-#     user_data = {
-#         "watched" : [
-#             {
+    user_data["watched"].append(movie)
 
-#             }
-#         ]
-#     }
-#     # return the user_data
-
-#     user_data = {}
-
-#     movie_info = create_movie(title, genre, rating)
-
-#     user_data["watched"] = 
-
-
-
-
+    # print(user_data)
+    return user_data
 
 def add_to_watchlist(user_data, movie):
-    pass
+    user_data = {
+        "watchlist": []
+    }
+
+    user_data["watchlist"].append(movie)
+
+    # print(user_data)
+    return user_data
 
 def watch_movie(user_data, title):
     pass
