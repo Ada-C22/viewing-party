@@ -1,8 +1,7 @@
 # Viewing Party
 
 ## Skills Assessed
-# Hi Anh :) --> -->
-### Hi Jenny. It's so great to work with you!
+
 Solving problems with...
 
 - Conditional logic
