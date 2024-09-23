@@ -25,12 +25,14 @@ def add_to_watchlist(user_data, movie):
 def watch_movie(user_data, title):
     
     movies = user_data.copy()
-    if title in movies["watchlist"]["title"]:
-        movies["watchlist"]["title"].remove(title)
-        movies["watched"]["title"].append(title)
-        return movies
-    else:
-        return user_data
+
+    for movie in movies["watchlist"]:
+        if title in movie["title"]:
+            watchlist_movie = movie
+            movies["watchlist"].remove(watchlist_movie)
+            movies["watched"].append(watchlist_movie)
+    
+    return movies
         
 
 # create_movie("Title A", "Horror", 3.5)
