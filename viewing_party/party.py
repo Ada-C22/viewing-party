@@ -11,6 +11,22 @@ def create_movie(title, genre, rating):
         return movie
     else: return None
 
+user_data = {"watched": []}
+movie = {
+        "title": "Title A",
+        "genre": "Horror",
+        "rating": 3.5
+    }
+def add_to_watched(user_data, movie):
+    user_data["watched"].append(movie)
+    print(len(user_data["watched"]))
+    return user_data
+    
+print(add_to_watched(user_data,movie))
+
+
+def watch_movie(user_data,title):
+    pass
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
