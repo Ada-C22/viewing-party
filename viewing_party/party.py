@@ -23,10 +23,14 @@ def add_to_watched(user_data, movie):
 
     return user_data
 
-def add_to_watchlist(data, movie):
-    pass
+def add_to_watchlist(user_data, movie):
+    if not movie:
+        return user_data
+    user_data["watchlist"].append(movie)
 
-def watch_movie(data, title):
+    return user_data
+
+def watch_movie(user_data, title):
     pass
 
 # -----------------------------------------
