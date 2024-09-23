@@ -1,6 +1,33 @@
 # ------------- WAVE 1 --------------------
 
 def create_movie(title, genre, rating):
+    if not title or not genre or not rating:
+        return None
+    
+    movie_dict = {
+        "title": title,
+        "genre": genre,
+        "rating": rating,
+    }
+    
+    # movie_dict["title"] = title
+    # movie_dict["genre"] = genre
+    # movie_dict["rating"] = rating
+
+    return movie_dict
+
+def add_to_watched(user_data, movie):
+    user_data_dict = {}
+
+    if "watched" not in user_data:
+        user_data["watched"] = [] 
+
+    return user_data_dict
+
+def add_to_watchlist(data, movie):
+    pass
+
+def watch_movie(data, title):
     pass
 
 # -----------------------------------------
@@ -8,11 +35,12 @@ def create_movie(title, genre, rating):
 # -----------------------------------------
 
 
+
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 
-        
+
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
