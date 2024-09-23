@@ -16,6 +16,12 @@ def create_movie(movie_title, genre, rating):
     
     return None
 
+# ALEIDA V's changes:
+def add_to_watched(user_data, movie):
+    pass
+
+
+
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
