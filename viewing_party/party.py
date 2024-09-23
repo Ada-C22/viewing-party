@@ -15,22 +15,22 @@ def create_movie(title, genre, rating):
     """
 
     # Psuedocode: 
-
+    if title or genre or rating is None:
+        return None
+    
     try:
         # Checking if user inputs on these parameters are all valid.
         title = str(title)
         genre = str(genre)
         rating = float(rating)
         
-        # Need to check the type of tittle and genre are string and rating are int
-        if title and genre and rating:
-            return {"title": title, "genre": genre, "rating": rating}
+        return {"title": title, "genre": genre, "rating": rating}
         
     except ValueError and TypeError as e:
         print(e)
         return None
     
-print(create_movie(None, "Horror", 3.5))
+print(create_movie(None,"None", 3.5))
    
    
     
