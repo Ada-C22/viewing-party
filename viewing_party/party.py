@@ -10,10 +10,6 @@ def create_movie(title, genre, rating):
         "rating": rating,
     }
     
-    # movie_dict["title"] = title
-    # movie_dict["genre"] = genre
-    # movie_dict["rating"] = rating
-
     return movie_dict
 
 def add_to_watched(user_data, movie):
