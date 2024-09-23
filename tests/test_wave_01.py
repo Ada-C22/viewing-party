@@ -1,8 +1,8 @@
 import pytest
 # NOTE: In production code, we developers should change import * to something more specific. Due to some constraints of this project, we will import * in our test files.
 # from viewing_party.main import *
-from viewing_party.party import create_movie
-from tests.test_constants import MOVIE_TITLE_1,GENRE_1,RATING_1
+from viewing_party.party import create_movie, add_to_watched
+from tests.test_constants import MOVIE_TITLE_1,GENRE_1,RATING_1, FANTASY_2
 
 #@pytest.mark.skip()
 def test_create_successful_movie():

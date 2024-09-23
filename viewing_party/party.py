@@ -18,8 +18,10 @@ def create_movie(movie_title, genre, rating):
 
 # ALEIDA V's changes:
 def add_to_watched(user_data, movie):
-    pass
-
+    # user_data is a DICT, ONE KEY: "watched": [list of dicts]
+    # movie, is a single DICT with "title", "genre", "rating" keys
+    user_data["watched"].append(movie)
+    return user_data
 
 
 # -----------------------------------------
