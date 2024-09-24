@@ -65,11 +65,6 @@ def get_watched_avg_rating(user_data):
         return 0.0
     return average_rating
 
-
-# determin most frequent occurence in the watchlist
-# key == "genre" a str
-# return most frequent watched
-# if value of "watched" == empty list get_most_watched_genre return None 
 def get_most_watched_genre(user_data):
     
     if user_data['watched'] == []:
@@ -79,24 +74,15 @@ def get_most_watched_genre(user_data):
     
     for movie in user_data["watched"]:
         genre = movie["genre"]
-        print("******move genre*******")
-        print(genre)
         if genre in count_genres:
             count_genres[genre] +=1
-            print("plus one  of genres******")
-            print(count_genres)
         else:
             count_genres[genre] =1
-        
-          
+              
     most_watched = max(count_genres, key= count_genres.get)
-    print("!!! most watched !!!11")
     return most_watched
       
-           
-          
-           
-       
+                                
         
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
