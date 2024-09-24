@@ -14,17 +14,20 @@ def create_movie(title, genre, rating):
 
 
 def add_to_watched(user_data, movie):
-    movie_list = []
-    movie_list.append(movie)      
-    user_data['watched'] = movie_list
-    print(movie_list)
-
+    if movie == []:
+         user_data['watched'] = []
+         
+    else:
+         user_data['watched'].append(movie)
+    
     return user_data
+    
 
 def add_to_watchlist(user_data, movie):
     user_data['watchlist'].append(movie)
     return user_data
-         
+
+
           
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
