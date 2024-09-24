@@ -20,9 +20,6 @@ def test_create_successful_movie():
     assert new_movie["rating"] == pytest.approx(RATING_1)
 
 <<<<<<< HEAD
-#@pytest.mark.skip()
-=======
-# @pytest.mark.skip()
 >>>>>>> 3cbd23c1f105a9f66d7afc62c6774a840dc97805
 def test_create_no_title_movie():
     # Arrange
