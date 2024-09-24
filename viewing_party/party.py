@@ -111,15 +111,6 @@ def get_available_recs(user_data):
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 
-""" 
-- take one parameter: `user_data`
-  - `user_data` will have a field `"favorites"`. The value of `"favorites"` is a list of movie dictionaries
-    - This represents the user's favorite movies
-- Determine a list of recommended movies. A movie should be added to this list if and only if:
-  - The movie is in the user's `"favorites"`
-  - None of the user's friends have watched it
-- Return the list of recommended movies
-"""
 def get_rec_from_favorites(user_data):
     friends_movies = set()
     for friend in user_data["friends"]:
@@ -128,5 +119,5 @@ def get_rec_from_favorites(user_data):
     unique_movies = [
         movie for movie in user_data["favorites"] if movie["title"] not in friends_movies
     ]
-    
+
     return unique_movies
