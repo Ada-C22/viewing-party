@@ -36,11 +36,7 @@ def test_create_no_title_movie():
     # Assert
     assert new_movie is None
 
-<<<<<<< HEAD
-#@pytest.mark.skip()
-=======
 # @pytest.mark.skip()
->>>>>>> 3cbd23c1f105a9f66d7afc62c6774a840dc97805
 def test_create_no_genre_movie():
     # Arrange
     movie_title = "Title A"
@@ -53,11 +49,7 @@ def test_create_no_genre_movie():
     # Assert
     assert new_movie is None
 
-<<<<<<< HEAD
-#@pytest.mark.skip()
-=======
 # @pytest.mark.skip()
->>>>>>> 3cbd23c1f105a9f66d7afc62c6774a840dc97805
 def test_create_no_rating_movie():
     # Arrange
     movie_title = "Title A"
@@ -70,11 +62,7 @@ def test_create_no_rating_movie():
     # Assert
     assert new_movie is None
 
-<<<<<<< HEAD
-#@pytest.mark.skip()
-=======
 # @pytest.mark.skip()
->>>>>>> 3cbd23c1f105a9f66d7afc62c6774a840dc97805
 def test_adds_movie_to_user_watched():
     # Arrange
     movie = {
@@ -95,11 +83,7 @@ def test_adds_movie_to_user_watched():
     assert updated_data["watched"][0]["genre"] == GENRE_1
     assert updated_data["watched"][0]["rating"] == RATING_1
 
-<<<<<<< HEAD
-#@pytest.mark.skip()
-=======
 # @pytest.mark.skip()
->>>>>>> 3cbd23c1f105a9f66d7afc62c6774a840dc97805
 def test_adds_movie_to_non_empty_user_watched():
     # Arrange
     movie = {
