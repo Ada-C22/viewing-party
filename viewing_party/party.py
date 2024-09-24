@@ -65,11 +65,46 @@ def watch_movie(user_data, title):
             list_of_watched_movie_dict.append(movie_dict)
             # exit loop early if found
             break
+
     return user_data
 
-# -----------------------------------------
-# ------------- WAVE 2 --------------------
-# -----------------------------------------
+
+#wave 2 
+
+def get_watched_avg_rating(user_data):
+    """
+    the value of user_data will be a dictionary with a "watched" list of movie dictionaries
+    This represents that the user has a list of watched movies
+    Calculate the average rating of all movies in the watched list
+    The average rating of an empty watched list is 0.0
+    return the average rating
+    user_data = {"watched": [...list of movie_dict watched...]}
+    """
+
+    watched_list = user_data["watched"]
+    total_rating = 0
+    
+    if watched_list == []:
+        return 0.0
+    for movie in watched_list:
+        total_rating += movie["rating"]
+    
+    avg_rating = total_rating/len(watched_list)
+    return avg_rating
+        
+
+def get_most_watched_genre(user_data):
+    """
+    the value of user_data will be a dictionary with a "watched" list of movie dictionaries. Each movie dictionary has a key "genre".
+    This represents that the user has a list of watched movies. Each watched movie has a genre.
+    The values of "genre" is a string.
+    Determine which genre is most frequently occurring in the watched list
+    return the genre that is the most frequently watched
+    If the value of "watched" is an empty list, get_most_watched_genre should return None.
+    """
+
+    watched_list = user_data["watched"]
+    genre_count = {}
 
 def get_watched_avg_rating(user_data):
     '''
@@ -136,6 +171,37 @@ def get_most_watched_genre(user_data):
 
 
 
+<<<<<<< HEAD
 
+=======
+    if watched_list == []:
+        return None
+    for movie in watched_list:
+        genre = movie["genre"] # assigning value of genre to variable "genre"
+        count = genre_count.get(genre, 0)
+        genre_count[genre] = count + 1
+
+    # Determine the most frequent
+    max_count = 0
+    frequent_genre = None
+
+    for key, value in genre_count.items():
+        if value > max_count:
+            max_count = value
+            frequent_genre = key
+    return frequent_genre
+
+
+
+# wave 3
+
+
+        
+            
+        
+# -----------------------------------------
+# ------------- WAVE 4 --------------------
+# -----------------------------------------
+>>>>>>> d0705de84eb7fb2f80c628ea51e19705471c2b59
 
 
