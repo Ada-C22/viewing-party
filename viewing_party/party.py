@@ -10,11 +10,6 @@ def create_movie(title, genre, rating):
         }
     else:
         return None
-# print(create_movie("movie_title", "comedy", "5"))
-# user_data:
-# {"watched": [movies] 
-#  "watchlist": [movies]} <-- add here a movie
-# add movie to 'watched' list from the user dict
 
 def add_to_watched(user_data, movie):
     user_data["watched"].append(movie)
@@ -44,12 +39,6 @@ def add_to_watchlist(user_data, movie):
 # add_to_watchlist( usr, "soe " )
 
 
-# value "title" == str, and this reprsents movies watched
-# if title is in a movive from watchlist
-#   add that movie to watchlist
-#  return user_daa
-# if title is NOT a movie in the users watchlist
-# retrun the user-data
 def watch_movie(user_data, title):
     for movie in user_data["watchlist"]:
         if movie["title"] == title:
@@ -64,19 +53,17 @@ def watch_movie(user_data, title):
 # -----------------------------------------
 
 def get_watched_avg_rating(user_data):
-     
+    
     total_ratings = 0
     number_of_movies = 0
     for movie in user_data["watched"]:
         total_ratings += movie["rating"]
         number_of_movies += 1
         average_rating = total_ratings / number_of_movies
-        print(user_data.keys())
         
     if number_of_movies == 0:
         return 0.0
     return average_rating
-
 
 
 # determin most frequent occurence in the watchlist
@@ -85,7 +72,31 @@ def get_watched_avg_rating(user_data):
 # if value of "watched" == empty list get_most_watched_genre return None 
 def get_most_watched_genre(user_data):
     
-    pass
+    if user_data['watched'] == []:
+        return None
+    
+    count_genres = {}
+    
+    for movie in user_data["watched"]:
+        genre = movie["genre"]
+        print("******move genre*******")
+        print(genre)
+        if genre in count_genres:
+            count_genres[genre] +=1
+            print("plus one  of genres******")
+            print(count_genres)
+        else:
+            count_genres[genre] =1
+        
+          
+    most_watched = max(count_genres, key= count_genres.get)
+    print("!!! most watched !!!11")
+    return most_watched
+      
+           
+          
+           
+       
         
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
