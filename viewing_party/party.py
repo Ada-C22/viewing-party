@@ -1,3 +1,5 @@
+# to avoid naming confusing
+# "lod" in lod_<var.name> means list of dict
 # ------------- WAVE 1 --------------------
 
 def create_movie(title, genre, rating):
@@ -29,8 +31,8 @@ def add_to_watched(user_data, movie):
     user_data = {"watched": [...list of movie_dict watched...]}
     '''
 
-    list_of_watched_movie_dict = user_data["watched"]
-    list_of_watched_movie_dict.append(movie)
+    lod_watched = user_data["watched"]
+    lod_watched.append(movie)
     return user_data
 
 def add_to_watchlist(user_data, movie):
@@ -39,8 +41,8 @@ def add_to_watchlist(user_data, movie):
     An empty list represents that the user has no movies in their watchlist
     user_data = {"watchlist": [...list of movie_dict wanting to watch...]}
     '''
-    list_of_watchlist_dict = user_data["watchlist"]
-    list_of_watchlist_dict.append(movie)
+    lod_watchlist = user_data["watchlist"]
+    lod_watchlist.append(movie)
     return user_data
 
 def watch_movie(user_data, title):
@@ -53,16 +55,16 @@ def watch_movie(user_data, title):
     - if movie is not in user watchlist, return user data
     '''
 
-    list_of_watchlist_dict = user_data["watchlist"]
-    list_of_watched_movie_dict = user_data["watched"]
+    lod_watchlist = user_data["watchlist"]
+    lod_watched = user_data["watched"]
     # returns [ {movie_dict} , {movie_dict} , ...]
 
-    for movie_dict in list_of_watchlist_dict:
+    for movie_dict in lod_watchlist:
         if movie_dict["title"] == title:
             # remove from watchlist
-            list_of_watchlist_dict.remove(movie_dict)
+            lod_watchlist.remove(movie_dict)
             # add to watched
-            list_of_watched_movie_dict.append(movie_dict)
+            lod_watched.append(movie_dict)
             # exit loop early if found
             break
 
@@ -106,74 +108,7 @@ def get_most_watched_genre(user_data):
     watched_list = user_data["watched"]
     genre_count = {}
 
-def get_watched_avg_rating(user_data):
-    '''
-    the value of user_data will be a dictionary with a "watched" list of movie dictionaries
-    This represents that the user has a list of watched movies
-    Calculate the average rating of all movies in the watched list
-    The average rating of an empty watched list is 0.0
-    return the average rating
-    user_data = {"watched": [...list of movie_dict watched...]}
-    '''
-    list_of_watched_movie_dict = user_data["watched"]
 
-    # if the list is empty/falsy
-    if not list_of_watched_movie_dict:
-        return 0.0
-
-    rating_sum = 0
-    for movie_dict in list_of_watched_movie_dict:
-        rating = movie_dict["rating"]
-        rating_sum += rating
-    return rating_sum/len(list_of_watched_movie_dict)
-
-    # what if the movie_dict has no rating
-
-def get_most_watched_genre(user_data):
-    '''
-    the value of user_data will be a dictionary with a "watched" list of movie dictionaries. Each movie dictionary has a key "genre".
-    This represents that the user has a list of watched movies. Each watched movie has a genre.
-    The values of "genre" is a string.
-    Determine which genre is most frequently occurring in the watched list
-    return the genre that is the most frequently watched
-    If the value of "watched" is an empty list, get_most_watched_genre should return None.
-    '''
-    list_of_watched_movie_dict = user_data["watched"]
-
-    # if the list is empty/falsy
-    if not list_of_watched_movie_dict:
-        return None
-    
-    # # used list comprehension to create the list of movie genre strings
-    # genres = [movie_dict["genre"] for movie_dict in list_of_watched_movie_dict]
-
-    # initialize dict
-    genre_count_dict = {}
-
-    for movie_dict in list_of_watched_movie_dict:
-        genre = movie_dict["genre"]
-        count = genre_count_dict.get(genre,0)
-        genre_count_dict[genre] = count + 1
-    
-    max_genre = None
-    max_count = 0
-
-    for genre, count in genre_count_dict.items():
-        if count > max_count:
-            max_count = count
-            max_genre = genre
-    return max_genre
-
-
-
-    
-
-
-
-
-<<<<<<< HEAD
-
-=======
     if watched_list == []:
         return None
     for movie in watched_list:
@@ -191,17 +126,71 @@ def get_most_watched_genre(user_data):
             frequent_genre = key
     return frequent_genre
 
+# -----------------------------------------
+# ------------- WAVE 3 --------------------
+# -----------------------------------------
+
+def get_unique_watched(user_data):
+    '''
+    the value of user_data will be a dictionary with a "watched" list of movie dictionaries, and a "friends"
+    This represents that the user has a list of watched movies and a list of friends
+    The value of "friends" is a list
+    Each item in "friends" is a dictionary. This dictionary has a key "watched", which has a list of movie dictionaries.
+    Each movie dictionary has a "title".
+    Determine which movies the user has watched, but none of their friends have watched.
+    Return a list of dictionaries, that represents a list of movies
+    user_data = {'watched': [{...}, {...}, {...}, {...}, {...}, {...}], 'friends': [{'watched': [...]}, {'watched': [...]}]
+                                                                                                 v [{'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}, {'title': 'The Lord of the Functions: The Return of the Value', 'genre': 'Fantasy', 'rating': 4.0}, {'title': 'The Programmer: An Unexpected Stack Trace', 'genre': 'Fantasy', 'rating': 4.0}, {'title': 'It Came from the Stack Trace', 'genre': 'Horror', 'rating': 3.5}]   
+    '''
+    list_of_watched_movie_dict = user_data["watched"] # output: [{...}, {...}, {...}, {...}, {...}, {...}]
+    list_of_friends_watched_movie_dict = user_data["friends"] # [{'watched': [...]}, {'watched': [...]}]
+
+    list_of_all_movies_friends_watched = []
+    # need to iterate thru list (list_of_friends_watched_movie_dict) to pull out watched movie dict
+    for movie_dict in list_of_friends_watched_movie_dict: # {'watched': [...]}
+        friend_movie_list = movie_dict["watched"] # [ {"title": "...", "genre": "...", "rating": .. } {...movie_dict...} ] 
+        list_of_all_movies_friends_watched = list_of_all_movies_friends_watched + friend_movie_list
+    
+    unique_movies_list = []
+    for movie_dict in list_of_watched_movie_dict:
+        if not movie_dict in list_of_all_movies_friends_watched:
+            unique_movies_list.append(movie_dict)
+
+    return unique_movies_list
 
 
-# wave 3
 
 
-        
-            
+
+
+
+
+
+
+
+    # list_of_watched_movie_dict = user_data["watched"]
+    # list_of_friends_watched_movie_dict = user_data["friends"] # [{'watched': [...]}, {'watched': [...]}]
+    # flat_list_friends_watched_movie = []
+    # for movie_dict in list_of_friends_watched_movie_dict:
+    #     list_of_watched_movie_dict_for_one_friend = movie_dict["watched"] # [{'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}, {'title': 'The Lord of the Functions: The Return of the Value', 'genre': 'Fantasy', 'rating': 4.0}, {'title': 'The Programmer: An Unexpected Stack Trace', 'genre': 'Fantasy', 'rating': 4.0}, {'title': 'It Came from the Stack Trace', 'genre': 'Horror', 'rating': 3.5}]
+    #     for friends_watched_movie_dict in list_of_watched_movie_dict_for_one_friend:
+    #         flat_list_friends_watched_movie.append(friends_watched_movie_dict)
+    
+    # unique_movies = []
+    # for movie_dict in list_of_watched_movie_dict:
+    #     if not movie_dict in flat_list_friends_watched_movie:
+    #         unique_movies.append(movie_dict)
+    
+    # return unique_movies
+
+    
+
         
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
->>>>>>> d0705de84eb7fb2f80c628ea51e19705471c2b59
 
+# -----------------------------------------
+# ------------- WAVE 5 --------------------
+# -----------------------------------------
 
