@@ -39,19 +39,21 @@ def add_to_watched(user_data, movie):
     # }
     # return the user_data
 
-    user_data = {
-        "watched": []
-    }
-
     user_data["watched"].append(movie)
 
-    # print(user_data)
+    #print(user_data)
     return user_data
 
+# print(add_to_watched(user_data, movie))
+
+print(add_to_watched({"watched": []}, {
+                                        "title": "Happy Feet",
+                                        "genre": "Drama",
+                                        "rating": 5
+                                    }))
+
+
 def add_to_watchlist(user_data, movie):
-    user_data = {
-        "watchlist": []
-    }
 
     user_data["watchlist"].append(movie)
 
