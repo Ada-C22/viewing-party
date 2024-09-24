@@ -99,11 +99,27 @@ def watch_movie(user_data, title):
             user_data["watched"].append(movie)
         
     return user_data
-  
-# -----------------------------------------
-# ------------- WAVE 2 --------------------
-# -----------------------------------------
 
+
+# ------------- WAVE 2 --------------------
+
+def get_watched_avg_rating(user_data):
+
+    # user_data_copy = user_data.copy()
+    rate_sum = 0
+    index = 0
+
+    # Loop through each item and sum the ratings
+    for item in user_data["raiting"]:
+        rate_sum += item["raiting"]
+        index += 1
+    # Calculate average rating 
+    if user_data["raiting"] > 0:
+        average_rating = rate_sum / index
+    else:
+        average_rating = 0.0
+    
+    return average_rating
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
