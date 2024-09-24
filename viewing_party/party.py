@@ -6,6 +6,34 @@ def create_movie(title, genre, rating):
     return {'title': title, 'genre': genre, 'rating': rating}
 
 
+def add_to_watched(user_data, movie):
+    watched_list = user_data["watched"]
+    watched_list.append(movie)
+    return user_data
+
+
+def add_to_watchlist(user_data: dict, movie: dict):
+
+    movie_list = user_data["watchlist"]
+    movie_list.append(movie)
+    return user_data
+
+
+def watch_movie(user_data, title):
+    watchlist = user_data['watchlist']
+    watched = user_data['watched']
+    for movie in watchlist:
+        if title == movie["title"]:
+            watched.append(movie)
+            watchlist.remove(movie)
+    return user_data
+
+
+
+
+
+
+
 
 
 
