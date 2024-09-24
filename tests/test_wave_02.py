@@ -30,10 +30,10 @@ def test_empty_watched_average_rating_is_zero():
 # @pytest.mark.skip()
 def test_most_watched_genre():
     # Arrange
+    janes_data = clean_wave_2_data()
 
     # Act
     popular_genre = get_most_watched_genre(janes_data)
-    janes_data = clean_wave_2_data()
 
     # Assert
     assert popular_genre == "Fantasy"
