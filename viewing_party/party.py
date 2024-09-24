@@ -1,7 +1,9 @@
+import pytest
+
 # ------------- WAVE 1 --------------------
 
 def create_movie(title, genre, rating):
-    pass
+    
     if title and genre and rating:
             return {
                 "title": title,
@@ -18,6 +20,12 @@ def add_to_watched(user_data, movie):
     print(movie_list)
 
     return user_data
+
+def add_to_watchlist(user_data, movie):
+    user_data['watchlist'].append(movie)
+    return user_data
+         
+          
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
