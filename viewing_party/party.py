@@ -60,8 +60,44 @@ def add_to_watchlist(user_data, movie):
     # print(user_data)
     return user_data
 
+
+
+
+    exa_data = {
+        "watchlist": [
+            {
+            }
+        ],
+        "watched": [
+            {
+            }
+        ]
+    }
+
+    exa_data["watchlist"] == 0
+
+
 def watch_movie(user_data, title):
-    pass
+
+    # watchlist = add_to_watchlist(user_data, movie)
+    # watched = add_to_watched(user_data, movie)
+
+
+
+    for movie in user_data["watchlist"]:
+        if movie["title"] == title:
+            user_data["watchlist"].remove(movie)
+            user_data["watched"].append(movie)
+            return user_data
+    
+    return user_data
+    
+
+    #call function add_to_watched 
+        #title is string
+        #list of "watched movies"
+    # if title is in watchlist add movie to watched and return user_data
+    # if title is not on watchlist return user_data
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
