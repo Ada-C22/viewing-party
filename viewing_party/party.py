@@ -18,7 +18,7 @@ def add_to_watched(user_data, movie):
          user_data['watched'] = []
          
     else:
-         user_data['watched'].append(movie)
+        user_data['watched'].append(movie)
     
     return user_data
     
@@ -40,9 +40,33 @@ def watch_movie(user_data,title):
     
     return user_data
           
-# -----------------------------------------
+
 # ------------- WAVE 2 --------------------
-# -----------------------------------------
+
+def get_watched_avg_rating(user_data):
+
+    watched_movies = user_data.get('watched', [])
+
+    rating_sum = 0.0
+    total_movies = 0
+
+    for movie in watched_movies:
+        rating = movie.get('rating')
+        if rating is not None:
+            rating_sum += rating
+            total_movies += 1
+
+    if total_movies == 0:
+        return 0.0  
+
+    average_rating = rating_sum / total_movies
+    return average_rating
+        
+
+        
+               
+               
+    
 
 
 # -----------------------------------------
