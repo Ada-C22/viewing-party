@@ -45,21 +45,21 @@ def get_most_watched_genre(user_data):
     if not user_data["watched"]:
         return None
     
-    genres = {}
+    genre_count = {}
     for movie in user_data["watched"]:
-        if movie["genre"] not in genres:
-            genres[movie["genre"]] = 1
+        if movie["genre"] not in genre_count:
+            genre_count[movie["genre"]] = 1
         else:
-            genres[movie["genre"]] +=1
+            genre_count[movie["genre"]] +=1
 
     max_num = 0
-    max_genre = ""
-    for genre, times_watched in genres.items():
-        if times_watched > max_num:
-            max_num = times_watched
-            max_genre = genre
+    most_watched_genre = None
+    for genre in genre_count:
+        if genre_count[genre] > max_num:
+            max_num = genre_count[genre]
+            most_watched_genre = genre
     
-    return max_genre
+    return most_watched_genre
         
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
