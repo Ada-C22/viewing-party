@@ -26,6 +26,9 @@ def watch_movie(user_data, title):
     
     movies = user_data.copy()
 
+    movies["watchlist"] = movies["watchlist"].copy()
+    movies["watched"] = movies["watched"].copy()
+
     for movie in movies["watchlist"]:
         if title in movie["title"]:
             watchlist_movie = movie
@@ -33,7 +36,7 @@ def watch_movie(user_data, title):
             movies["watched"].append(watchlist_movie)
     
     return movies
-        
+
 
 # create_movie("Title A", "Horror", 3.5)
 # movie ="Title A", "Horror", 3.5

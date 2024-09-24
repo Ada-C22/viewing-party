@@ -183,9 +183,12 @@ def test_moves_movie_from_watchlist_to_watched():
     assert len(updated_data["watchlist"]) == 1
     assert len(updated_data["watched"]) == 2
     
-    watched_last_item = updated_data["watched"][-1]  
-    assert watched_last_item["title"] == movie_to_watch["title"], f"Incorrect movie added to watched list: expected '{movie_to_watch['title']}', got '{watched_last_item['title']}'"
-
+    if updated_data["watched"][-1]["title"] != movie_to_watch["title"]:
+        raise ValueError(f"Incorrect movie added to watched list: expected '{movie_to_watch[0]['title']}', got '{updated_data["watched"][-1]["title"]}'")
+    
+    
+    
+    
 
 #@pytest.mark.skip()
 def test_does_nothing_if_movie_not_in_watchlist():
