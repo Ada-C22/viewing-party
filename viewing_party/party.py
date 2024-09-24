@@ -2,7 +2,7 @@
 from tests.test_constants import *
 
 def create_movie(title, genre, rating):
-    if not title or genre or rating:
+    if not title or not genre or not rating:
         return None 
     movie = {
         "title": MOVIE_TITLE_1,
