@@ -46,6 +46,7 @@ def test_create_no_genre_movie():
     assert new_movie is None
 
 # @pytest.mark.skip()
+# @pytest.mark.skip()
 def test_create_no_rating_movie():
     # Arrange
     movie_title = "Title A"
@@ -160,10 +161,13 @@ def test_moves_movie_from_watchlist_to_empty_watched():
     assert len(updated_data["watched"]) == 1
     
     # raise Exception("Test needs to be completed.")
-    assert watch_movie not in updated_data["watched"]
     # *******************************************************************************************
     # ****** Add assertions here to test that the correct movie was added to "watched" **********
     # *******************************************************************************************
+    # assert MOVIE_TITLE_1 not in updated_data["watchlist"]
+    # assert MOVIE_TITLE_1 in updated_data["watched"]
+    assert janes_data not in updated_data["watchlist"]
+
 
 # @pytest.mark.skip()
 def test_moves_movie_from_watchlist_to_watched():
@@ -185,11 +189,10 @@ def test_moves_movie_from_watchlist_to_watched():
     assert len(updated_data["watched"]) == 2
     
     # raise Exception("Test needs to be completed.")
-    # assert movie_to_watch not in updated_data["watchlist"]
-    assert movie_to_watch not in updated_data["watchlist"]
     # *******************************************************************************************
     # ****** Add assertions here to test that the correct movie was added to "watched" **********
     # *******************************************************************************************
+    assert movie_to_watch not in updated_data["watchlist"]
 
 # @pytest.mark.skip()
 def test_does_nothing_if_movie_not_in_watchlist():
