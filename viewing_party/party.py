@@ -152,7 +152,6 @@ def get_unique_watched(user_data):
     # unique list of movies user's watched but not their friends
     list_unique_movies = []
     for movie in user_data["watched"]:
-        print(movie)
         if movie["title"] not in titles_friends_watched:
             list_unique_movies.append(movie)
             
@@ -164,27 +163,17 @@ def get_friends_unique_watched(user_data):
     friends': [{'watched': [..{},{},{}..], {'watched': [..{},{},{}..]
     '''
 
-
     list_titles_watched = set()
     for movie in user_data["watched"]:
         list_titles_watched.add(movie["title"])
 
-    titles_friends_watched = set()
-
-    for friend_movie_dict in user_data["friends"]:
-        for movie in friend_movie_dict["watched"]:
-            titles_friends_watched.add(movie["title"])
-    
-    
     list_friends_unique_movie = []
     for friend in user_data["friends"]:
         for movie_dict in friend["watched"]:
-            print(movie_dict["title"])
             if movie_dict["title"] not in list_titles_watched and movie_dict not in list_friends_unique_movie:
                 list_friends_unique_movie.append(movie_dict)
 
     return list_friends_unique_movie
-
 
 
     
