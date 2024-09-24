@@ -83,15 +83,15 @@ def get_watched_avg_rating(user_data):
     user_data = {"watched": [...list of movie_dict watched...]}
     """
 
-    watched_list = user_data["watched"]
+    lod_watched = user_data["watched"]
     total_rating = 0
     
-    if watched_list == []:
+    if lod_watched == []:
         return 0.0
-    for movie in watched_list:
+    for movie in lod_watched:
         total_rating += movie["rating"]
     
-    avg_rating = total_rating/len(watched_list)
+    avg_rating = total_rating/len(lod_watched)
     return avg_rating
         
 
@@ -105,13 +105,13 @@ def get_most_watched_genre(user_data):
     If the value of "watched" is an empty list, get_most_watched_genre should return None.
     """
 
-    watched_list = user_data["watched"]
+    lod_watched = user_data["watched"]
     genre_count = {}
 
 
-    if watched_list == []:
+    if lod_watched == []:
         return None
-    for movie in watched_list:
+    for movie in lod_watched:
         genre = movie["genre"] # assigning value of genre to variable "genre"
         count = genre_count.get(genre, 0)
         genre_count[genre] = count + 1
