@@ -10,7 +10,7 @@ def test_create_successful_movie():
     movie_title = MOVIE_TITLE_1
     genre = GENRE_1
     rating = RATING_1
-    
+
     # Act
     new_movie = create_movie(movie_title, genre, rating)
 
@@ -38,7 +38,7 @@ def test_create_no_genre_movie():
     movie_title = "Title A"
     genre = None
     rating = 3.5
-  
+
 
     # Act
     new_movie = create_movie(movie_title, genre, rating)
@@ -159,7 +159,7 @@ def test_moves_movie_from_watchlist_to_empty_watched():
     # Assert
     assert len(updated_data["watchlist"]) == 0
     assert len(updated_data["watched"]) == 1
-    
+
     raise Exception("Test needs to be completed.")
     # *******************************************************************************************
     # ****** Add assertions here to test that the correct movie was added to "watched" **********
@@ -183,7 +183,7 @@ def test_moves_movie_from_watchlist_to_watched():
     # Assert
     assert len(updated_data["watchlist"]) == 1
     assert len(updated_data["watched"]) == 2
-    
+
     raise Exception("Test needs to be completed.")
     # *******************************************************************************************
     # ****** Add assertions here to test that the correct movie was added to "watched" **********
