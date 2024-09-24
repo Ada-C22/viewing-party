@@ -129,6 +129,17 @@ def get_most_watched_genre(user_data):
     for movie in user_data["watched"]:
         genres[movie["genre"]] += 1
 
+    max_rate = 0
+    genre = None
+
+    for key, rate in genres.items():
+        if rate > max_rate:
+            genre = key
+            max_rate = rate
+    
+    return genre
+
+
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
