@@ -71,17 +71,71 @@ def watch_movie(user_data, title):
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
 
+def get_watched_avg_rating(user_data):
+    '''
+    the value of user_data will be a dictionary with a "watched" list of movie dictionaries
+    This represents that the user has a list of watched movies
+    Calculate the average rating of all movies in the watched list
+    The average rating of an empty watched list is 0.0
+    return the average rating
+    user_data = {"watched": [...list of movie_dict watched...]}
+    '''
+    list_of_watched_movie_dict = user_data["watched"]
 
-# -----------------------------------------
-# ------------- WAVE 3 --------------------
-# -----------------------------------------
+    # if the list is empty/falsy
+    if not list_of_watched_movie_dict:
+        return 0.0
 
-        
-# -----------------------------------------
-# ------------- WAVE 4 --------------------
-# -----------------------------------------
+    rating_sum = 0
+    for movie_dict in list_of_watched_movie_dict:
+        rating = movie_dict["rating"]
+        rating_sum += rating
+    return rating_sum/len(list_of_watched_movie_dict)
 
-# -----------------------------------------
-# ------------- WAVE 5 --------------------
-# -----------------------------------------
+    # what if the movie_dict has no rating
+
+def get_most_watched_genre(user_data):
+    '''
+    the value of user_data will be a dictionary with a "watched" list of movie dictionaries. Each movie dictionary has a key "genre".
+    This represents that the user has a list of watched movies. Each watched movie has a genre.
+    The values of "genre" is a string.
+    Determine which genre is most frequently occurring in the watched list
+    return the genre that is the most frequently watched
+    If the value of "watched" is an empty list, get_most_watched_genre should return None.
+    '''
+    list_of_watched_movie_dict = user_data["watched"]
+
+    # if the list is empty/falsy
+    if not list_of_watched_movie_dict:
+        return None
+    
+    # # used list comprehension to create the list of movie genre strings
+    # genres = [movie_dict["genre"] for movie_dict in list_of_watched_movie_dict]
+
+    # initialize dict
+    genre_count_dict = {}
+
+    for movie_dict in list_of_watched_movie_dict:
+        genre = movie_dict["genre"]
+        count = genre_count_dict.get(genre,0)
+        genre_count_dict[genre] = count + 1
+    
+    max_genre = None
+    max_count = 0
+
+    for genre, count in genre_count_dict.items():
+        if count > max_count:
+            max_count = count
+            max_genre = genre
+    return max_genre
+
+
+
+    
+
+
+
+
+
+
 
