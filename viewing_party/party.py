@@ -142,17 +142,17 @@ def get_unique_watched(user_data):
     user_data = {'watched': [{...}, {...}, {...}, {...}, {...}, {...}], 'friends': [{'watched': [...]}, {'watched': [...]}]
                                                                                                  v [{'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}, {'title': 'The Lord of the Functions: The Return of the Value', 'genre': 'Fantasy', 'rating': 4.0}, {'title': 'The Programmer: An Unexpected Stack Trace', 'genre': 'Fantasy', 'rating': 4.0}, {'title': 'It Came from the Stack Trace', 'genre': 'Horror', 'rating': 3.5}]   
     '''
-    list_of_watched_movie_dict = user_data["watched"] # output: [{...}, {...}, {...}, {...}, {...}, {...}]
-    list_of_friends_watched_movie_dict = user_data["friends"] # [{'watched': [...]}, {'watched': [...]}]
+    lod_watched = user_data["watched"] # output: [{...}, {...}, {...}, {...}, {...}, {...}]
+    lod_friends_watched = user_data["friends"] # [{'watched': [...]}, {'watched': [...]}]
 
     list_of_all_movies_friends_watched = []
-    # need to iterate thru list (list_of_friends_watched_movie_dict) to pull out watched movie dict
-    for movie_dict in list_of_friends_watched_movie_dict: # {'watched': [...]}
-        friend_movie_list = movie_dict["watched"] # [ {"title": "...", "genre": "...", "rating": .. } {...movie_dict...} ] 
-        list_of_all_movies_friends_watched = list_of_all_movies_friends_watched + friend_movie_list
+    # need to iterate thru list (lod_friends_watched) to pull out watched movie dict, append to flat list
+    for friend_movie_dict in lod_friends_watched: # friend_movie_dict = {'watched': [...{},{},{}...]}
+        lod_friend_movies = friend_movie_dict["watched"] # lod_friend_movies = [ {...movie_dict...}, {...movie_dict...}, {...movie_dict...} ] 
+        list_of_all_movies_friends_watched = list_of_all_movies_friends_watched + lod_friend_movies # appending all 
     
     unique_movies_list = []
-    for movie_dict in list_of_watched_movie_dict:
+    for movie_dict in lod_watched:
         if not movie_dict in list_of_all_movies_friends_watched:
             unique_movies_list.append(movie_dict)
 
