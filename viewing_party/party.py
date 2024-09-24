@@ -145,11 +145,11 @@ def get_most_watched_genre(user_data):
             genres[genre] += 1
     
     # Tv = {'BreakingBad':100, 'GameOfThrones':1292, 'TMKUC' : 88}
+    # Tv = {'BreakingBad':100, 'GameOfThrones':1292, 'TMKUC' : 88}
 
     # Keymax = max(zip(Tv.values(), Tv.keys()))[1]
     # print(Keymax)    
                
-    
     max_rate = 0
     genre = None
     # Comparing the rates and returning the most frequenty genre.
@@ -165,8 +165,15 @@ def get_most_watched_genre(user_data):
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 
-    
-        
+
+    user_watched = user_data["watched"]
+    friends_watched = []
+
+    for friends in user_data["friends"]:
+        for movie in friends["watched"]:
+            friends_watched.append(movie["title"])
+
+
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
