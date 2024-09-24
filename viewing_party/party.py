@@ -136,12 +136,13 @@ def get_new_rec_by_genre(user_data):
 
 
 def get_rec_from_favorites(user_data):
+    
     friends_movies = set()
     for friend in user_data["friends"]:
         friends_movies.update(movie["title"] for movie in friend["watched"])
 
-    unique_movies = [
+    recommended_favorites = [
         movie for movie in user_data["favorites"] if movie["title"] not in friends_movies
     ]
 
-    return unique_movies
+    return recommended_favorites
