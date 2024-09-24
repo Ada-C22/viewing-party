@@ -57,14 +57,36 @@ def watch_movie(user_data, title):
             user_data["watched"].append(movie)
             break 
     return user_data
-
-        
+ 
     
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
 
+def get_watched_avg_rating(user_data):
+     
+    total_ratings = 0
+    number_of_movies = 0
+    for movie in user_data["watched"]:
+        total_ratings += movie["rating"]
+        number_of_movies += 1
+        average_rating = total_ratings / number_of_movies
+        print(user_data.keys())
+        
+    if number_of_movies == 0:
+        return 0.0
+    return average_rating
 
+
+
+# determin most frequent occurence in the watchlist
+# key == "genre" a str
+# return most frequent watched
+# if value of "watched" == empty list get_most_watched_genre return None 
+def get_most_watched_genre(user_data):
+    
+    pass
+        
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
