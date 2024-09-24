@@ -1,16 +1,16 @@
 # ------------- WAVE 1 --------------------
 
 def create_movie(title, genre, rating):
+# if falsy return none
     if not title or not genre or not rating:
         return None
     
+# check if parameters are truthy and if so return empty_dict
     return {
         "title": title,
         "genre": genre,
         "rating": rating
     }
-    # check if parameters are truthy and if so return empty_dict
-    # if falsy return none
 
 def add_to_watched(user_data, movie):
     user_data["watched"].append(movie)
