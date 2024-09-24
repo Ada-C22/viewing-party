@@ -25,6 +25,7 @@ def create_movie(title, genre, rating):
         else:
             return {"title": title, "genre": genre, "rating": rating}
         
+    # very general and we dont intend to reading     
     except Exception as e:
         print(e)
         return None
@@ -102,25 +103,32 @@ def watch_movie(user_data, title):
 
 
 # ------------- WAVE 2 --------------------
-
+# -----------------------------------------
 def get_watched_avg_rating(user_data):
-
-    # user_data_copy = user_data.copy()
-    rate_sum = 0
-    index = 0
-
-    # Loop through each item and sum the ratings
-    for item in user_data["raiting"]:
-        rate_sum += item["raiting"]
-        index += 1
-    # Calculate average rating 
-    if user_data["raiting"] > 0:
-        average_rating = rate_sum / index
-    else:
-        average_rating = 0.0
+    """
+    function calculate and return average rating
     
-    return average_rating
+    Parameters:
+        user_data (dict): "watched" list of movie dictionaries.
+        
+    Notes:
+        if average rating of empty watched list if 0.0
+    
+    Returns:
+        Average rating (float)        
+    """
+    total_rating = 0
+    movies = 0
+    for movie in user_data["watched"]:
+        movies += 1
+        total_rating += movie["rating"]
+        
+    if movies > 0:    
+        average_rating = total_rating/movies   
+    else:
+        average_rating = 0.0   
 
+    return average_rating
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
