@@ -59,48 +59,48 @@ def get_most_watched_genre(user_data):
     frecuency_data = []
     if user_data["watched"]:
         for movie in user_data["watched"]:
-            if "genre":
-                if movie["genre"] not in genres:
-                    genres[movie["genre"]] = 1
-                else:
-                    genres[movie["genre"]] += 1
+
+            if movie["genre"] not in genres:
+                genres[movie["genre"]] = 1
+
+            else:
+                genres[movie["genre"]] += 1
         for genre, frecuency in genres.items():
             frecuency_data.append(frecuency)
+
         for genre, frecuency in genres.items():
             if frecuency == max(frecuency_data):
                 return genre 
-        
-        
+            
     return None
 
-# user_data = {   'watched': [   {   'genre': 'Fantasy',
-#                     'rating': 4.8,
-#                     'title': 'The Lord of the Functions: The Fellowship of '
-#                                 'the Function'},
-#                 {   'genre': 'Fantasy',
-#                     'rating': 4.0,
-#                     'title': 'The Lord of the Functions: The Two '
-#                                 'Parameters'},
-#                 {   'genre': 'Fantasy',
-#                     'rating': 4.0,
-#                     'title': 'The Lord of the Functions: The Return of the '
-#                                 'Value'},
-#                 {   'genre': 'Action',
-#                     'rating': 2.2,
-#                     'title': 'The JavaScript and the React'},
-#                 {'genre': 'Intrigue', 'rating': 2.0, 'title': 'Recursion'},
-#                 {   'genre': 'Intrigue',
-#                     'rating': 4.5,
-#                     'title': 'Instructor Student TA Manager'}]}
 
-# get_watched_avg_rating(user_data)
-
-
-# -----------------------------------------
 # ------------- WAVE 3 --------------------
-# -----------------------------------------
 
-        
+def get_unique_watched(user_data):
+    friends_movies = set()
+
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            friends_movies.add(movie["title"])
+    movies_unwatched = []
+    for movie in user_data["watched"]:
+        if movie["title"] not in friends_movies:
+            movies_unwatched.append(movie)
+    return movies_unwatched
+
+def get_friends_unique_watched(user_data):
+    friends_movies = []
+    
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            if movie not in friends_movies:
+                friends_movies.append(movie)
+    friends_unwatched = []
+    for movie in friends_movies:
+        if movie not in user_data["watched"]:
+            friends_unwatched.append(movie)
+    return friends_unwatched
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
