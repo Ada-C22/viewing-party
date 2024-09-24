@@ -139,58 +139,62 @@ def get_unique_watched(user_data):
     Each movie dictionary has a "title".
     Determine which movies the user has watched, but none of their friends have watched.
     Return a list of dictionaries, that represents a list of movies
-    user_data = {'watched': [{...}, {...}, {...}, {...}, {...}, {...}], 'friends': [{'watched': [...]}, {'watched': [...]}]
+    user_data = {'watched': [{...}, {...}, {...}, {...}, {...}, {...}], 
+    friends': [{'watched': [..{},{},{}..], {'watched': [..{},{},{}..]
                                                                                                  v [{'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}, {'title': 'The Lord of the Functions: The Return of the Value', 'genre': 'Fantasy', 'rating': 4.0}, {'title': 'The Programmer: An Unexpected Stack Trace', 'genre': 'Fantasy', 'rating': 4.0}, {'title': 'It Came from the Stack Trace', 'genre': 'Horror', 'rating': 3.5}]   
     '''
-    lod_watched = user_data["watched"] # output: [{...}, {...}, {...}, {...}, {...}, {...}]
-    lod_friends_watched = user_data["friends"] # [{'watched': [...]}, {'watched': [...]}]
+    titles_friends_watched = set()
 
-    list_of_all_movies_friends_watched = []
-    # need to iterate thru list (lod_friends_watched) to pull out watched movie dict, append to flat list
-    for friend_movie_dict in lod_friends_watched: # friend_movie_dict = {'watched': [...{},{},{}...]}
-        lod_friend_movies = friend_movie_dict["watched"] # lod_friend_movies = [ {...movie_dict...}, {...movie_dict...}, {...movie_dict...} ] 
-        list_of_all_movies_friends_watched = list_of_all_movies_friends_watched + lod_friend_movies # appending all 
+    for friend_movie_dict in user_data["friends"]:
+        for movie in friend_movie_dict["watched"]:
+            titles_friends_watched.add(movie["title"])
     
-    unique_movies_list = []
-    for movie_dict in lod_watched:
-        if not movie_dict in list_of_all_movies_friends_watched:
-            unique_movies_list.append(movie_dict)
+    # unique list of movies user's watched but not their friends
+    list_unique_movies = []
+    for movie in user_data["watched"]:
+        print(movie)
+        if movie["title"] not in titles_friends_watched:
+            list_unique_movies.append(movie)
+            
+    return list_unique_movies
 
-    return unique_movies_list
+def get_friends_unique_watched(user_data):
+    '''
+    user_data = {'watched': [{...}, {...}, {...}, {...}, {...}, {...}], 
+    friends': [{'watched': [..{},{},{}..], {'watched': [..{},{},{}..]
+    '''
 
 
+    list_titles_watched = set()
+    for movie in user_data["watched"]:
+        list_titles_watched.add(movie["title"])
 
+    titles_friends_watched = set()
 
-
-
-
-
-
-
-
-    # list_of_watched_movie_dict = user_data["watched"]
-    # list_of_friends_watched_movie_dict = user_data["friends"] # [{'watched': [...]}, {'watched': [...]}]
-    # flat_list_friends_watched_movie = []
-    # for movie_dict in list_of_friends_watched_movie_dict:
-    #     list_of_watched_movie_dict_for_one_friend = movie_dict["watched"] # [{'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}, {'title': 'The Lord of the Functions: The Return of the Value', 'genre': 'Fantasy', 'rating': 4.0}, {'title': 'The Programmer: An Unexpected Stack Trace', 'genre': 'Fantasy', 'rating': 4.0}, {'title': 'It Came from the Stack Trace', 'genre': 'Horror', 'rating': 3.5}]
-    #     for friends_watched_movie_dict in list_of_watched_movie_dict_for_one_friend:
-    #         flat_list_friends_watched_movie.append(friends_watched_movie_dict)
+    for friend_movie_dict in user_data["friends"]:
+        for movie in friend_movie_dict["watched"]:
+            titles_friends_watched.add(movie["title"])
     
-    # unique_movies = []
-    # for movie_dict in list_of_watched_movie_dict:
-    #     if not movie_dict in flat_list_friends_watched_movie:
-    #         unique_movies.append(movie_dict)
     
-    # return unique_movies
+    list_friends_unique_movie = []
+    for friend in user_data["friends"]:
+        for movie_dict in friend["watched"]:
+            print(movie_dict["title"])
+            if movie_dict["title"] not in list_titles_watched and movie_dict not in list_friends_unique_movie:
+                list_friends_unique_movie.append(movie_dict)
+
+    return list_friends_unique_movie
+
+
 
     
 
         
-# -----------------------------------------
-# ------------- WAVE 4 --------------------
-# -----------------------------------------
+# # -----------------------------------------
+# # ------------- WAVE 4 --------------------
+# # -----------------------------------------
 
-# -----------------------------------------
-# ------------- WAVE 5 --------------------
-# -----------------------------------------
+# # -----------------------------------------
+# # ------------- WAVE 5 --------------------
+# # -----------------------------------------
 
