@@ -31,10 +31,8 @@ def watch_movie(user_data, title):
 
     for movie in movies["watchlist"]:
         if title in movie["title"]:
-            watchlist_movie = movie
-            movies["watchlist"].remove(watchlist_movie)
-            movies["watched"].append(watchlist_movie)
-    
+            movies["watchlist"].remove(movie)
+            movies["watched"].append(movie)
     return movies
 
 
@@ -82,11 +80,11 @@ def get_unique_watched(user_data):
     for friend in user_data["friends"]:
         for movie in friend["watched"]:
             friends_movies.add(movie["title"])
-    movies_unwatched = []
+    user_unique = []
     for movie in user_data["watched"]:
         if movie["title"] not in friends_movies:
-            movies_unwatched.append(movie)
-    return movies_unwatched
+            user_unique.append(movie)
+    return user_unique
 
 def get_friends_unique_watched(user_data):
     friends_movies = set()
@@ -97,17 +95,24 @@ def get_friends_unique_watched(user_data):
     
     user_watched = {movie["title"] for movie in user_data["watched"]}
     
-    friends_unwatched = []
+    friends_unique = []
     for friend in user_data["friends"]:
         for movie in friend["watched"]:
-            if movie["title"] not in user_watched and movie not in friends_unwatched:
-                friends_unwatched.append(movie)
+            if movie["title"] not in user_watched and movie not in friends_unique:
+                friends_unique.append(movie)
     
-    return friends_unwatched
-# -----------------------------------------
-# ------------- WAVE 4 --------------------
-# -----------------------------------------
+    return friends_unique
 
-# -----------------------------------------
+
+# ------------- WAVE 4 --------------------
+
+def get_available_recs(user_data):
+    recommended_movies = []
+    unwatched_movies = get_friends_unique_watched(user_data)
+    for movie in  unwatched_movies:
+        if movie["host"] in user_data["subscriptions"]:
+            recommended_movies.append(movie)
+    return recommended_movies
+
+
 # ------------- WAVE 5 --------------------
-# ----------------------------------------
