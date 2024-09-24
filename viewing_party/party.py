@@ -115,6 +115,20 @@ def get_watched_avg_rating(user_data):
         average_rating = 0.0   
 
     return average_rating
+
+"""
+Part two 
+"""
+def get_most_watched_genre(user_data):
+    genres ={}
+
+    # Return None if there is no value in "watched."
+    if user_data["watched"] == []:
+        return None
+    # Add and count the genres found. 
+    for movie in user_data["watched"]:
+        genres[movie["genre"]] += 1
+
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
