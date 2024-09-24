@@ -120,6 +120,17 @@ def get_watched_avg_rating(user_data):
 Part two 
 """
 def get_most_watched_genre(user_data):
+    """
+    Get the most frequently watched genre from user's watched movies
+    
+    Parameter:
+        user_data (dict): 
+            the key "watched" is a list of dictionaries, where each dictionary represent a movie
+            each movie dict contains a key "genre" (str)
+    Returns:
+        str: the genre that user watched frequently
+        None: if "watched" list is empty
+    """
     genres = {}
 
     # Return None if there is no value in "watched."
@@ -133,10 +144,10 @@ def get_most_watched_genre(user_data):
         else:
             genres[genre] += 1
     
-    Tv = {'BreakingBad':100, 'GameOfThrones':1292, 'TMKUC' : 88}
+    # Tv = {'BreakingBad':100, 'GameOfThrones':1292, 'TMKUC' : 88}
 
-    Keymax = max(zip(Tv.values(), Tv.keys()))[1]
-    print(Keymax)    
+    # Keymax = max(zip(Tv.values(), Tv.keys()))[1]
+    # print(Keymax)    
                
     
     max_rate = 0
@@ -153,7 +164,7 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
-def get_unique_watched (user_data):
+
     
         
 # -----------------------------------------
