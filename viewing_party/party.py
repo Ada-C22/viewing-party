@@ -56,22 +56,21 @@ def get_watched_avg_rating(user_data):
 
 def get_most_watched_genre(user_data):
     genres = {}
-    frecuency_data = []
+
     if user_data["watched"]:
         for movie in user_data["watched"]:
-
-            if movie["genre"] not in genres:
-                genres[movie["genre"]] = 1
-
+            genre = movie["genre"]
+            if genre not in genres:
+                genres[genre] = 1
             else:
-                genres[movie["genre"]] += 1
-        for genre, frecuency in genres.items():
-            frecuency_data.append(frecuency)
+                genres[genre] += 1
+        
+        max_frequency = max(genres.values())
+        
+        for genre, frequency in genres.items():
+            if frequency == max_frequency:
+                return genre
 
-        for genre, frecuency in genres.items():
-            if frecuency == max(frecuency_data):
-                return genre 
-            
     return None
 
 
@@ -90,16 +89,20 @@ def get_unique_watched(user_data):
     return movies_unwatched
 
 def get_friends_unique_watched(user_data):
-    friends_movies = []
+    friends_movies = set()
     
     for friend in user_data["friends"]:
         for movie in friend["watched"]:
-            if movie not in friends_movies:
-                friends_movies.append(movie)
+            friends_movies.add(movie["title"])
+    
+    user_watched = {movie["title"] for movie in user_data["watched"]}
+    
     friends_unwatched = []
-    for movie in friends_movies:
-        if movie not in user_data["watched"]:
-            friends_unwatched.append(movie)
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            if movie["title"] not in user_watched and movie not in friends_unwatched:
+                friends_unwatched.append(movie)
+    
     return friends_unwatched
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
