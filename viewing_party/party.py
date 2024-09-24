@@ -128,13 +128,80 @@ def get_most_watched_genre(user_data):
 
 # wave 3
 
+# Helper function: Collect title of movies watched by friends
+def movies_watched_by_friends(user_data):
+    friends_watched_set = set()
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            friends_watched_set.add(movie["title"])
+    return friends_watched_set
+
+def get_unique_watched(user_data):
+
+    friends_watched = movies_watched_by_friends(user_data)
+
+    # Determine the watched movies by user and compare with friends_watched_set
+    user_unique_watched = []
+    for movie in user_data["watched"]:
+        if movie["title"] not in friends_watched:
+            user_unique_watched.append(movie) #appending the entire dictionary
+
+    return user_unique_watched #returning list of dictionaries
+
 
         
-            
-        
-# -----------------------------------------
-# ------------- WAVE 4 --------------------
-# -----------------------------------------
+def get_friends_unique_watched(user_data):
+
+    friends_watched = movies_watched_by_friends(user_data)
+
+    #Collect movies user has watched
+    user_watched = set()
+    for movie in user_data["watched"]:
+        user_watched.add(movie["title"])
+
+    # Determine which movies at least one of the user's friends have watched
+    # but the user has not watched.
+    friends_watched_movie_list = []
+    for title in friends_watched:
+        if title not in user_watched:
+            for friend in user_data["friends"]:
+                for movie in friend["watched"]:
+                    if movie["title"] == title:
+                        # check if this movie is already in list
+                        if movie not in friends_watched_movie_list:
+                            friends_watched_movie_list.append(movie) # adding entire dictionary, not just title
+    return friends_watched_movie_list
+
+# Wave 4
+
+def get_available_recs(user_data):
+
+    # Collect movies at least one of the friends have watched
+    friends_watched = movies_watched_by_friends(user_data)
+
+    # User watched movies
+    user_watched = set()
+    for movie in user_data["watched"]:
+        user_watched.add(movie["title"])
+
+    # Access the subscriptions
+    subscriptions_list = set(user_data["subscriptions"])
+
+    # check movie is not watched by user, not_in_user_subscription and in friends_watched
+    recommendations = []
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            if movie["title"] not in user_watched and movie["host"] in subscriptions_list and movie["title"] in friends_watched:
+                if movie not in recommendations:
+                    recommendations.append(movie) 
+
+    return recommendations
+
+
+
+
+
+
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
