@@ -4,11 +4,13 @@ def create_movie(title, genre, rating):
     if not title or not genre or not rating:
         return None
     
-    return { 
+    return {
         "title": title,
         "genre": genre,
-        "rating": rating 
-        }
+        "rating": rating
+    }
+    # check if parameters are truthy and if so return empty_dict
+    # if falsy return none
 
 def add_to_watched(user_data, movie):
     user_data["watched"].append(movie)
@@ -19,12 +21,16 @@ def add_to_watchlist(user_data, movie):
     return user_data
 
 def watch_movie(user_data, title):
-    # if user_data["watchlist"][0]["title"] == title:
-    #     user_data["watchlist"][0].pop(title)
-    #     user_data["watched"].append(title)
-    #     user_data["watchlist"] = []
-    #     return user_data
-    # return user_data
+    # Loop through watchlist dict
+    for movie in user_data["watchlist"]:
+        # check if the tile of movie is in the user_data dict
+        if title == movie["title"]:
+            # remove the movie from watchlist if user already watched it
+            user_data["watchlist"].remove(movie)
+            # add movie to watched list if user already watched it
+            user_data["watched"].append(movie)
+            break # exit the loop once movie is found and moved
+    return user_data # return updated dict
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
