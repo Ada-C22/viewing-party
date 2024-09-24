@@ -120,16 +120,25 @@ def get_watched_avg_rating(user_data):
 Part two 
 """
 def get_most_watched_genre(user_data):
-    genres ={}
+    genres = {}
 
     # Return None if there is no value in "watched."
     if user_data["watched"] == []:
         return None
     # Add and count the genres found. 
     for movie in user_data["watched"]:
-        genres[movie["genre"]] += 1
+        genre = movie["genre"]
+        if genre not in genres:
+            genres[genre] = 1
+        else:
+            genres[genre] += 1
+    
+    Tv = {'BreakingBad':100, 'GameOfThrones':1292, 'TMKUC' : 88}
 
-
+    Keymax = max(zip(Tv.values(), Tv.keys()))[1]
+    print(Keymax)    
+               
+    
     max_rate = 0
     genre = None
     # Comparing the rates and returning the most frequenty genre.
@@ -144,7 +153,8 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
-
+def get_unique_watched (user_data):
+    
         
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
