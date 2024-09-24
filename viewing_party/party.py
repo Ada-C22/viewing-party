@@ -1,5 +1,5 @@
 # ------------- WAVE 1 --------------------
-
+# No.1
 def create_movie(title, genre, rating):
     movie = {"title": title, "genre": genre, "rating": rating}
 
@@ -7,18 +7,16 @@ def create_movie(title, genre, rating):
         return movie
     else:
         return None 
-
-# 2   
+# No.2
 def add_to_watched(user_data, movie):
     user_data["watched"].append(movie)
     print(len(user_data["watched"]))
     return user_data
-
-# 3
+    
+# No.3
 def add_to_watchlist(user_data, movie):
     user_data["watchlist"].append(movie)
     return user_data
-
 # No.4
 def watch_movie(user_data,title):
     pass
