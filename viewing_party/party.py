@@ -1,3 +1,5 @@
+# to avoid naming confusing
+# "lod" in lod_<var.name> means list of dict
 # ------------- WAVE 1 --------------------
 
 def create_movie(title, genre, rating):
@@ -29,8 +31,8 @@ def add_to_watched(user_data, movie):
     user_data = {"watched": [...list of movie_dict watched...]}
     '''
 
-    list_of_watched_movie_dict = user_data["watched"]
-    list_of_watched_movie_dict.append(movie)
+    lod_watched = user_data["watched"]
+    lod_watched.append(movie)
     return user_data
 
 def add_to_watchlist(user_data, movie):
@@ -39,8 +41,8 @@ def add_to_watchlist(user_data, movie):
     An empty list represents that the user has no movies in their watchlist
     user_data = {"watchlist": [...list of movie_dict wanting to watch...]}
     '''
-    list_of_watchlist_dict = user_data["watchlist"]
-    list_of_watchlist_dict.append(movie)
+    lod_watchlist = user_data["watchlist"]
+    lod_watchlist.append(movie)
     return user_data
 
 def watch_movie(user_data, title):
@@ -53,16 +55,16 @@ def watch_movie(user_data, title):
     - if movie is not in user watchlist, return user data
     '''
 
-    list_of_watchlist_dict = user_data["watchlist"]
-    list_of_watched_movie_dict = user_data["watched"]
+    lod_watchlist = user_data["watchlist"]
+    lod_watched = user_data["watched"]
     # returns [ {movie_dict} , {movie_dict} , ...]
 
-    for movie_dict in list_of_watchlist_dict:
+    for movie_dict in lod_watchlist:
         if movie_dict["title"] == title:
             # remove from watchlist
-            list_of_watchlist_dict.remove(movie_dict)
+            lod_watchlist.remove(movie_dict)
             # add to watched
-            list_of_watched_movie_dict.append(movie_dict)
+            lod_watched.append(movie_dict)
             # exit loop early if found
             break
 
@@ -81,15 +83,15 @@ def get_watched_avg_rating(user_data):
     user_data = {"watched": [...list of movie_dict watched...]}
     """
 
-    watched_list = user_data["watched"]
+    lod_watched = user_data["watched"]
     total_rating = 0
     
-    if watched_list == []:
+    if lod_watched == []:
         return 0.0
-    for movie in watched_list:
+    for movie in lod_watched:
         total_rating += movie["rating"]
     
-    avg_rating = total_rating/len(watched_list)
+    avg_rating = total_rating/len(lod_watched)
     return avg_rating
         
 
@@ -103,13 +105,13 @@ def get_most_watched_genre(user_data):
     If the value of "watched" is an empty list, get_most_watched_genre should return None.
     """
 
-    watched_list = user_data["watched"]
+    lod_watched = user_data["watched"]
     genre_count = {}
 
 
-    if watched_list == []:
+    if lod_watched == []:
         return None
-    for movie in watched_list:
+    for movie in lod_watched:
         genre = movie["genre"] # assigning value of genre to variable "genre"
         count = genre_count.get(genre, 0)
         genre_count[genre] = count + 1
@@ -124,86 +126,64 @@ def get_most_watched_genre(user_data):
             frequent_genre = key
     return frequent_genre
 
-
-
-# wave 3
-
-# Helper function: Collect title of movies watched by friends
-def movies_watched_by_friends(user_data):
-    friends_watched_set = set()
-    for friend in user_data["friends"]:
-        for movie in friend["watched"]:
-            friends_watched_set.add(movie["title"])
-    return friends_watched_set
+# -----------------------------------------
+# ------------- WAVE 3 --------------------
+# -----------------------------------------
 
 def get_unique_watched(user_data):
+    '''
+    the value of user_data will be a dictionary with a "watched" list of movie dictionaries, and a "friends"
+    This represents that the user has a list of watched movies and a list of friends
+    The value of "friends" is a list
+    Each item in "friends" is a dictionary. This dictionary has a key "watched", which has a list of movie dictionaries.
+    Each movie dictionary has a "title".
+    Determine which movies the user has watched, but none of their friends have watched.
+    Return a list of dictionaries, that represents a list of movies
+    user_data = {'watched': [{...}, {...}, {...}, {...}, {...}, {...}], 
+    friends': [{'watched': [..{},{},{}..], {'watched': [..{},{},{}..]
+                                                                                                 v [{'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}, {'title': 'The Lord of the Functions: The Return of the Value', 'genre': 'Fantasy', 'rating': 4.0}, {'title': 'The Programmer: An Unexpected Stack Trace', 'genre': 'Fantasy', 'rating': 4.0}, {'title': 'It Came from the Stack Trace', 'genre': 'Horror', 'rating': 3.5}]   
+    '''
+    titles_friends_watched = set()
 
-    friends_watched = movies_watched_by_friends(user_data)
-
-    # Determine the watched movies by user and compare with friends_watched_set
-    user_unique_watched = []
+    for friend_movie_dict in user_data["friends"]:
+        for movie in friend_movie_dict["watched"]:
+            titles_friends_watched.add(movie["title"])
+    
+    # unique list of movies user's watched but not their friends
+    list_unique_movies = []
     for movie in user_data["watched"]:
-        if movie["title"] not in friends_watched:
-            user_unique_watched.append(movie) #appending the entire dictionary
+        if movie["title"] not in titles_friends_watched:
+            list_unique_movies.append(movie)
+            
+    return list_unique_movies
 
-    return user_unique_watched #returning list of dictionaries
+def get_friends_unique_watched(user_data):
+    '''
+    user_data = {'watched': [{...}, {...}, {...}, {...}, {...}, {...}], 
+    friends': [{'watched': [..{},{},{}..], {'watched': [..{},{},{}..]
+    '''
 
+    list_titles_watched = set()
+    for movie in user_data["watched"]:
+        list_titles_watched.add(movie["title"])
+
+    list_friends_unique_movie = []
+    for friend in user_data["friends"]:
+        for movie_dict in friend["watched"]:
+            if movie_dict["title"] not in list_titles_watched and movie_dict not in list_friends_unique_movie:
+                list_friends_unique_movie.append(movie_dict)
+
+    return list_friends_unique_movie
+
+
+    
 
         
-def get_friends_unique_watched(user_data):
+# # -----------------------------------------
+# # ------------- WAVE 4 --------------------
+# # -----------------------------------------
 
-    friends_watched = movies_watched_by_friends(user_data)
-
-    #Collect movies user has watched
-    user_watched = set()
-    for movie in user_data["watched"]:
-        user_watched.add(movie["title"])
-
-    # Determine which movies at least one of the user's friends have watched
-    # but the user has not watched.
-    friends_watched_movie_list = []
-    for title in friends_watched:
-        if title not in user_watched:
-            for friend in user_data["friends"]:
-                for movie in friend["watched"]:
-                    if movie["title"] == title:
-                        # check if this movie is already in list
-                        if movie not in friends_watched_movie_list:
-                            friends_watched_movie_list.append(movie) # adding entire dictionary, not just title
-    return friends_watched_movie_list
-
-# Wave 4
-
-def get_available_recs(user_data):
-
-    # Collect movies at least one of the friends have watched
-    friends_watched = movies_watched_by_friends(user_data)
-
-    # User watched movies
-    user_watched = set()
-    for movie in user_data["watched"]:
-        user_watched.add(movie["title"])
-
-    # Access the subscriptions
-    subscriptions_list = set(user_data["subscriptions"])
-
-    # check movie is not watched by user, not_in_user_subscription and in friends_watched
-    recommendations = []
-    for friend in user_data["friends"]:
-        for movie in friend["watched"]:
-            if movie["title"] not in user_watched and movie["host"] in subscriptions_list and movie["title"] in friends_watched:
-                if movie not in recommendations:
-                    recommendations.append(movie) 
-
-    return recommendations
-
-
-
-
-
-
-
-# -----------------------------------------
-# ------------- WAVE 5 --------------------
-# -----------------------------------------
+# # -----------------------------------------
+# # ------------- WAVE 5 --------------------
+# # -----------------------------------------
 

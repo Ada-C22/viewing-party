@@ -80,17 +80,12 @@ def test_friends_unique_movies_not_duplicated():
     # Assert
     assert len(friends_unique_movies) == 3
     assert INTRIGUE_3 in friends_unique_movies
-    #check for duplicates
+    # #check for duplicates
     unique_titles = set()
     for movie in friends_unique_movies:
         unique_titles.add(movie["title"])
     assert len(unique_titles) == len(friends_unique_movies)
-    
 
-    # raise Exception("Test needs to be completed.")
-    # *************************************************************************************************
-    # ****** Add assertions here to test that the correct movies are in friends_unique_movies **********
-    # **************************************************************************************************
 
 # @pytest.mark.skip()
 def test_friends_not_unique_movies():
