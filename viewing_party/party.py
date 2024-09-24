@@ -17,18 +17,13 @@ def create_movie(title, genre, rating):
     if not title or not genre or not rating:
         return None
     
-    try:
-        # Checking if user inputs on these parameters are all valid.
-        if not isinstance(title, str) or not isinstance(genre, str) \
-            or not isinstance(rating, float):
-            return None
-        else:
-            return {"title": title, "genre": genre, "rating": rating}
-        
-    # very general and we dont intend to reading     
-    except Exception as e:
-        print(e)
+    # Checking if user inputs on these parameters are all valid.
+    if not isinstance(title, str) or not isinstance(genre, str) \
+        or not isinstance(rating, float):
         return None
+    else:
+        return {"title": title, "genre": genre, "rating": rating}
+
     
 def  add_to_watched(user_data, movie):
     """
@@ -47,15 +42,10 @@ def  add_to_watched(user_data, movie):
     Return:
         user_data ("watched" list of movies)
     """
-    
-    try:
-        
-        user_data["watched"].append(movie)
-        return user_data    
-    
-    except Exception as e:
-        print(e)
-        
+
+    user_data["watched"].append(movie)
+    return user_data    
+
 def add_to_watchlist(user_data, movies):
     """
     Add a movie to user's watchlist
@@ -73,13 +63,9 @@ def add_to_watchlist(user_data, movies):
     Return:
         user_data (watchlist of movies)
     """
-    try:
-        user_data["watchlist"].append(movies)
-        return user_data
+    user_data["watchlist"].append(movies)
+    return user_data
     
-    except Exception as e:
-        print (e)    
-
 def watch_movie(user_data, title):
     """
     Parameters:
