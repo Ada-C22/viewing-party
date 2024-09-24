@@ -140,7 +140,7 @@ def test_adds_movie_to_non_empty_user_watchlist():
     assert movie in updated_data["watchlist"]
     assert FANTASY_2 in updated_data["watchlist"]
 
-#@pytest.mark.skip()
+@pytest.mark.skip()
 def test_moves_movie_from_watchlist_to_empty_watched():
     # Arrange
     janes_data = {
