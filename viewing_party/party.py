@@ -60,6 +60,38 @@ def get_watched_avg_rating(user_data):
 
     return average_rating
 
+def get_most_watched_genre(user_data):
+    '''
+    Determines the genre most frequently watched by the user.
+    
+    Parameter:
+    user_data (dict): A dictionary with a "watched" list of movie 
+    dictionaries. Each movie dictionary contains information on the
+    genre, rating, and title of the movie.
+
+    Returns:
+    most_watched_genre (string): The genre most frequently watched by
+    the user, None if the list is empty.
+    '''
+    if not user_data['watched']:
+        return None
+    
+    count = {}
+    for movie in user_data['watched']:
+        genre = movie['genre']
+        if genre in count:
+            count[genre] += 1
+        else:
+            count[genre] = 1
+
+    max_count = 0
+    for genre, genre_count in count.items():
+        if genre_count > max_count:
+            max_count = genre_count
+            most_watched_genre = genre
+
+    return most_watched_genre
+
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
