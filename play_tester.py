@@ -21,9 +21,11 @@ pp = pprint.PrettyPrinter(indent=4)
 #pp.pprint(clean_wave_3_data())
 
 # Wave 04 user data
-get_available_recs(clean_wave_4_data())
-#print("\n-----Wave 04 user_data-----")
+print("\n-----Wave 04 user_data-----")
 #pp.pprint(clean_wave_4_data())
+get_available_recs(clean_wave_4_data())
+
+
 
 # Wave 05 user data
 #print("\n-----Wave 05 user_data-----")
