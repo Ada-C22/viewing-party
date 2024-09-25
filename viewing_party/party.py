@@ -27,39 +27,44 @@ def add_to_watchlist(user_data, movie):
 
     return user_data
 
+
 def watch_movie(user_data, title):
-    temp_user_data = copy.deepcopy(user_data)
-    watch_list = temp_user_data["watchlist"]
-    watched = temp_user_data["watched"]
-    test = False
 
-    for i in range(0, len(user_data["watchlist"])):
-        watch_list_title = watch_list[i]["title"]
-        if watch_list_title == title:
-          watched.append(watch_list[i])
-          test = i
+    watch_list = user_data["watchlist"]
+    watched = user_data["watched"]
 
-    if test:
-        del watch_list[test]
+    for movie in watch_list:
+        if isinstance(movie, list):
+            #add Horror_1 "watched"
+            #remove movie_to_watch "watchlist"
+            if title in movie:
+                watched.append(title)
+                watch_list.remove(title)
 
-    return temp_user_data
+        elif isinstance(movie, dict):
+            if movie["title"] == title:
+                watched.append(movie)
+                watch_list.remove(movie)
+                break
+    print(user_data)    
+    return user_data
 
 
-# janes_data = {
-#     "watchlist": [{
-#         "title": "MOVIE_TITLE_1",
-#         "genre": "GENRE_1",
-#         "rating": "RATING_1"
-#     },{
-#         "title": "MOVIE_TITLE_2",
-#         "genre": "GENRE_1",
-#         "rating": "RATING_1"
-#     }],
+HORROR_1 = {
+    "title": "MOVIE_TITLE_1",
+    "genre": "GENRE_1",
+    "rating": "RATING_1"
+}
+movie_to_watch = HORROR_1
+janes_data = {
+        "watchlist": [
+            "FANTASY_1",
+            movie_to_watch
+        ],
+        "watched": ["FANTASY_2"]
+    }
 
-#     "watched": []
-# }
-
-# updated_data = watch_movie(janes_data, "MOVIE_TITLE_1")
+updated_data = watch_movie(janes_data, movie_to_watch["title"])
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
