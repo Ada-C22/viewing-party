@@ -38,7 +38,7 @@ def test_new_genre_rec_from_empty_watched():
     # Assert
     assert len(recommendations) == 0
 
-##@pytest.mark.skip()
+# @pytest.mark.skip()
 def test_new_genre_rec_from_empty_friends():
     # Arrange
     sonyas_data = {
@@ -53,14 +53,13 @@ def test_new_genre_rec_from_empty_friends():
         ]
     }
 
-    # raise Exception("Test needs to be completed.")
-    recommendations = get_new_rec_by_genre(sonyas_data)
-    assert len(recommendations) == 0
-    # *********************************************************************
-    # ****** Complete the Act and Assert Portions of these tests **********
-    # *********************************************************************
+    # Act
+    new_recomemendation = get_rec_from_favorites(sonyas_data)
 
-#@pytest.mark.skip()
+    #Assert
+    assert new_recomemendation == []
+
+# @pytest.mark.skip()
 def test_unique_rec_from_favorites():
     # Arrange
     sonyas_data = clean_wave_5_data()
