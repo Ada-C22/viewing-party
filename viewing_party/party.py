@@ -46,7 +46,6 @@ def watch_movie(user_data, title):
                 watched.append(movie)
                 watch_list.remove(movie)
                 break
-    print(user_data)    
     return user_data
 
 
@@ -152,3 +151,27 @@ def get_available_recs(user_data):
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
+
+
+def get_new_rec_by_genre(user_data):
+    rec_movies = []
+    most_watched_genre = get_most_watched_genre(user_data)
+    friend_unique_movie = get_friends_unique_watched(user_data)
+    
+    for movie in friend_unique_movie:
+        if most_watched_genre == movie["genre"]:
+            rec_movies.append(movie)
+   
+    return rec_movies
+
+
+def get_rec_from_favorites(user_data):
+    unique_watched_movie = get_unique_watched(user_data)
+    rec_movies = []
+    for user_movie in unique_watched_movie:
+        for fav_movie in user_data["favorites"]:
+            if user_movie["title"] == fav_movie["title"]: 
+                rec_movies.append(user_movie)
+    
+    return rec_movies    
+
