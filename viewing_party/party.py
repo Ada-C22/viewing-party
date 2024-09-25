@@ -28,11 +28,37 @@ def watch_movie(user_data, title):
             watchlist.remove(movie)
     return user_data
 
-
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
 
+def get_watched_avg_rating(user_data):
+    '''
+    Calculates the average rating of all movies watched by the user.
+
+    Parameter:
+    user_data (dict): A dictionary with a "watched" list of movie
+    dictionaries. Each movie dictionary contains information on the 
+    genre, rating, and title of the movie.
+
+    Returns:
+    (float): The average rating of all movies in the watched list, 0.0
+    if the list is empty.
+    '''
+    if not user_data['watched']:
+        return 0.0
+
+    num_movies = 0
+    sum = 0.0
+    average_rating = 0.0
+
+    while num_movies < len(user_data['watched']):
+        sum += user_data['watched'][num_movies]['rating']
+        num_movies += 1
+
+    average_rating = sum / num_movies
+
+    return average_rating
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
