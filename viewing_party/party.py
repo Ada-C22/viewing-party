@@ -167,7 +167,6 @@ def get_most_watched_genre(user_data):
 
 def get_friends_watched(user_data):
     friends_watched= []
-    #[HORROR_1,FANTASY_1]
     
     for friend in user_data["friends"]:
         friends_watched.extend(friend["watched"])
