@@ -16,6 +16,7 @@ def test_get_available_friend_rec():
     assert FANTASY_4b in recommendations
     assert amandas_data == clean_wave_4_data()
 
+
 # @pytest.mark.skip()
 def test_no_available_friend_recs():
     # Arrange
@@ -38,7 +39,7 @@ def test_no_available_friend_recs():
     # Assert
     assert len(recommendations) == 0
 
-# @pytest.mark.skip()
+#@pytest.mark.skip()
 def test_no_available_friend_recs_watched_all():
     # Arrange
     amandas_data = {

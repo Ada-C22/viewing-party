@@ -21,59 +21,47 @@ def add_to_watchlist(user_data, movie):
     user_data["watchlist"].append(movie)
     return user_data
 
-
 def watch_movie(user_data, title):
-    
-    movies = user_data.copy()
+    for movie in user_data["watchlist"]:
+        if movie["title"] == title:
+            user_data["watchlist"].remove(movie)
+            user_data["watched"].append(movie)
 
-    movies["watchlist"] = movies["watchlist"].copy()
-    movies["watched"] = movies["watched"].copy()
-
-    for movie in movies["watchlist"]:
-        if title in movie["title"]:
-            movies["watchlist"].remove(movie)
-            movies["watched"].append(movie)
-    return movies
-
-
+    return user_data
+# -----------------------------------------
 # ------------- WAVE 2 --------------------
+# -----------------------------------------
 def get_watched_avg_rating(user_data):
-    ratings = 0
-    movie_counter = 0
-    avg_rating = 0
-    
-    if user_data["watched"]:
-        for movie in user_data["watched"]:
-            if "rating":
-                ratings += movie["rating"]
-                movie_counter += 1
-            else:
-                movie_counter += 1
-        return ratings/movie_counter
-    return 0.0
+    # an empty watched list is 0.0
+    if not user_data["watched"]:
+        return 0.0
+    # caculate total rating
+    total_rating = 0
+    for movie in user_data["watched"]:
+        total_rating += movie["rating"]
+
+    avg_rating = total_rating / len(user_data["watched"])
+
+    return avg_rating
 
 def get_most_watched_genre(user_data):
-    genres = {}
-
-    if user_data["watched"]:
-        for movie in user_data["watched"]:
-            genre = movie["genre"]
-            if genre not in genres:
-                genres[genre] = 1
-            else:
-                genres[genre] += 1
-        
-        max_frequency = max(genres.values())
-        
-        for genre, frequency in genres.items():
-            if frequency == max_frequency:
-                return genre
-
-    return None
-
-
+    # an empty list return None
+    if not user_data["watched"]:
+        return None
+    
+    most_genre = {}
+    # bulid a dict for genre count
+    for movie in user_data["watched"]:
+        genre = movie["genre"]
+        if genre in most_genre:
+            most_genre[genre] +=1
+        else:
+            most_genre[genre] =1
+    # use max to find the most one
+    return max(most_genre, key=most_genre.get)
+# -----------------------------------------
 # ------------- WAVE 3 --------------------
-
+# -----------------------------------------
 def get_unique_watched(user_data):
     friends_movies = set()
 
@@ -102,10 +90,10 @@ def get_friends_unique_watched(user_data):
                 friends_unique.append(movie)
     
     return friends_unique
-
-
+        
+# -----------------------------------------
 # ------------- WAVE 4 --------------------
-
+# -----------------------------------------
 def get_available_recs(user_data):
     recommended_movies = []
     if "subscriptions" in user_data and user_data["subscriptions"]:
@@ -113,9 +101,9 @@ def get_available_recs(user_data):
             if movie["host"] in user_data["subscriptions"]:
                 recommended_movies.append(movie)
     return recommended_movies
-
-
+# -----------------------------------------
 # ------------- WAVE 5 --------------------
+# -----------------------------------------
 def get_new_rec_by_genre(user_data):
     
     filtered_recommendations = []
@@ -131,5 +119,3 @@ def get_rec_from_favorites(user_data):
         for movie in get_unique_watched(user_data):
             if movie in user_data["favorites"]:
                 recommended_movies.append(movie)
-        
-    return recommended_movies
