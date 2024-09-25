@@ -167,6 +167,7 @@ def get_most_watched_genre(user_data):
 
 def get_friends_watched(user_data):
     friends_watched= []
+    #[HORROR_1,FANTASY_1]
     
     for friend in user_data["friends"]:
         friends_watched.extend(friend["watched"])
@@ -202,13 +203,13 @@ def get_friends_unique_watched(user_data):
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
 def get_available_recs (user_data):
-    
-    user_watched = user_data["watched"]
-    friends_watched = get_friends_watched(user_data)
     # loop through friends' values, 
     # find each friend's movie who has the movie that user has not watched and 
     # host in user_data["subscription"]
     
+    user_watched = user_data["watched"]
+    friends_watched = get_friends_watched(user_data)
+  
     recommended_movies = []
     for movie in friends_watched:
         if movie not in user_watched and movie["host"] in user_data["subscriptions"] \
