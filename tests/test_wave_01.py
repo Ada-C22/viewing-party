@@ -152,6 +152,14 @@ def test_moves_movie_from_watchlist_to_empty_watched():
         }],
         "watched": []
     }
+    expected_result = {
+        "watchlist": [],
+        "watched": [{
+            "title": MOVIE_TITLE_1,
+            "genre": GENRE_1,
+            "rating": RATING_1
+        }]
+    }
 
     # Act
     updated_data = watch_movie(janes_data, MOVIE_TITLE_1)
@@ -159,13 +167,14 @@ def test_moves_movie_from_watchlist_to_empty_watched():
     # Assert
     assert len(updated_data["watchlist"]) == 0
     assert len(updated_data["watched"]) == 1
+    assert updated_data == expected_result
 
-    raise Exception("Test needs to be completed.")
+    # raise Exception("Test needs to be completed.")
     # *******************************************************************************************
     # ****** Add assertions here to test that the correct movie was added to "watched" **********
     # *******************************************************************************************
 
-@pytest.mark.skip()
+# @pytest.mark.skip()
 def test_moves_movie_from_watchlist_to_watched():
     # Arrange
     movie_to_watch = HORROR_1
@@ -176,6 +185,13 @@ def test_moves_movie_from_watchlist_to_watched():
         ],
         "watched": [FANTASY_2]
     }
+    expected_result = {
+        "watchlist": [
+            FANTASY_1
+
+        ],
+        "watched": [FANTASY_2, movie_to_watch]
+    }
 
     # Act
     updated_data = watch_movie(janes_data, movie_to_watch["title"])
@@ -183,13 +199,14 @@ def test_moves_movie_from_watchlist_to_watched():
     # Assert
     assert len(updated_data["watchlist"]) == 1
     assert len(updated_data["watched"]) == 2
+    assert updated_data == expected_result
 
-    raise Exception("Test needs to be completed.")
+    # raise Exception("Test needs to be completed.")
     # *******************************************************************************************
     # ****** Add assertions here to test that the correct movie was added to "watched" **********
     # *******************************************************************************************
 
-@pytest.mark.skip()
+# @pytest.mark.skip()
 def test_does_nothing_if_movie_not_in_watchlist():
     # Arrange
     movie_to_watch = HORROR_1
