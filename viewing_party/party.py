@@ -60,19 +60,82 @@ def get_most_watched_genre(user_data):
             max_count = count
     
     return popular_genre
-
-
-
-
-
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
+def get_unique_watched(user_data):
+    unique_watched_by_user = []
+    # Create a flat list of all movies watched by friends
+    friend_watched_list = []
+    
+    for friends_watched in user_data["friends"]:
+        for movie in friends_watched["watched"]:
+            friend_watched_list.append(movie)
+       
+    for user_watched in user_data["watched"]:
+        if user_watched not in friend_watched_list:
+            unique_watched_by_user.append(user_watched)
 
-        
+    return unique_watched_by_user
+
+def get_friends_unique_watched(user_data):
+    unique_watched_by_friend = []
+
+    for each_friend_watched in user_data["friends"]:
+        for movie in each_friend_watched["watched"]:
+            if movie not in user_data["watched"]:
+                if movie not in unique_watched_by_friend:
+                    unique_watched_by_friend.append(movie)
+    
+    return unique_watched_by_friend   
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
+# INTRIGUE_3b["host"] = "disney+"
+
+# USER_DATA_4 = {
+#     "watched": [
+#         FANTASY_1b, 
+#         FANTASY_2b, 
+#         FANTASY_3b, 
+#         ACTION_1b, 
+#         INTRIGUE_1b, 
+#         INTRIGUE_2b
+#         ],  
+#     "friends":  [
+#         {
+#             "watched": [
+#                 FANTASY_1b,
+#                 FANTASY_3b,
+#                 FANTASY_4b,
+#                 HORROR_1b,
+#             ]
+#         },
+#         {
+#             "watched": [
+#                 FANTASY_1b,
+#                 FANTASY_4b,
+#                 ACTION_1b,
+#                 INTRIGUE_1b,
+#                 INTRIGUE_3b,
+#             ]
+#         }  
+#     ]
+# }
+
+# USER_DATA_4["subscriptions"] = ["netflix", "hulu"] 
+def get_available_recs(user_data):
+    recommended_movie_list = []
+    user_watched_titles = {movie["title"] for movie in user_data["watched"]}
+    
+    for friends_watched_list in user_data["friends"]:
+        for movie in friends_watched_list["watched"]:
+            if (movie["title"] not in user_watched_titles and 
+                movie["host"] in user_data["subscriptions"]
+                and movie not in recommended_movie_list):
+                recommended_movie_list.append(movie)
+
+    return recommended_movie_list
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
