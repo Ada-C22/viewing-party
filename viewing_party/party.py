@@ -64,17 +64,22 @@ def get_most_watched_genre(user_data):
     
     all_genre = {}
 
-    for genre in most_watched_genre:
+    for item in most_watched_genre:
+        genre = item.get("genre")
         if genre in all_genre:
             all_genre[genre] += 1
         else:
             all_genre[genre] = 1
 
-    reoccurring_genres = []
+    most_watched = None
+    highest_count = 0
+
     for genre, count in all_genre.items():
-        if count > 1:
-            reoccurring_genres.append(genre)
-    return reoccurring_genres
+        if count > highest_count:
+            highest_count = count
+            most_watched = genre
+    return most_watched
+    
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
