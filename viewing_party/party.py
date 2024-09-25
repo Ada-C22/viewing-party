@@ -7,7 +7,7 @@ def create_movie(title, genre, rating):
 
     return {"title": title, "genre": genre, "rating": rating}
 
-
+# Add movie to "watched" list
 def add_to_watched(user_data, movie):
     user_data["watched"].append(movie)
     return user_data
@@ -17,7 +17,7 @@ def add_to_watchlist(user_data, movie):
     user_data["watchlist"].append(movie)
     return user_data
 
-
+# Adds movie from watchlist to "watched" list
 def watch_movie(user_data, title):
     movies = user_data["watchlist"]
 
@@ -32,13 +32,17 @@ def watch_movie(user_data, title):
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
+
+# Get average rating of user "watched" movies
 def get_watched_avg_rating(user_data):
     total_rating = 0
     movies = user_data["watched"]
 
+    # Return 0 if list of "watched" is empty
     if not movies:
         return total_rating
 
+    # Find sum of ratings
     for movie in movies:
         total_rating += movie["rating"]
 
@@ -141,28 +145,17 @@ def get_available_recs(user_data):
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 
+# Recommend movies from friends list based on user most frequent genre
 def get_new_rec_by_genre(user_data):
 
-    watched_genre_dict = {}
-    for movie in user_data["watched"]:
-        genre = movie["genre"]
-        if genre in watched_genre_dict:
-            watched_genre_dict[genre] += 1
-            continue
-        watched_genre_dict[genre] = 1
+    # Get user most frequent genre
+    most_frequent_genre = get_most_watched_genre(user_data)
 
-    frequent_genre = ""
-    genre_highest_count = 0
-    for genre, count in watched_genre_dict.items():
-        if count > genre_highest_count:
-            frequent_genre = genre
-            genre_highest_count = count
-
+    # Create list of recommended movies with most frequent genre
     not_watched = get_friends_unique_watched(user_data)
-
     recommended_movies = [
         movie for movie in not_watched 
-        if movie["genre"] == frequent_genre
+        if movie["genre"] == most_frequent_genre
     ]
 
     return recommended_movies
