@@ -131,7 +131,6 @@ def get_available_recs(user_data):
     unique_movies = get_friends_unique_watched(user_data)
 
     recommended_movies = []
-
     # Append a movie to a list of recommended movies
     # if a movie is hosted by a subscription user has acces to
     for movie in unique_movies:
@@ -162,18 +161,13 @@ def get_new_rec_by_genre(user_data):
 
 # Recommend movies from user favorites
 def get_rec_from_favorites(user_data):
+    # Get the list of movies that only the user has watched
+    unique_movies = get_unique_watched(user_data)
 
-    # Put titles that friends watched in a set
-    friends_movies = set()
-    for friend in user_data["friends"]:
-        friends_movies.update(movie["title"] for movie in friend["watched"])
-
-    # Create list of movies that only user watched 
-    # and is in their favorites list
+    # Filter the unique movies to only those that are in the user's favorites
     recommended_favorites = [
-        movie
-        for movie in user_data["favorites"]
-        if movie["title"] not in friends_movies
+        movie for movie in unique_movies 
+        if movie in user_data["favorites"]
     ]
 
     return recommended_favorites
