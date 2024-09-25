@@ -54,8 +54,11 @@ def test_friends_unique_movies_not_duplicated():
 
     # Assert
     assert len(friends_unique_movies) == 3
+    assert INTRIGUE_3 in friends_unique_movies
+    assert FANTASY_4 in friends_unique_movies
+    assert HORROR_1 in friends_unique_movies
 
-    raise Exception("Test needs to be completed.")
+    # raise Exception("Test needs to be completed.")
     # *************************************************************************************************
     # ****** Add assertions here to test that the correct movies are in friends_unique_movies **********
     # **************************************************************************************************
