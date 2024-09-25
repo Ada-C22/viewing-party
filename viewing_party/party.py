@@ -177,11 +177,31 @@ def get_friends_unique_watched(user_data):
 
 
     
+# Wave 4
+def get_available_recs(user_data):
+    """user_data= {
+        "subscriptions": ["", "", ""],
+        "watched": [ {}, {}, {} ],
+        "friends": [ {"watched": [...{},{}...] }, {"watched": [...{},{}...] }]
+            },
+    """ 
+    
+    lod_unique_friends_movie = get_friends_unique_watched(user_data)
 
-        
-# # -----------------------------------------
-# # ------------- WAVE 4 --------------------
-# # -----------------------------------------
+    lod_recommended_movies = []
+    for friend in user_data["friends"]:
+        for movie_dict in friend["watched"]:
+            for unique_movies in lod_unique_friends_movie:
+                subscription = movie_dict["host"]
+                if subscription in user_data["subscriptions"]:
+                    lod_recommended_movies.append(movie_dict)
+
+    print(lod_recommended_movies)
+    return lod_recommended_movies
+
+
+
+
 
 # # -----------------------------------------
 # # ------------- WAVE 5 --------------------
