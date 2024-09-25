@@ -19,18 +19,17 @@ def add_to_watchlist(user_data, movie):
     return user_data
 # No.4
 def watch_movie(user_data,title):
-    print(user_data, title)
+    #print(user_data, title)
     #user_data["watchlist"] = add_to_watchlist(user_data)
     #ser_data["watched"] = add_to_watched(user_data)
     for movie in user_data["watchlist"]:
-        for value in movie.values():
-            if title in value: 
-                user_data["watchlist"].remove(movie)
-                user_data["watched"].append(movie)
-                return user_data
-            else:
-                return user_data
-    
+        if title in movie["title"]: 
+            user_data["watchlist"].remove(movie)
+            user_data["watched"].append(movie)
+            return user_data
+        else:
+            return user_data
+        
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
