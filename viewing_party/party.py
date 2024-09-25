@@ -45,9 +45,66 @@ def watch_movie(user_data, title):
 # -----------------------------------------
 
 
-# -----------------------------------------
-# ------------- WAVE 3 --------------------
-# -----------------------------------------
+user_data = {
+    "watched": [
+        FANTASY_1, 
+        FANTASY_2, 
+        FANTASY_3, 
+        ACTION_1, 
+        INTRIGUE_1, 
+        INTRIGUE_2
+        ],
+    "friends": [
+        {
+            "watched": [
+                FANTASY_1,
+                FANTASY_3,
+                FANTASY_4,
+                HORROR_1,
+            ]
+        }]}
+
+
+
+def get_unique_watched(user_data):
+    unique_watched = []
+    collect_friends_movies = []
+    user_watched = user_data["watched"]
+
+    friends_watched = user_data["friends"]
+    for i in range(len(friends_watched)):
+        friends_movies = friends_watched[i]["watched"]
+        collect_friends_movies.append[friends_movies]
+
+    for movie in user_watched:
+        if movie not in collect_friends_movies:
+            unique_watched.append(movie)
+    return unique_watched
+
+def get_friends_unique_watched(user_data):
+    unique_friend_watched = []
+    collect_friends_movies = []
+    user_watched = user_data["watched"]
+
+    friends_watched = user_data["friends"]
+    for i in range(len(friends_watched)):
+        friends_movies = friends_watched[i]["watched"]
+        collect_friends_movies.append[friends_movies]
+
+    for movie in collect_friends_movies:
+        if movie not in user_watched:
+            unique_friend_watched.append(movie)
+    return unique_friend_watched
+
+    
+
+# user_data is a dictionary containing 2 key value pair
+# the value for watched is a list of dicts
+ # the inner dicts have the key values for movie, rating, genre
+# the value for friends is a a list of dictionaries
+ #  each inner dict has a key "watched" and a list of dicts for values
+ # the inner inner have key values for movie, rating, genre
+
 
         
 # -----------------------------------------
