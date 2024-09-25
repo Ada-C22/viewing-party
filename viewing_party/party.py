@@ -55,6 +55,27 @@ def get_watched_avg_rating(user_data):
 
     return avg_rating
 
+def get_most_watched_genre(user_data):
+
+    most_watched_genre = user_data.get("watched", [])
+
+    if not most_watched_genre:
+        return None
+    
+    all_genre = {}
+
+    for genre in most_watched_genre:
+        if genre in all_genre:
+            all_genre[genre] += 1
+        else:
+            all_genre[genre] = 1
+
+    reoccurring_genres = []
+    for genre, count in all_genre.items():
+        if count > 1:
+            reoccurring_genres.append(genre)
+    return reoccurring_genres
+
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
