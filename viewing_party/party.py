@@ -29,18 +29,6 @@ def watch_movie(user_data, title):
     return user_data
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
@@ -49,8 +37,39 @@ def watch_movie(user_data, title):
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
+def get_unique_watched(user_data):
+    # user_list
+    watched_user_list = []
+    for movie in user_data["watched"]:
+        watched_user_list.append(movie)
 
-        
+    user_movies_titles = set()
+    for movie in watched_user_list:
+        user_movies_titles.add(movie["title"])
+
+    # friends_watched_list
+    watched_list_of_friends = []
+    for movie in user_data["friends"]:
+        if "watched" in movie:
+            watched_list_of_friends.extend(movie["watched"])
+
+    friends_movies_titles = set()
+    for movie in watched_list_of_friends:
+        friends_movies_titles.add(movie["title"])
+
+
+    unwatched_movies = []
+    combined_movies_lists = user_movies_titles - friends_movies_titles
+    for movie in watched_user_list:
+        if movie["title"] in combined_movies_lists:
+            unwatched_movies.append(movie)
+
+
+    return unwatched_movies
+
+
+
+
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
