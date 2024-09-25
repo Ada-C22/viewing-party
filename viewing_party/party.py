@@ -22,12 +22,16 @@ def add_to_watchlist(user_data, movie):
     return user_data
 
 def watch_movie(user_data, title):
-    for movie in user_data["watchlist"]:
-        if movie["title"] == title:
-            user_data["watchlist"].remove(movie)
-            user_data["watched"].append(movie)
+    movies = user_data.copy()
+    movies["watchlist"] = movies["watchlist"].copy()
+    movies["watched"] = movies["watched"].copy()
 
-    return user_data
+    for movie in movies["watchlist"]:
+        if movie["title"] == title:
+            movies["watchlist"].remove(movie)
+            movies["watched"].append(movie)
+
+    return movies
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
@@ -119,3 +123,4 @@ def get_rec_from_favorites(user_data):
         for movie in get_unique_watched(user_data):
             if movie in user_data["favorites"]:
                 recommended_movies.append(movie)
+    return recommended_movies
