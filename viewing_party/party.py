@@ -25,10 +25,11 @@ def create_movie(title, genre, rating):
 
 def add_to_watched(user_data, movie):
     '''
-    the value of user_data will be a dictionary with a key "watched", and a value which is a list of dictionaries representing the movies the user has watched
+    return user_data after adding movie to watched
     An empty list represents that the user has no movies in their watched list
-    in this case, user_data represents movies we have watched
-    user_data = {"watched": [...list of movie_dict watched...]}
+    user_data = {
+        'watched': [{"title": "", "genre": "", "rating": <float>}, {...}, {...}, {...}, {...}, {...}]
+        }
     '''
 
     lod_watched = user_data["watched"]
@@ -37,9 +38,11 @@ def add_to_watched(user_data, movie):
 
 def add_to_watchlist(user_data, movie):
     '''
-    the value of user_data will be a dictionary with a key "watchlist", and a value which is a list of dictionaries representing the movies the user wants to watch
+    return user_data after adding movie to watchlist
     An empty list represents that the user has no movies in their watchlist
-    user_data = {"watchlist": [...list of movie_dict wanting to watch...]}
+    user_data = {
+        'watchlist': [{"title": "", "genre": "", "rating": <float>}, {...}, {...}, {...}, {...}, {...}]
+        }
     '''
     lod_watchlist = user_data["watchlist"]
     lod_watchlist.append(movie)
@@ -47,12 +50,12 @@ def add_to_watchlist(user_data, movie):
 
 def watch_movie(user_data, title):
     '''
-    - user_data: dictionary with a "watchlist" and a "watched" keys
-        - values are list of dict of movies that are wither watched or on watchlist
-    - title: string, rep. title of movie user watched
-
     - if title is in watchlist: remove from watchlist, add to watched, return user data
     - if movie is not in user watchlist, return user data
+    user_data = {
+        'watched': [{"title": "", "genre": "", "rating": <float>}, {...}, {...}, {...}, {...}, {...}],
+        'watchlist': [{"title": "", "genre": "", "rating": <float>}, {...}, {...}, {...}, {...}, {...}]
+        }
     '''
 
     lod_watchlist = user_data["watchlist"]
@@ -74,14 +77,13 @@ def watch_movie(user_data, title):
 #wave 2 
 
 def get_watched_avg_rating(user_data):
-    """
-    the value of user_data will be a dictionary with a "watched" list of movie dictionaries
-    This represents that the user has a list of watched movies
-    Calculate the average rating of all movies in the watched list
-    The average rating of an empty watched list is 0.0
+    '''
     return the average rating
-    user_data = {"watched": [...list of movie_dict watched...]}
-    """
+    The average rating of an empty watched list is 0.0
+    user_data = {
+        'watched': [{"title": "", "genre": "", "rating": <float>}, {...}, {...}, {...}, {...}, {...}]
+        }
+    '''
 
     lod_watched = user_data["watched"]
     total_rating = 0
@@ -96,14 +98,13 @@ def get_watched_avg_rating(user_data):
         
 
 def get_most_watched_genre(user_data):
-    """
-    the value of user_data will be a dictionary with a "watched" list of movie dictionaries. Each movie dictionary has a key "genre".
-    This represents that the user has a list of watched movies. Each watched movie has a genre.
-    The values of "genre" is a string.
-    Determine which genre is most frequently occurring in the watched list
+    '''
     return the genre that is the most frequently watched
     If the value of "watched" is an empty list, get_most_watched_genre should return None.
-    """
+    user_data = {
+        'watched': [{"title": "", "genre": "", "rating": <float>}, {...}, {...}, {...}, {...}, {...}]
+        }
+    '''
 
     lod_watched = user_data["watched"]
     genre_count = {}
@@ -132,16 +133,12 @@ def get_most_watched_genre(user_data):
 
 def get_unique_watched(user_data):
     '''
-    the value of user_data will be a dictionary with a "watched" list of movie dictionaries, and a "friends"
-    This represents that the user has a list of watched movies and a list of friends
-    The value of "friends" is a list
-    Each item in "friends" is a dictionary. This dictionary has a key "watched", which has a list of movie dictionaries.
-    Each movie dictionary has a "title".
-    Determine which movies the user has watched, but none of their friends have watched.
-    Return a list of dictionaries, that represents a list of movies
-    user_data = {'watched': [{...}, {...}, {...}, {...}, {...}, {...}], 
-    friends': [{'watched': [..{},{},{}..], {'watched': [..{},{},{}..]
-                                                                                                 v [{'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}, {'title': 'The Lord of the Functions: The Return of the Value', 'genre': 'Fantasy', 'rating': 4.0}, {'title': 'The Programmer: An Unexpected Stack Trace', 'genre': 'Fantasy', 'rating': 4.0}, {'title': 'It Came from the Stack Trace', 'genre': 'Horror', 'rating': 3.5}]   
+    Return a list of dictionaries, that represents a list of movies that:
+    -the user has watched, but none of their friends have watched. (user movies) - (friends movies)
+    user_data = {
+        'watched': [{...}, {...}, {...}, {...}, {...}, {...}], 
+        friends': [{'watched': [..{},{},{}..], {'watched': [..{},{},{}..]
+        }
     '''
     titles_friends_watched = set()
 
@@ -159,8 +156,12 @@ def get_unique_watched(user_data):
 
 def get_friends_unique_watched(user_data):
     '''
-    user_data = {'watched': [{...}, {...}, {...}, {...}, {...}, {...}], 
-    friends': [{'watched': [..{},{},{}..], {'watched': [..{},{},{}..]
+    Return a list of dictionaries, that represents a list of movies that:
+    - aleast one of the user's friends have watched, but the user has not watched aka (friends movies) - (user movies)
+    user_data = {
+        'watched': [{...}, {...}, {...}, {...}, {...}, {...}], 
+        friends': [{'watched': [..{},{},{}..], {'watched': [..{},{},{}..]
+        }
     '''
 
     list_titles_watched = set()
@@ -179,12 +180,13 @@ def get_friends_unique_watched(user_data):
     
 # Wave 4
 def get_available_recs(user_data):
-    """user_data= {
-        "subscriptions": ["", "", ""],
+    '''
+    user_data= {
+        "subscriptions": [ "","","" ],
         "watched": [ {}, {}, {} ],
         "friends": [ {"watched": [...{},{}...] }, {"watched": [...{},{}...] }]
-            },
-    """ 
+        }
+    '''
     
     lod_unique_friends_movie = get_friends_unique_watched(user_data)
 
@@ -196,13 +198,44 @@ def get_available_recs(user_data):
     return lod_recommended_movies
 
 
+# wave 5
 
+def get_new_rec_by_genre(user_data):    
+    '''
+    Return the list of recommended movies....A movie should be added to this list if and only if:
+    -The user has not watched it
+    -At least one of the user's friends has watched
+    -The "genre" of the movie is the same as the user's most frequent genre
+    '''
+    # return lod of movies friends have watched but not user
+    lod_unique_friends_movie = get_friends_unique_watched(user_data)
 
+    # get user's most freq genre
+    user_freq_genre = get_most_watched_genre(user_data)
 
+    lod_recommended_movies = []
+    for movie in lod_unique_friends_movie:
+        if movie["genre"] == user_freq_genre:
+            lod_recommended_movies.append(movie)
 
+    return lod_recommended_movies
 
+def get_rec_from_favorites(user_data):
+    '''
+    user_data= {
+        "favorites": [ {}, {}, {} ],
+        "watched": [ {}, {}, {} ],
+        "friends": [ {"watched": [...{},{}...] }, {"watched": [...{},{}...] }]
+        }
+    '''
+    # list of movies only the user has seen (not any of the friends)
+    lod_user_unique_movies = get_unique_watched(user_data)
 
-# # -----------------------------------------
-# # ------------- WAVE 5 --------------------
-# # -----------------------------------------
+    lod_recommended_movies = []
+    for movie in lod_user_unique_movies:
+        if movie in user_data["favorites"]:
+            lod_recommended_movies.append(movie)
+
+    return lod_recommended_movies
+
 
