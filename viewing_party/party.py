@@ -38,38 +38,40 @@ def watch_movie(user_data, title):
 def get_watched_avg_rating(user_data):
     if not user_data["watched"]:
         return 0.0
-    
-    num_of_ratings = 0
-    ratings_total = 0
-    
-    for movie in user_data["watched"]:
-        ratings_total += movie["rating"]
+        
+    for i in range(len(user_data["watched"][0])):
         num_of_ratings += 1
     
     return ratings_total/num_of_ratings
+
+def get_most_watched_genre(user_data):
+    if not user_data["watched"]:
+        return None
     
+    genre_frequency = {}
+
+    #first for loop tracks amount of times a genre appears
+    for movie in user_data["watched"]:
+        genre_type = movie["genre"]
+        if genre_type in genre_frequency:
+            genre_frequency[genre_type] += 1
+        else:
+            genre_frequency[genre_type] =1
+    
+    most_watched_genre = None
+    highest_genre_count = 0
+
+    #second for loop picks out which genre is the most watched
+    for genre, count in genre_frequency.items():
+        if count > highest_genre_count:
+            highest_genre_count = count
+            most_watched_genre = genre
+
+    return most_watched_genre
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
-def get_unique_watched(user_data):
-    unique_movies = []
-# loop through each user movie
-    for user_movie in user_data["watched"]:
-        is_movie_unique = True
-
-# loop through each friend
-        for friend in user_data["friends"]:
-            # loop through each friend movie
-            for friend_movie in friend["watched"]:
-                # check if friend movie matches user movie
-                if user_movie["title"] == friend_movie["title"]:
-                    is_movie_unique = False
-# if movie is unique after loop then add movie to unique movie list
-        if is_movie_unique:
-            unique_movies.append(user_movie)
-
-    return unique_movies
 
 
 # -----------------------------------------
