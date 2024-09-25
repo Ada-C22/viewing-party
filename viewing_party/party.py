@@ -52,6 +52,24 @@ def get_watched_avg_rating(user_data):
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
+def get_unique_watched(user_data):
+    unique_movies = []
+# loop through each user movie
+    for user_movie in user_data["watched"]:
+        is_movie_unique = True
+
+# loop through each friend
+        for friend in user_data["friends"]:
+            # loop through each friend movie
+            for friend_movie in friend["watched"]:
+                # check if friend movie matches user movie
+                if user_movie["title"] == friend_movie["title"]:
+                    is_movie_unique = False
+# if movie is unique after loop then add movie to unique movie list
+        if is_movie_unique:
+            unique_movies.append(user_movie)
+
+    return unique_movies
 
 
 # -----------------------------------------
