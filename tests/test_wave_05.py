@@ -54,7 +54,7 @@ def test_new_genre_rec_from_empty_friends():
     }
 
     # Act
-    new_recomemendation=get_rec_from_favorites(sonyas_data)
+    new_recomemendation = get_rec_from_favorites(sonyas_data)
 
     #Assert
     assert new_recomemendation == []
