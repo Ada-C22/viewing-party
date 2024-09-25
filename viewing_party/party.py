@@ -95,8 +95,60 @@ def get_unique_watched(user_data):
 
 
 def get_friends_unique_watched(user_data):
-    pass
+    unique_movies_list = []
+    total_friends_watched = []
 
+    for movies in user_data["friends"]:
+        total_friends_watched += movies["watched"]
+    
+    for unique_movies in total_friends_watched:
+        if unique_movies not in user_data["watched"]:
+            unique_movies_list.append(unique_movies)
+
+    return unique_movies_list
+
+
+MOVIE_TITLE_1 = "It Came from the Stack Trace"
+GENRE_1 = "Horror"
+RATING_1 = 3.5
+
+HORROR_1 = {
+    "title": MOVIE_TITLE_1,
+    "genre": GENRE_1,
+    "rating": RATING_1
+}
+
+FANTASY_1 = {
+    "title": "The Lord of the Functions: The Fellowship of the Function",
+    "genre": "Fantasy",
+    "rating": 4.8
+}
+
+INTRIGUE_1 = {
+    "title": "Recursion",
+    "genre": "Intrigue",
+    "rating": 2.0
+}
+
+amandas_data = {
+        "watched": [
+            HORROR_1,
+            FANTASY_1
+        ],
+        "friends": [
+            {
+                "watched": [
+                    HORROR_1,
+                    FANTASY_1,
+                    INTRIGUE_1
+                ]
+            },
+            {
+                "watched": []
+            }
+        ]
+    }
+get_friends_unique_watched(amandas_data)
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
