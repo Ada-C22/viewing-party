@@ -77,6 +77,45 @@ def get_most_watched_genre(user_data):
             most_watched_genre = key 
     return most_watched_genre
 
+def get_unique_watched(user_data):
+    unique_watched = []
+    collect_friends_movies = []
+    user_watched = user_data["watched"]
+
+    friends_watched = user_data["friends"]   # the list of 2 dictionaries in the "friends" key
+    for friend in friends_watched:   # the inner "watched dict"
+        friend_movie_list = friend["watched"]   # the inner list of dicts
+        for friend_movie in friend_movie_list:
+            collect_friends_movies.append(friend_movie)
+
+    for movie in user_watched:
+        if movie not in collect_friends_movies:
+            unique_watched.append(movie)
+    return unique_watched
+
+def get_friends_unique_watched(user_data):
+    unique_friend_watched = []
+    user_watched = user_data["watched"]
+
+    friends_watched = user_data["friends"]   # the list of 2 dictionaries in the "friends" key
+    for friend in friends_watched:   # the inner "watched dict"
+        friend_movie_list = friend["watched"]   # the inner list of dicts
+        for friend_movie in friend_movie_list:
+            if friend_movie not in user_watched and friend_movie not in unique_friend_watched:
+                unique_friend_watched.append(friend_movie)
+    return unique_friend_watched
+   
+
+    
+
+# user_data is a dictionary containing 2 key value pair
+# the value for watched is a list of dicts
+ # the inner dicts have the key values for movie, rating, genre
+# the value for friends is a a list of dictionaries
+ #  each inner dict has a key "watched" and a list of dicts for values
+ # the inner inner have key values for movie, rating, genre
+
+
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
