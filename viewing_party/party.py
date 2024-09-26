@@ -119,7 +119,27 @@ def get_friends_unique_watched(user_data):
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
-USER_DATA_4 = {
+def get_available_recs(user_data):
+    user_watched = user_data["watched"]
+    recommended_movie_list = []
+    available_movies = []
+
+    friends_watched = user_data["friends"]   # the list of 2 dictionaries in the "friends" key
+    for friend in friends_watched:   # the inner "watched dict"
+        friend_movie_list = friend["watched"]   # the inner list of dicts
+        for friend_movie in friend_movie_list:
+            if friend_movie["host"] in user_data["subscriptions"]:
+                available_movies.append(friend_movie)
+
+    for movie in available_movies:
+        if movie not in user_watched and movie not in recommended_movie_list:
+            recommended_movie_list.append(movie)
+    return recommended_movie_list
+
+# -----------------------------------------
+# ------------- WAVE 5 --------------------
+# -----------------------------------------
+USER_DATA_5 = {
     "watched": [
         FANTASY_1b, 
         FANTASY_2b, 
@@ -128,7 +148,16 @@ USER_DATA_4 = {
         INTRIGUE_1b, 
         INTRIGUE_2b
         ],
-    "subscriptions" : ["netflix", "hulu"],  
+    "subscriptions" : [
+        "netflix",
+          "hulu"
+        ], 
+    "favorites" : [
+        FANTASY_1b, 
+        FANTASY_2b, 
+        INTRIGUE_1b,
+        INTRIGUE_2b
+        ], 
     "friends":  [
         {
             "watched": [
@@ -150,45 +179,46 @@ USER_DATA_4 = {
     ]
 }
 
-USER_DATA_4["friends"][0]["watched"][0]["host"]
+USER_DATA_5["friends"][0]["watched"][0]["host"]
 
-USER_DATA_4["subscriptions"]
+USER_DATA_5["subscriptions"]
 
 
 
-def get_available_recs(user_data):
-    user_watched = user_data["watched"]
-    recommended_movie_list = []
-    available_movies = []
+
+def get_new_rec_by_genre(user_data):
+    favorite_genre = get_most_watched_genre(user_data)
+    friend_genre_list = []
+    recommended_genre = []
+
 
     friends_watched = user_data["friends"]   # the list of 2 dictionaries in the "friends" key
     for friend in friends_watched:   # the inner "watched dict"
         friend_movie_list = friend["watched"]   # the inner list of dicts
         for friend_movie in friend_movie_list:
-            if friend_movie["host"] in user_data["subscriptions"]:
-                available_movies.append(friend_movie)
+            if friend_movie["genre"] == favorite_genre:
+                friend_genre_list.append(friend_movie)
 
-    for movie in available_movies:
-        if movie not in user_watched and movie not in recommended_movie_list:
-            recommended_movie_list.append(movie)
-    return recommended_movie_list
+    for movie in friend_genre_list:
+        if movie not in user_data["watched"] and movie not in recommended_genre:
+            recommended_genre.append(movie)
+    return recommended_genre
+
+def get_rec_from_favorites(user_data):
+    recommended_movies = []
+    collect_friend_movies = []
+
+    friends_watched = user_data["friends"]   # the list of 2 dictionaries in the "friends" key
+    for friend in friends_watched:   # the inner "watched dict"
+        friend_movie_list = friend["watched"]   # the inner list of dicts
+        for friend_movie in friend_movie_list:
+            if friend_movie not in collect_friend_movies:
+                collect_friend_movies.append(friend_movie)
+
+    for movie in user_data["favorites"]:
+        if movie not in collect_friend_movies:
+            recommended_movies.append(movie)
+    return recommended_movies
 
 
-
-    
-    
-
-
-
-
-    
-
-
-
-
-
-
-# -----------------------------------------
-# ------------- WAVE 5 --------------------
-# -----------------------------------------
 
