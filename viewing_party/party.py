@@ -5,16 +5,12 @@ def create_movie(movie_title, genre, rating):
     movie= {}
 
     if movie_title and genre and rating:
-        
-        if isinstance(movie_title,str) or isinstance(genre,str)\
-        or rating.isinstance(rating (int,float)):
-            
-            movie["title"] = movie_title
-            movie["genre"] = genre
-            movie["rating"] = rating          
-                
-        return movie
     
+        movie["title"] = movie_title
+        movie["genre"] = genre
+        movie["rating"] = rating          
+        return movie
+
     return None
 
 # ALEIDA V changes:
@@ -81,25 +77,24 @@ def get_watched_avg_rating(user_data):
 
 def get_most_watched_genre(user_data):
 
-    genre_frequencies= 0
     max_value =0
-    most_watched = {}
-    if len((user_data["watched"])) > 0:
-        for i in range(len((user_data["watched"]))-1):
+    genre_frquencies = {}
 
-            if user_data["watched"][i]["genre"] in most_watched:
-                genre_frequencies += 1
-                most_watched[user_data["watched"][i]["genre"]] = genre_frequencies
-            else:
-                most_watched[user_data["watched"][i]["genre"]] = 1
-
-        for key, current_value in most_watched.items():
+    if len(user_data["watched"]) == 0:
+        return None
+    
+    for movie in  user_data["watched"]:
+        if movie["genre"] in genre_frquencies:
+            genre_frquencies[movie["genre"]] += 1
+        else:
+            genre_frquencies[movie["genre"]] = 1
+        
+    for key, current_value in genre_frquencies.items():
             if current_value > max_value:
                 max_value = current_value
-                most_watched_genre = key
-
-        return most_watched_genre
-    return None
+                most_watched = key
+    
+    return most_watched
 
 
 # -----------------------------------------
