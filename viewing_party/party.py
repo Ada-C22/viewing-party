@@ -46,11 +46,11 @@ def add_to_watched(user_data, movie):
 
 # print(add_to_watched(user_data, movie))
 
-print(add_to_watched({"watched": []}, {
-                                        "title": "Happy Feet",
-                                        "genre": "Drama",
-                                        "rating": 5
-                                    }))
+# print(add_to_watched({"watched": []}, {
+#                                         "title": "Happy Feet",
+#                                         "genre": "Drama",
+#                                         "rating": 5
+#                                     }))
 
 
 def add_to_watchlist(user_data, movie):
@@ -136,17 +136,48 @@ def get_most_watched_genre(user_data):
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 
-# def get_unique_watched(user_data):
-
-    #user_data = {watched: [movies{}]}
-    #return a list of dictionaries that represents a list of movies 
-        
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
-def get_available_functions(user_data):
+
+def get_available_recs(user_data):
+    subscriptions = set(user_data.get("subscriptions", []))
+
+    recommended_movies = set()  # Using a set to ensure uniqueness
+    user_watched = set()  # Track movies the user has already watched
+
+    # Populate user_watched set with movie titles from user_data
+    for movie in user_data.get("watched"):
+        if "title" in movie:
+            user_watched.add(movie["title"])
+  
+    # Loop through each friend and their watched movies
+    for friend in user_data.get("friends"):
+        for movie in friend.get("watched"):
+                # Only add the movie if it's hosted on a subscribed platform and not watched by the user
+            if movie["host"] in subscriptions and movie["title"] not in user_watched:
+                recommended_movies.add((movie["title"], movie["host"], movie["rating"], movie["genre"]))
+
+    # Convert the set of tuples back to a list of dictionaries, including the 'genre' key
+    updated_recommendation = [
+        {"title": title, "host": host, "rating": rating, "genre": genre}
+        for title, host, rating, genre in recommended_movies
+    ]
+
+    return updated_recommendation
     
+    # list of recommended movies: user has not watched,
+    # at least one of the friends have watched 
+    # host of movie service is not in user's subscriptions
+
+
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
-
+# def get_new_rec_by_genre(user_data):
+#     for user_data 
+    #determine most frequently watched genre
+    #determine list of recommended movies
+        #user has not watched
+        #at least 1 of user friends watched
+        #"genre is most frequently watched drama
