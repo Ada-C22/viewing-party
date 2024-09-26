@@ -47,36 +47,7 @@ def test_friends_unique_movies():
 def test_friends_unique_movies_not_duplicated():
     # Arrange
     amandas_data = clean_wave_3_data()
-    #{
-#     "watched": [
-#         FANTASY_1, 
-#         FANTASY_2, 
-#         FANTASY_3, 
-#         ACTION_1, 
-#         INTRIGUE_1, 
-#         INTRIGUE_2
-#         ],    
-# }
-# diff : FANTASY_4, HORROR_1,INTRIGUE_3
-    #  amandas_data["friends"] =  [
-    #     {
-    #         "watched": [
-    #             FANTASY_1,
-    #             FANTASY_3,
-    #             FANTASY_4,
-    #             HORROR_1,
-    #            INTRIGUE_3
-    #         ]
-    #     },
-    #     {
-    #         "watched": [
-    #             FANTASY_1,
-    #             ACTION_1,
-    #             INTRIGUE_1,
-    #             INTRIGUE_3,
-    #         ]
-    #     }
-    # ]  
+
     amandas_data["friends"][0]["watched"].append(INTRIGUE_3)
 
     # Act
