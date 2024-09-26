@@ -1,3 +1,4 @@
+
 # ------------- WAVE 1 --------------------
 
 def create_movie(title, genre, rating):
@@ -19,7 +20,6 @@ def add_to_watchlist(user_data, movie):
     return user_data
 
 def watch_movie(user_data, title):
-
     for data in user_data["watchlist"]:
         if data["title"] == title:
             user_data["watchlist"].remove(data)
@@ -67,7 +67,29 @@ def get_most_watched_genre(user_data):
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
 
+
+def get_available_recs(user_data):
+    recommendations = []
+
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            if movie in recommendations:
+                continue
+            
+            elif movie in user_data["watched"]:
+                continue
+            
+            elif movie["host"] not in user_data["subscriptions"]:
+                continue
+            
+            else: 
+                recommendations.append(movie)
+
+    return recommendations
+
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
+
+
 
