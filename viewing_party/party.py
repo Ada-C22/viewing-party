@@ -84,10 +84,13 @@ def get_unique_watched(user_data):
     unique_movies_list = []
     total_friends_watched = []
 
+    #loops through values of key 'friends' in user data, and is appended to total_friends_watched list
     for movies in user_data["friends"]:
         total_friends_watched += movies["watched"]
 
+    #loops through values of key 'watched' in user_data to get movies watched
     for unique_movies in user_data["watched"]:
+        #if statement compares movies in total_friends_watched list to what the user has watched, any unique movie gets appended to unique_movies_list
         if unique_movies not in total_friends_watched:
             unique_movies_list.append(unique_movies)
     
@@ -98,9 +101,11 @@ def get_friends_unique_watched(user_data):
     unique_movies_list = []
     total_friends_watched = []
 
+    #loops through values of key 'friends' in user data, and is appended to total_friends_watched list
     for movies in user_data["friends"]:
         total_friends_watched += movies["watched"]
     
+    #loops through movies in the total_friends_watched list to compare (in the if statement) if the movie is not in the user's watched list and hasn't appeared in the unique_movies_list (checks for duplicates) to then append the unique movie
     for unique_movies in total_friends_watched:
         if (unique_movies not in user_data["watched"]) and (not unique_movies in unique_movies_list):
             unique_movies_list.append(unique_movies)
