@@ -143,3 +143,13 @@ def get_new_rec_by_genre(user_data):
             recommended_movies_list.append(movie)
     
     return recommended_movies_list
+
+def get_new_rec_by_genre(user_date):
+    recommend_movies_list = []
+    # get user title from favorite
+    # 
+
+    # get friends watech  
+
+    return recommend_movies_list
+    
