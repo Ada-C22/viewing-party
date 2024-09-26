@@ -229,5 +229,15 @@ def get_rec_from_favorites(user_data):
         return []
     elif not user_data['friends']:
         return user_data['favorites']
-    
-    
+
+    friends_watched_set = set()
+    for friend in user_data['friends']:
+        for movie in friend['watched']:
+            friends_watched_set.add(movie['title'])
+
+    favorites_recommended = []
+    for favorite in user_data['favorites']:
+        if favorite['title'] not in friends_watched_set:
+            favorites_recommended.append(favorite)
+
+    return favorites_recommended
