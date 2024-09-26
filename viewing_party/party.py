@@ -96,9 +96,14 @@ def get_friends_unique_watched(user_data):
 # -----------------------------------------
 def get_available_recs(user_data):
     recommended_movies_list = []
+<<<<<<< HEAD
     user_watched_titles = []
     for movie in user_data["watched"]:
         user_watched_titles.append(movie["title"])
+=======
+
+    user_watched_titles = get_user_watched_list(user_data)
+>>>>>>> 8b0a475f304077d990bc64aff642d86d3ade4381
     
     for friend in user_data["friends"]:
         for movie in friend["watched"]:
