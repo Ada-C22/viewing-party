@@ -87,7 +87,8 @@ def get_unique_watched(user_data):
 
     # Create list of movies that only user watched
     unique_movies = [
-        movie for movie in user_data["watched"] if movie["title"] not in friends_movies
+        movie for movie in user_data["watched"] 
+        if movie["title"] not in friends_movies
     ]
 
     return unique_movies
@@ -166,8 +167,9 @@ def get_rec_from_favorites(user_data):
 
     # Filter the unique movies to only those that are in the user's favorites
     recommended_favorites = [
-        movie for movie in unique_movies 
-        if movie in user_data["favorites"]
+        movie
+        for movie in unique_movies
+        if movie["title"] in {fav_movie["title"] for fav_movie in user_data["favorites"]}
     ]
 
     return recommended_favorites
