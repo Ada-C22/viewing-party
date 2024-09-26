@@ -61,6 +61,51 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
+def is_movie_watched_by_friend(user_watched_movie, friends):
+    for friend in friends:
+        for friend_watched_movie in friend["watched"]:
+            if user_watched_movie["title"].lower() == friend_watched_movie["title"].lower():
+                return True
+    return False
+
+def is_movie_watched_by_user(friend_watched_movie, user_watched_movies_list):
+    for user_watched_movie in user_watched_movies_list:
+        if user_watched_movie["title"].lower() == friend_watched_movie["title"].lower():
+                return True
+    return False
+
+def is_movie_in_movie_list(movie_title, movie_dict_list):
+    for movie_dict in movie_dict_list:
+        if movie_title.lower() == movie_dict["title"].lower():
+            return True
+    return False
+
+def get_unique_watched(user_data):
+    watched_list = user_data["watched"]
+    friends = user_data["friends"]
+    movies_watched_by_user_only_list = []
+
+    for watched_movie in watched_list:
+        if is_movie_in_movie_list(watched_movie["title"], movies_watched_by_user_only_list):
+            continue
+        if not is_movie_watched_by_friend(watched_movie, friends):
+            movies_watched_by_user_only_list.append(watched_movie)
+    
+    return movies_watched_by_user_only_list
+
+def get_friends_unique_watched(user_data):
+    watched_list = user_data["watched"]
+    friends = user_data["friends"]
+    movies_watched_by_friend_only_list = []
+
+    for friend in friends:
+        for friend_watched_movie in friend["watched"]:
+            if is_movie_in_movie_list(friend_watched_movie["title"], movies_watched_by_friend_only_list):
+                continue
+            if not is_movie_watched_by_user(friend_watched_movie, watched_list):
+                    movies_watched_by_friend_only_list.append(friend_watched_movie)
+    
+    return movies_watched_by_friend_only_list
 
         
 # -----------------------------------------
