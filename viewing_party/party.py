@@ -1,23 +1,19 @@
 # ------------- WAVE 1 --------------------
-
 def create_movie(title, genre, rating):
     if title is None or genre is None or rating is None:
         return None
     return {'title': title, 'genre': genre, 'rating': rating}
-
 
 def add_to_watched(user_data, movie):
     watched_list = user_data["watched"]
     watched_list.append(movie)
     return user_data
 
-
 def add_to_watchlist(user_data: dict, movie: dict):
 
     movie_list = user_data["watchlist"]
     movie_list.append(movie)
     return user_data
-
 
 def watch_movie(user_data, title):
     watchlist = user_data['watchlist']
@@ -31,7 +27,6 @@ def watch_movie(user_data, title):
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
-
 def get_watched_avg_rating(user_data):
     '''
     Calculates the average rating of all movies watched by the user.
@@ -181,4 +176,44 @@ def get_available_recs(user_data):
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
+def get_new_rec_by_genre(user_data):
+    '''
+    Compiles a list of recommended movies for the user. Movies added to
+    this list will match the user's most frequent genre, will have been
+    watched by at least one of the user's friends, and will not have been
+    watched yet by the user.
 
+    Parameters:
+        user_data (dict): A dictionary with a "watched" list of movie
+        dictionaries. Each movie dictionary contains information on the 
+        genre, rating, and title of the movie.
+    Returns:
+        recs_by_genre (list): A list of dictionaries that represents a 
+        list of movies recommended for the user.
+    '''
+    if not user_data['watched']:
+        return []
+        
+    for friend in user_data['friends']:
+        is_friends_empty = True
+        if friend['watched']:
+            is_friends_empty = False
+            break
+    if is_friends_empty:
+        return []
+    
+    recs_by_genre = []
+    available_recs = get_available_recs(user_data)
+    most_watched_genre = get_most_watched_genre(user_data)
+
+    for rec in available_recs:
+        if rec['genre'] == most_watched_genre:
+            is_rec_found = False
+            for movie in user_data['watched']:
+                if rec['title'] == movie['title']:
+                    is_rec_found = True
+                    break
+            if not is_rec_found:
+                recs_by_genre.append(rec)
+
+    return recs_by_genre
