@@ -119,7 +119,7 @@ def get_friends_unique_watched(user_data):
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
-USER_DATA_4 = {
+USER_DATA_5 = {
     "watched": [
         FANTASY_1b, 
         FANTASY_2b, 
@@ -128,7 +128,16 @@ USER_DATA_4 = {
         INTRIGUE_1b, 
         INTRIGUE_2b
         ],
-    "subscriptions" : ["netflix", "hulu"],  
+    "subscriptions" : [
+        "netflix",
+          "hulu"
+        ], 
+    "favorites" : [
+        FANTASY_1b, 
+        FANTASY_2b, 
+        INTRIGUE_1b,
+        INTRIGUE_2b
+        ], 
     "friends":  [
         {
             "watched": [
@@ -150,9 +159,9 @@ USER_DATA_4 = {
     ]
 }
 
-USER_DATA_4["friends"][0]["watched"][0]["host"]
+USER_DATA_5["friends"][0]["watched"][0]["host"]
 
-USER_DATA_4["subscriptions"]
+USER_DATA_5["subscriptions"]
 
 
 
