@@ -124,9 +124,19 @@ def get_friends_unique_watched(user_data):
     return friends_unique_watched_movies_list
 
         
-# -----------------------------------------
 # ------------- WAVE 4 --------------------
-# -----------------------------------------
+
+def get_available_recs(user_data):
+
+   
+
+    user_subscriptions = set(user_data.get('subscriptions', []))
+    friends_recommendadtions = get_friends_unique_watched(user_data)
+
+    return [movie for movie in friends_recommendadtions if movie['host'] in user_subscriptions]
+
+
+
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
