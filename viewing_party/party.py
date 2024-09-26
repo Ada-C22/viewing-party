@@ -47,11 +47,11 @@ def add_to_watched(user_data, movie):
 
 # print(add_to_watched(user_data, movie))
 
-# print(add_to_watched({"watched": []}, {
-#                                         "title": "Happy Feet",
-#                                         "genre": "Drama",
-#                                         "rating": 5
-#                                     }))
+# # print(add_to_watched({"watched": []}, {
+# #                                         "title": "Happy Feet",
+# #                                         "genre": "Drama",
+# #                                         "rating": 5
+# #                                     }))
 
 
 def add_to_watchlist(user_data, movie):
