@@ -57,13 +57,10 @@ def test_new_genre_rec_from_empty_friends():
     genre_recommendations = get_new_rec_by_genre(sonyas_data)
 
     #Assert
-    assert len(genre_recommendations) == 0
-
-
     #raise Exception("Test needs to be completed.")
     # *********************************************************************
     # ****** Complete the Act and Assert Portions of these tests **********
-    # assert recommendations is None
+    assert len(genre_recommendations) == 0
     # *********************************************************************
 
 #pytest.mark.skip()
