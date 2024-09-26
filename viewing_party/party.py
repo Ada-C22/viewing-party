@@ -71,34 +71,28 @@ def get_most_watched_genre(user_data):
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 def get_unique_watched(user_data):
-    user_data_copy = user_data.copy()
     friends_watched_movie_titles = set()
-
-    for friend_dict in user_data_copy["friends"]:
-        for movie_dict in friend_dict["watched"]:
-            friends_watched_movie_titles.add(movie_dict["title"])
-
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            friends_watched_movie_titles.add(movie["title"])
+            
     user_unique_watched = []
-    for movie_dict in user_data_copy["watched"]:
-        if movie_dict["title"] not in friends_watched_movie_titles:
-            user_unique_watched.append(movie_dict)
-
+    for movie in user_data["watched"]:
+        if movie["title"] not in friends_watched_movie_titles:
+            user_unique_watched.append(movie)
     return user_unique_watched
 
 def get_friends_unique_watched(user_data):
-    user_data_copy = user_data.copy()
-    user_unique_watched = set ()
-
-    for movie_dict in user_data_copy["watched"]:
-        user_unique_watched.add(movie_dict["title"])
-
-    friends_unique_movies = []
-    for friend_dict in user_data_copy["friends"]:
-        for movie_dict in friend_dict["watched"]:
-            if movie_dict["title"] not in user_unique_watched:
-                if movie_dict not in friends_unique_movies:
-                    friends_unique_movies.append(movie_dict)
+    user_unique_watched = set()
+    for movie in user_data["watched"]:
+        user_unique_watched.add(movie["title"])
     
+    friends_unique_movies = []
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            if (movie["title"] not in user_unique_watched and
+                movie not in friends_unique_movies):
+                friends_unique_movies.append(movie)
     return friends_unique_movies
 
 # -----------------------------------------
