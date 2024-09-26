@@ -61,21 +61,18 @@ def add_to_watchlist(user_data, movie):
     # print(user_data)
     return user_data
 
+    # exa_data = {
+    #     "watchlist": [
+    #         {
+    #         }
+    #     ],
+    #     "watched": [
+    #         {
+    #         }
+    #     ]
+    # }
 
-
-
-    exa_data = {
-        "watchlist": [
-            {
-            }
-        ],
-        "watched": [
-            {
-            }
-        ]
-    }
-
-    exa_data["watchlist"] == 0
+    # exa_data["watchlist"] == 0
 
 
 def watch_movie(user_data, title):
