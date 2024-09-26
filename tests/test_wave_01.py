@@ -199,3 +199,19 @@ def test_does_nothing_if_movie_not_in_watchlist():
     assert len(updated_data["watched"]) == 1
     assert movie_to_watch not in updated_data["watchlist"]
     assert movie_to_watch not in updated_data["watched"]
+
+def test_no_movie_input():
+    # Arrange
+    movie = None
+    user_data = {
+        "watched": [],
+        "watchlist": []
+    }
+
+    # Act
+    updated_data = add_to_watched(user_data, movie)
+    updated_data = add_to_watchlist(user_data, movie)
+
+    # Assert
+    assert len(updated_data["watched"]) == 0
+    assert len(updated_data["watchlist"]) == 0
