@@ -160,7 +160,7 @@ def test_moves_movie_from_watchlist_to_empty_watched():
     assert len(updated_data["watched"]) == 1
 
     if updated_data["watched"]:
-        if updated_data["watched"][0]["title"] != janes_data["watchlist"][0]["title"]:
+        if updated_data["watched"][0]["title"] != MOVIE_TITLE_1:
             raise ValueError("The wrong movie was moved to the watched list.")
 
 
