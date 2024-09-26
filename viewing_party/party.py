@@ -153,6 +153,46 @@ def get_unique_watched(user_data):
 
 def get_friends_unique_watched(user_data):
 
+    friends_unique_movies = []
+
+    # Loops through each friend's watched list
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            # Appends to list if 1) movie is not in the user's watched list and 2) not already in the result list
+            if movie not in user_data["watched"] and movie not in friends_unique_movies:
+                friends_unique_movies.append(movie)
+    
+    return friends_unique_movies
+
+print(get_friends_unique_watched(    user_data = {
+        "watched": [
+            "FANTASY_1", 
+            "FANTASY_2", 
+            "FANTASY_3", 
+            "ACTION_1", 
+            "INTRIGUE_1", 
+            "INTRIGUE_2"
+            ],  
+        "friends": [
+            {
+                "watched": [
+                    "FANTASY_1",
+                    "FANTASY_3",
+                    "FANTASY_4",
+                    "HORROR_1",
+                ]
+            },
+            {
+                "watched": [
+                    "FANTASY_1",
+                    "ACTION_1",
+                    "INTRIGUE_1",
+                    "INTRIGUE_3",
+                ]
+            }
+        ]
+    }))
+
     # user_data = {
     #     "watched": [
     #         "FANTASY_1", 
@@ -182,21 +222,6 @@ def get_friends_unique_watched(user_data):
     #     ]
     # }
 
-    movies_watched_by_friends_not_user = []
-
-    # Loops through each friend's watched list
-    for friend in user_data["friends"]:
-        for movie in friend["watched"]:
-            # Appends to list if 1) movie is not in the user's watched list and 2) not already in the result list
-            if movie not in user_data["watched"] and movie not in movies_watched_by_friends_not_user:
-                movies_watched_by_friends_not_user.append(movie)
-    
-    return movies_watched_by_friends_not_user
-
-# get_friends_unique_watched()
-    
-    #user_data = {watched: [movies{}]}
-    #return a list of dictionaries that represents a list of movies 
         
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
