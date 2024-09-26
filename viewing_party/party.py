@@ -217,3 +217,17 @@ def get_new_rec_by_genre(user_data):
                 recs_by_genre.append(rec)
 
     return recs_by_genre
+
+def get_rec_from_favorites(user_data):
+    # user_data['favorites'] = list of movie dictionaries
+    # ^ user's favorite movies
+    # list recommended movies. include if
+    ## movie is in user's favorites
+    ## no friends have watched it
+
+    if not user_data['favorites']:
+        return []
+    elif not user_data['friends']:
+        return user_data['favorites']
+    
+    
