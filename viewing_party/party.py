@@ -77,13 +77,17 @@ def get_most_watched_genre(user_data):
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 
+# Add helper function to get movie titles
+def get_titles(list_of_dict):
+    return {item["title"] for item in list_of_dict}
+
 # Get all movies unique to user
 def get_unique_watched(user_data):
 
     # Put titles that friends watched in a set
     friends_movies = set()
     for friend in user_data["friends"]:
-        friends_movies.update(movie["title"] for movie in friend["watched"])
+        friends_movies.update(get_titles(friend["watched"]))
 
     # Create list of movies that only user watched
     unique_movies = [
@@ -97,7 +101,7 @@ def get_unique_watched(user_data):
 def get_friends_unique_watched(user_data):
 
     # Put movie titles user has watched in a set
-    user_movie_titles = {movie["title"] for movie in user_data["watched"]}
+    user_movie_titles = get_titles(user_data["watched"])
 
     # Create a list for movies only friends watched
     unique_friends_movies = []
@@ -166,7 +170,7 @@ def get_rec_from_favorites(user_data):
     unique_movies = get_unique_watched(user_data)
 
     # Get a set of favorite movie titles
-    favorite_movies = {fav_movie["title"] for fav_movie in user_data["favorites"]}
+    favorite_movies = get_titles(user_data["favorites"])
     
     # Filter the unique movies to only those that are in the user's favorites
     recommended_favorites = [
