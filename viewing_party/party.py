@@ -4,38 +4,44 @@ def create_movie(title, genre, rating):
     """
     Creates a movie dictionary with title, genre and rating
     """
+    # Verify the arguments exist
     if title and genre and rating:
         return {
             "title": title,
             "genre": genre,
             "rating": rating,
         }
-    return None
 
 def add_to_watched(user_data, movie):
     """
     Adds the movie to the user's watched list.
     """
-    user_data["watched"].append(movie)
-    return user_data
+    # Verify the arguments exist
+    if user_data and movie:
+        user_data["watched"].append(movie)
+        return user_data
 
 def add_to_watchlist(user_data, movie):
     """
     Adds the movie to the user's watch list.
     """
-    user_data["watchlist"].append(movie)
-    return user_data
+    # Verify the arguments exist
+    if user_data and movie:
+        user_data["watchlist"].append(movie)
+        return user_data
 
 def watch_movie(user_data, title):
     """
     Moves a movie with the title "title" from the user's 
     watch list to the user's watched list.
     """
-    for movie in user_data["watchlist"]:
-        if movie["title"] == title:
-            user_data["watchlist"].remove(movie)
-            add_to_watched(user_data, movie)
-    return user_data
+    # Verify the arguments exist
+    if user_data and title:
+        for movie in user_data["watchlist"]:
+            if movie["title"] == title:
+                user_data["watchlist"].remove(movie)
+                add_to_watched(user_data, movie)
+        return user_data
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
@@ -45,24 +51,27 @@ def get_watched_avg_rating(user_data):
     """
     Calculates the average rating of all the movies in the watched list.
     """
+    # Verify the argument exists
+    if user_data:
+        total_ratings = 0
+        number_of_movies = 0
+        average_rating = 0.0
+        # Sum all ratings and count movies
+        for movie in user_data["watched"]:
+            total_ratings += movie["rating"]
+            number_of_movies += 1
+        # Check if there are any movies to avoid ZeroDevisionError
+        if number_of_movies:
+            average_rating = total_ratings / number_of_movies
 
-    total_ratings = 0
-    number_of_movies = 0
-    for movie in user_data["watched"]:
-        total_ratings += movie["rating"]
-        number_of_movies += 1
-        average_rating = total_ratings / number_of_movies
-
-    if number_of_movies == 0:
-        return 0.0
-    return average_rating
+        return average_rating
 
 def get_most_watched_genre(user_data):
     """
     Determines the most frequently watched genre from the user's watched list.
     """
-
-    if user_data['watched'] == []:
+    # Check if argument and the "watched" list exist
+    if not user_data or user_data['watched'] == []:
         return None
 
     count_genres = {}
@@ -73,8 +82,8 @@ def get_most_watched_genre(user_data):
             count_genres[genre] +=1
         else:
             count_genres[genre] =1
-
-    most_watched = max(count_genres, key= count_genres.get)
+    # Find the maximum genre count based on count_genres values, return None if empty
+    most_watched = max(count_genres, key=count_genres.get, default=None)
     return most_watched
 
 # -----------------------------------------
