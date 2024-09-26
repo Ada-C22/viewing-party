@@ -145,14 +145,6 @@ def get_friends_unique_watched(user_data):
 
 def get_available_recs(user_data):
     
-    # user_data = {
-    # "subsriptions" : ["streaming service"],
-    # "friends": [{"watched":[{"host":"streaming service"}]}]
-    # }
-
-
-    #friends_unique_vies = [movie for movie in get_friends_unique_watched(user_data)]
-    friends_unique_movies = []
     rec_list = []
 
     friends_uniques = get_friends_unique_watched(user_data)
