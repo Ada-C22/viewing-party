@@ -46,6 +46,7 @@ def  add_to_watched(user_data, movie):
     user_data["watched"].append(movie)
     return user_data    
 
+
 def add_to_watchlist(user_data, movies):
     """
     Add a movie to user's watchlist
@@ -65,6 +66,7 @@ def add_to_watchlist(user_data, movies):
     """
     user_data["watchlist"].append(movies)
     return user_data
+ 
     
 def watch_movie(user_data, title):
     """
@@ -161,13 +163,16 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 
 def get_friends_watched(user_data):
-   
+    """
+    Helper function to get list of all movies that friends have watched
+    """
     friends_watched= []
     
     for friend in user_data["friends"]:
         friends_watched.extend(friend["watched"])
         
     return friends_watched
+
 
 def get_unique_watched(user_data):
     """
@@ -193,6 +198,7 @@ def get_unique_watched(user_data):
             unique_watched.append(movie)
 
     return unique_watched
+
 
 def get_friends_unique_watched(user_data):
     """
@@ -283,6 +289,7 @@ def get_new_rec_by_genre(user_data):
             recommended_movies.append(movie)
     
     return recommended_movies  
+
 
 def get_rec_from_favorites(user_data):
     """
