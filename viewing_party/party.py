@@ -1,3 +1,4 @@
+# from tests.test_constants import *
 # ------------- WAVE 1 --------------------
 
 def create_movie(title, genre, rating):
@@ -10,7 +11,7 @@ def create_movie(title, genre, rating):
         movie_dict['title'] = title
         movie_dict['genre'] = genre
         movie_dict['rating'] = rating
-        print(movie_dict)
+        # print(movie_dict)
     
     return movie_dict
 
@@ -46,11 +47,11 @@ def add_to_watched(user_data, movie):
 
 # print(add_to_watched(user_data, movie))
 
-print(add_to_watched({"watched": []}, {
-                                        "title": "Happy Feet",
-                                        "genre": "Drama",
-                                        "rating": 5
-                                    }))
+# print(add_to_watched({"watched": []}, {
+#                                         "title": "Happy Feet",
+#                                         "genre": "Drama",
+#                                         "rating": 5
+#                                     }))
 
 
 def add_to_watchlist(user_data, movie):
@@ -132,8 +133,70 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
-
 def get_unique_watched(user_data):
+
+
+    movies_not_watched_by_friends = []
+
+    for movie_watched_by_user in user_data["watched"]:
+        watched_by_any_friend = False
+
+        # checks if the movie is has been watched by a friend
+        for friend in user_data["friends"]:
+            if movie_watched_by_user in friend["watched"]:
+                watched_by_any_friend = True
+                break
+
+        # If no friend has watched it, adds it to the final list
+        if not watched_by_any_friend:
+            movies_not_watched_by_friends.append(movie_watched_by_user)
+    
+    print(movies_not_watched_by_friends)
+    return movies_not_watched_by_friends
+
+def get_friends_unique_watched(user_data):
+
+    # user_data = {
+    #     "watched": [
+    #         "FANTASY_1", 
+    #         "FANTASY_2", 
+    #         "FANTASY_3", 
+    #         "ACTION_1", 
+    #         "INTRIGUE_1", 
+    #         "INTRIGUE_2"
+    #         ],  
+    #     "friends": [
+    #         {
+    #             "watched": [
+    #                 "FANTASY_1",
+    #                 "FANTASY_3",
+    #                 "FANTASY_4",
+    #                 "HORROR_1",
+    #             ]
+    #         },
+    #         {
+    #             "watched": [
+    #                 "FANTASY_1",
+    #                 "ACTION_1",
+    #                 "INTRIGUE_1",
+    #                 "INTRIGUE_3",
+    #             ]
+    #         }
+    #     ]
+    # }
+
+    movies_watched_by_friends_not_user = []
+
+    # Loops through each friend's watched list
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            # Appends to list if 1) movie is not in the user's watched list and 2) not already in the result list
+            if movie not in user_data["watched"] and movie not in movies_watched_by_friends_not_user:
+                movies_watched_by_friends_not_user.append(movie)
+    
+    return movies_watched_by_friends_not_user
+
+# get_friends_unique_watched()
     
     #user_data = {watched: [movies{}]}
     #return a list of dictionaries that represents a list of movies 
@@ -145,4 +208,5 @@ def get_unique_watched(user_data):
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
+
 
