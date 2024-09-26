@@ -116,7 +116,30 @@ def get_friends_unique_watched(user_data):
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
 def get_available_recs(user_data):
-    pass
+    user_data_copy = user_data.copy()
+    user_subscriptions_list = user_data_copy["subscriptions"]
+    friends_list = user_data_copy["friends"]
+    user_unique_watched_list = user_data_copy["watched"]
+
+    user_unique_movies_set = set()
+    friends_unique_movies_dict = dict()
+    recommended_movies = list()
+
+    for friend in friends_list:
+        friend_watched_list = friend["watched"]
+        for movie_dict in friend_watched_list:
+            movie_title = movie_dict["title"]
+            friends_unique_movies_dict[movie_title] = movie_dict
+
+    for movie_dict in user_unique_watched_list:
+        user_unique_movies_set.add(movie_dict["title"])
+
+    for title, movie in friends_unique_movies_dict.items():
+        if title not in user_unique_movies_set:
+            if movie["host"] in user_subscriptions_list:
+                recommended_movies.append(movie)
+
+    return recommended_movies
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
