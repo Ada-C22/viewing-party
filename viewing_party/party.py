@@ -141,9 +141,6 @@ def get_available_recs(user_data):
     return result
 
 
-
-
-# -----------------------------------------
 # ------------- WAVE 5 --------------------
 
 def get_new_rec_by_genre(user_data):
