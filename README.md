@@ -213,7 +213,7 @@ To run this file, use:
 python3 play_tester.py
 ```
 
-      There is some starter code provided in `play_tester.py`. This code prints the test data that is used for many of the tests. Looking closely at this data can help us think critically about the expected output for given input for each function. Then, calling each function with this data allows us to observe the **actual** output for given input. 
+There is some starter code provided in `play_tester.py`. This code prints the test data that is used for many of the tests. Looking closely at this data can help us think critically about the expected output for given input for each function. Then, calling each function with this data allows us to observe the **actual** output for given input. 
 
 ## Test Data
 
