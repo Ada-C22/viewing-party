@@ -1,3 +1,4 @@
+# from tests.test_constants import *
 # ------------- WAVE 1 --------------------
 
 def create_movie(title, genre, rating):
@@ -10,7 +11,7 @@ def create_movie(title, genre, rating):
         movie_dict['title'] = title
         movie_dict['genre'] = genre
         movie_dict['rating'] = rating
-        print(movie_dict)
+        # print(movie_dict)
     
     return movie_dict
 
@@ -60,21 +61,18 @@ def add_to_watchlist(user_data, movie):
     # print(user_data)
     return user_data
 
+    # exa_data = {
+    #     "watchlist": [
+    #         {
+    #         }
+    #     ],
+    #     "watched": [
+    #         {
+    #         }
+    #     ]
+    # }
 
-
-
-    exa_data = {
-        "watchlist": [
-            {
-            }
-        ],
-        "watched": [
-            {
-            }
-        ]
-    }
-
-    exa_data["watchlist"] == 0
+    # exa_data["watchlist"] == 0
 
 
 def watch_movie(user_data, title):
@@ -136,6 +134,11 @@ def get_most_watched_genre(user_data):
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 
+def get_unique_watched(user_data):
+    
+    #user_data = {watched: [movies{}]}
+    #return a list of dictionaries that represents a list of movies 
+        
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
@@ -174,10 +177,4 @@ def get_available_recs(user_data):
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
-# def get_new_rec_by_genre(user_data):
-#     for user_data 
-    #determine most frequently watched genre
-    #determine list of recommended movies
-        #user has not watched
-        #at least 1 of user friends watched
-        #"genre is most frequently watched drama
+
