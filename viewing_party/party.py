@@ -165,11 +165,14 @@ def get_rec_from_favorites(user_data):
     # Get the list of movies that only the user has watched
     unique_movies = get_unique_watched(user_data)
 
+    # Get a set of favorite movie titles
+    favorite_movies = {fav_movie["title"] for fav_movie in user_data["favorites"]}
+    
     # Filter the unique movies to only those that are in the user's favorites
     recommended_favorites = [
         movie
         for movie in unique_movies
-        if movie["title"] in {fav_movie["title"] for fav_movie in user_data["favorites"]}
+        if movie["title"] in favorite_movies
     ]
 
     return recommended_favorites
