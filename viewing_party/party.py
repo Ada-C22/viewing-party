@@ -102,6 +102,9 @@ def watch_movie(user_data, title):
 # -----------------------------------------
 def get_watched_avg_rating(user_data):
     #user_data = {"watched": []}
+    #if there are no movies then return 0.0
+    #find average of ratings 
+  
     if not user_data["watched"]:
         return 0.0
     
@@ -113,9 +116,9 @@ def get_watched_avg_rating(user_data):
 
     return average
 
-
+  #find the most watched genre 
 def get_most_watched_genre(user_data):
-    genre_count = {"Fantasy": 0, "Intrigue": 0, "Action": 0}
+    genre_count = {"Fantasy": 0, "Intrigue": 0, "Action": 0} #change method so that other genres can be included
 
     if not user_data["watched"]:
         return None 
@@ -133,15 +136,16 @@ def get_most_watched_genre(user_data):
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 
-def get_unique_watched(user_data):
-    
+# def get_unique_watched(user_data):
+
     #user_data = {watched: [movies{}]}
     #return a list of dictionaries that represents a list of movies 
         
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
-
+def get_available_functions(user_data):
+    
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
