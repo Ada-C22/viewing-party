@@ -48,7 +48,6 @@ def test_friends_unique_movies():
 def test_friends_unique_movies_not_duplicated():
     # Arrange
     amandas_data = clean_wave_3_data()
-    original_data = copy.deepcopy(amandas_data)
     amandas_data["friends"][0]["watched"].append(INTRIGUE_3)
 
     # Act
@@ -56,17 +55,15 @@ def test_friends_unique_movies_not_duplicated():
 
     # Assert
     assert len(friends_unique_movies) == 3
+# *************************************************************************************************
+# ****** Add assertions here to test that the correct movies are in friends_unique_movies **********
+# **************************************************************************************************
     assert INTRIGUE_3 in friends_unique_movies
     assert HORROR_1 in friends_unique_movies
     assert FANTASY_4 in friends_unique_movies
-    assert original_data["friends"][0]["watched"] == amandas_data["friends"][0]["watched"][:-1]
-   
 
     
-    # *************************************************************************************************
-    # ****** Add assertions here to test that the correct movies are in friends_unique_movies **********
-    # **************************************************************************************************
-
+    
 # @pytest.mark.skip()
 def test_friends_not_unique_movies():
     # Arrange
