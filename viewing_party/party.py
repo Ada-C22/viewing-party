@@ -121,6 +121,7 @@ def get_new_rec_by_genre(user_data):
     return recommended_movies
 
 def get_rec_from_favorites(user_data):
+    # We made the assumption that the favorites are in "user_unique_watched"
     user_unique_watched = get_unique_watched(user_data)
     recommended_movies = []
 
