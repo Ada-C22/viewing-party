@@ -76,61 +76,17 @@ def get_most_watched_genre(user_data):
             genre_count = value
             most_watched_genre = key 
     return most_watched_genre
-        
-
-
-
-
-
-        
-
-
-
-
-
-
-
-    
-    
-
-
-
-
-
-    
-
-
-
-user_data = {
-    "watched": [
-        FANTASY_1, 
-        FANTASY_2, 
-        FANTASY_3, 
-        ACTION_1, 
-        INTRIGUE_1, 
-        INTRIGUE_2
-        ],
-    "friends": [
-        {
-            "watched": [
-                FANTASY_1,
-                FANTASY_3,
-                FANTASY_4,
-                HORROR_1,
-            ]
-        }]}
-
-
 
 def get_unique_watched(user_data):
     unique_watched = []
     collect_friends_movies = []
     user_watched = user_data["watched"]
 
-    friends_watched = user_data["friends"]
-    for i in range(len(friends_watched)):
-        friends_movies = friends_watched[i]["watched"]
-        collect_friends_movies.append[friends_movies]
+    friends_watched = user_data["friends"]   # the list of 2 dictionaries in the "friends" key
+    for friend in friends_watched:   # the inner "watched dict"
+        friend_movie_list = friend["watched"]   # the inner list of dicts
+        for friend_movie in friend_movie_list:
+            collect_friends_movies.append(friend_movie)
 
     for movie in user_watched:
         if movie not in collect_friends_movies:
@@ -139,18 +95,16 @@ def get_unique_watched(user_data):
 
 def get_friends_unique_watched(user_data):
     unique_friend_watched = []
-    collect_friends_movies = []
     user_watched = user_data["watched"]
 
-    friends_watched = user_data["friends"]
-    for i in range(len(friends_watched)):
-        friends_movies = friends_watched[i]["watched"]
-        collect_friends_movies.append[friends_movies]
-
-    for movie in collect_friends_movies:
-        if movie not in user_watched:
-            unique_friend_watched.append(movie)
+    friends_watched = user_data["friends"]   # the list of 2 dictionaries in the "friends" key
+    for friend in friends_watched:   # the inner "watched dict"
+        friend_movie_list = friend["watched"]   # the inner list of dicts
+        for friend_movie in friend_movie_list:
+            if friend_movie not in user_watched and friend_movie not in unique_friend_watched:
+                unique_friend_watched.append(friend_movie)
     return unique_friend_watched
+   
 
     
 
