@@ -142,7 +142,7 @@ def get_most_watched_genre(user_data):
         else:
             genres_count[genre] += 1
             
-    #using lamda function to get the max count and most frequent genre        
+    # using lamblda function to get the max count and most frequent genre in genere_count dictionary       
     # most_frequent_genre = max(genres_count, key=genres_count.get)    
                
     max_rate = 0
