@@ -140,18 +140,6 @@ def get_friends_unique_watched(user_data):
 
 def get_available_recs(user_data):
     
-    # user_data = {
-    # "subsriptions" : ["streaming service"],
-    # "friends": [{"watched":[{"host":"streaming service"}]}]
-    # }
-
-# Determine list of recommended movies:
-    # only if user has NOT watched it.
-    # at least one of the user's friends HAS watched it
-    # "host" of the movie is a service that is in the user's
-        # "subscriptions"
-    #friends_unique_movies = [movie for movie in get_friends_unique_watched(user_data)]
-    friends_unique_movies = []
     rec_list = []
 
     friends_uniques = get_friends_unique_watched(user_data)
