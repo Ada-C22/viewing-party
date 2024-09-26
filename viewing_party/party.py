@@ -99,68 +99,30 @@ def get_unique_watched(user_data):
     for movie in watched_movie:
         if movie['title'] not in friends_watched_titles:
             user_unique_watched_movies.append(movie)    
+    print(user_unique_watched_movies)
     return user_unique_watched_movies
 
 
-
-a = {'watched': [{'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}, 
-             {'title': 'The Lord of the Functions: The Two Parameters', 'genre': 'Fantasy', 'rating': 4.0}, 
-             {'title': 'The Lord of the Functions: The Return of the Value', 'genre': 'Fantasy', 'rating': 4.0}, 
-             {'title': 'The JavaScript and the React', 'genre': 'Action', 'rating': 2.2}, 
-             {'title': 'Recursion', 'genre': 'Intrigue', 'rating': 2.0}, 
-             {'title': 'Instructor Student TA Manager', 'genre': 'Intrigue', 'rating': 4.5}],
-  'friends': [
-    {'watched': [
-        {'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}, 
-        {'title': 'The Lord of the Functions: The Return of the Value', 'genre': 'Fantasy', 'rating': 4.0}, 
-        {'title': 'The Programmer: An Unexpected Stack Trace', 'genre': 'Fantasy', 'rating': 4.0}, 
-        {'title': 'It Came from the Stack Trace', 'genre': 'Horror', 'rating': 3.5}]}, 
-    {'watched': [
-        {'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8}, 
-        {'title': 'The JavaScript and the React', 'genre': 'Action', 'rating': 2.2}, 
-        {'title': 'Recursion', 'genre': 'Intrigue', 'rating': 2.0}, 
-        {'title': 'Zero Dark Python', 'genre': 'Intrigue', 'rating': 3.0}]
-        }
-    ]
-}
-
-#get a list of title in watched 
-#get a list of title in friends 
-#compare two list
-
-
-
-
 def get_friends_unique_watched(user_data):
-    friends_unique_watched = {}
-    
+    friends_unique_watched_movies_list = []
 
-   
-    user_watched_movie = user_data.get('watched',[])
-    print(user_watched_movie)
+    user_watched_title_set = set()   
+    user_watched_movie_list = user_data.get('watched', [])
 
-    #for movie in user_data['watched']:
-    #    user_watched_movie_titles.append(movie['title'])
+    friends_watched_movie_list = user_data.get('friends', [])
+    friends_watched_title_set = set()
     
-    #print(user_watched_movie_titles)
+    for user_watched_movies in user_watched_movie_list:
+        user_watched_title_set.add(user_watched_movies['title'])
 
-    print("---------")
+    for friends_movies_list in friends_watched_movie_list: #list
+        for firends_watched_movie in friends_movies_list.get('watched', []): #dict.value
+            if firends_watched_movie['title'] not in user_watched_title_set and firends_watched_movie['title'] not in friends_watched_title_set:
+                friends_unique_watched_movies_list.append(firends_watched_movie)
+            friends_watched_title_set.add(firends_watched_movie['title'])
+    
+    return friends_unique_watched_movies_list
 
-    friends_watched_movie_titles = []
-    for movie in user_data['friends']:
-        #friends_watched_movie_titles.append(movie['title'])
-        friends_watched_movie = movie['watched']
-    
-    friends_unique_watched = set(friends_watched_movie) - set(user_watched_movie)
-
-    print("---------")
-    print(friends_watched_movie)
-    
-    
-
-   
-    
-    return friends_unique_watched
         
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
