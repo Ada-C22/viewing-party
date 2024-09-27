@@ -24,6 +24,6 @@ pp.pprint(FANTASY_2)
 #print("\n-----Wave 04 user_data-----")
 #pp.pprint(clean_wave_4_data())
 
-# Wave 05 user data
-#print("\n-----Wave 05 user_data-----")
-#pp.pprint(clean_wave_5_data())
+#Wave 05 user data
+print("\n-----Wave 05 user_data-----")
+pp.pprint(clean_wave_5_data())

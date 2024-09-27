@@ -360,7 +360,7 @@ Note: For Waves 2, 3, 4, and 5, your implementation of each of the functions sho
   - The user has not watched it
   - At least one of the user's friends has watched
   - The `"genre"` of the movie is the same as the user's most frequent genre
-- Return the list of recommended movies
+- Return the list of recommended moviesd
 
 2. Create a function named  `get_rec_from_favorites`. This function should...
 
