@@ -131,6 +131,21 @@ def get_most_watched_genre(user_data):
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 def get_unique_watched(user_data):
+    '''
+    Retrieves a list of movies that the user has watched, but their 
+    friends have not.
+
+    Parameters:
+        user_data (dict): A dictionary containing the user's watched
+        movies and their friends' watched movies. The key "watched" 
+        corresponds to a list of movies for the user, and the key
+        "friends" maps to a list of dictionaries representing individual
+        friends, each with "watched" keys
+
+    Returns:
+        unique_watched (list): A list of dictionaries representing movies
+        that have been watched by the user but not their friends.
+    '''
     user_watched_list = list(user_data["watched"])
 
     friends_watched_list = []
@@ -144,20 +159,22 @@ def get_unique_watched(user_data):
 
     return unique_watched
 
-def remove_duplicates(list_of_dicts):
-    unique_list = []
-    seen = set()
-
-    for d in list_of_dicts:
-        dict_tuple = tuple(d.items())
-
-        if dict_tuple not in seen:
-            seen.add(dict_tuple)
-            unique_list.append(d)
-
-    return unique_list
-
 def get_friends_unique_watched(user_data):
+    '''
+    Retrieves a list of movies that the user's friends have watched, but
+    the user has not.
+
+    Parameters:
+        user_data (dict): A dictionary containing the user's watched
+        movies and their friends' watched movies. The key "watched" 
+        corresponds to a list of movies for the user, and the key
+        "friends" maps to a list of dictionaries representing individual
+        friends, each with "watched" keys
+
+    Returns:
+        unique_watched (list): A list of dictionaries representing movies
+        that have been watched by the user's friends but not them.
+    '''
     user_watched_list = list(user_data["watched"])
 
     friends_watched_list = []
@@ -173,6 +190,29 @@ def get_friends_unique_watched(user_data):
 
     return unique_watched
 
+def remove_duplicates(list_of_dicts):
+    '''
+        Removes duplicate dictionaries from a list based on their contents.
+
+        Parameters:
+            list_of_dicts (list): A list of dictionaries from which
+            duplicates should be removed.
+
+        Returns:
+            unique_list (list): A list of unique dictionaries. Preserves
+            the order of occurrence.
+    '''
+    unique_list = []
+    seen = set()
+
+    for d in list_of_dicts:
+        dict_tuple = tuple(d.items())
+
+        if dict_tuple not in seen:
+            seen.add(dict_tuple)
+            unique_list.append(d)
+
+    return unique_list
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
