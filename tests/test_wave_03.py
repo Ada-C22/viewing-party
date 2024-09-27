@@ -64,7 +64,7 @@ def test_friends_unique_movies_not_duplicated():
     assert friends_unique_movies[1]["title"] == HORROR_1["title"]
     assert friends_unique_movies[2]["title"] == INTRIGUE_3["title"]
 
-@pytest.mark.skip()
+# @pytest.mark.skip()
 def test_friends_not_unique_movies():
     # Arrange
     amandas_data = {
