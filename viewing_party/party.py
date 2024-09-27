@@ -159,7 +159,7 @@ def get_new_rec_by_genre(user_data):
 def get_rec_from_favorites(user_data):
     recommend_movies_list = []
 
-    user_favorites_watched_movies = user_data.get('favorites', [])
+    user_favorites_watched_movies_list = user_data.get('favorites', [])
 
     friends_watched_movies_list = user_data.get('friends',[])
    
@@ -167,7 +167,7 @@ def get_rec_from_favorites(user_data):
     for friend_watched_movies in friends_watched_movies_list:
         for friend_movie in friend_watched_movies.get('watched',[]):
             friends_watched_movies_title_list.append(friend_movie['title'])
-    for movie in user_favorites_watched_movies:
+    for movie in user_favorites_watched_movies_list:
         if movie['title'] not in friends_watched_movies_title_list:
             recommend_movies_list.append(movie)
  
