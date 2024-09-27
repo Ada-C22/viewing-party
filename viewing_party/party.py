@@ -57,15 +57,14 @@ def get_most_watched_genre(user_data):
             genre_count[genre] += 1
         else:
             genre_count[genre] = 1
-    
-    most_watched_genre = None
+            
     max_count = 0
+    most_watched_genre = None
     for genre, count in genre_count.items():
         if count > max_count:
             max_count = count
             most_watched_genre = genre
     return most_watched_genre
-
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
@@ -86,7 +85,7 @@ def get_friends_unique_watched(user_data):
     user_unique_watched = set()
     for movie in user_data["watched"]:
         user_unique_watched.add(movie["title"])
-    
+        
     friends_unique_movies = []
     for friend in user_data["friends"]:
         for movie in friend["watched"]:
@@ -114,7 +113,7 @@ def get_new_rec_by_genre(user_data):
     most_watched_genre = get_most_watched_genre(user_data)
     friends_unique_movies = get_friends_unique_watched(user_data)
     recommended_movies = []
-
+    
     for movie in friends_unique_movies:
         if movie["genre"] == most_watched_genre:
             recommended_movies.append(movie)
@@ -124,7 +123,7 @@ def get_rec_from_favorites(user_data):
     # We made the assumption that the favorites are in "user_unique_watched"
     user_unique_watched = get_unique_watched(user_data)
     recommended_movies = []
-
+    
     for movie in user_data["favorites"]:
         if movie in user_unique_watched:
             recommended_movies.append(movie)
