@@ -144,7 +144,7 @@ def get_most_watched_genre(user_data):
         else:
             genres_count[genre] += 1
             
-    # using max() to get the max count and most frequent genre in genere_count dictionary       
+    # using max() to get the max count in genere_count dictionary       
     # most_frequent_genre = max(genres_count, key=genres_count.get)    
                
     max_rate = 0
