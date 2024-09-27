@@ -260,7 +260,7 @@ When our test failures leave us confused and stuck, let's use the detailed proje
 - add the `movie` to the `"watched"` list inside of `user_data`
 - return the `user_data`
 
-3. Create a function named `add_to_watchlist`. This function should...
+**3. Create a function named `add_to_watchlist`. This function should...
 
 - take two parameters: `user_data`, `movie`
   - the value of `user_data` will be a dictionary with a key `"watchlist"`, and a value which is a list of dictionaries representing the movies the user wants to watch
