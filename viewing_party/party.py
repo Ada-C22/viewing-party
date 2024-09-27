@@ -125,14 +125,13 @@ def get_available_recs(user_data):
     Generates and returns a list of movies watched by friends, unwatched by user, 
     and available on user’s subscriptions.
     """
+    rec_pool = get_friends_unique_watched(user_data)
 
     recommended_title = []
 
-    for friend in user_data["friends"]:
-        for movie in friend["watched"]:
-            if movie not in user_data["watched"] and movie["host"] in user_data["subscriptions"]:
-                if movie not in recommended_title:
-                    recommended_title.append(movie)
+    for movie in rec_pool:
+        if movie["host"] in  user_data["subscriptions"]:
+            recommended_title.append(movie)
     return recommended_title
 
 # -----------------------------------------
