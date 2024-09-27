@@ -1,7 +1,6 @@
 # Viewing Party
-
-## Skills Assessed
-
+## Comment by Sarah --> 'Hello, i dont know how to comment'
+## Skills Assessed --> 
 Solving problems with...
 
 - Conditional logic
