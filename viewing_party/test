@@ -1,0 +1,100 @@
+# # def get_new_rec_by_genre(user_data):
+# #     # Determine user's most frequently watched genre
+# #     genre_counter = {}
+# #     recommendations = []
+
+# #     # Count the genres from the user's favorites (or watched) movies
+# #     for movie in user_data.get("favorites"):
+# #         genre = movie["genre"]
+# #         if genre not in genre_counter:
+# #             genre_counter[genre] = 0
+# #         genre_counter[genre] += 1
+
+# #     # If no favorites, return an empty recommendation list
+# #     if not genre_counter:
+# #         return recommendations  # Return empty list
+
+# #     # Identify the top genre
+# #     top_genre = max(genre_counter, key=genre_counter.get)
+
+# #     # Recommend movies from friends that match the top genre and are not in user's favorites
+# #     for friend in user_data.get("friends"):
+# #         for movie in friend.get("watched"):
+# #             if movie["genre"] == top_genre and movie not in user_data["favorites"]and movie not in recommendations: 
+# #                 recommendations.append(movie)  # Add movie to recommendations if it's not a duplicate
+
+# #     return recommendations
+# ========================================
+# def get_new_rec_by_genre(user_data):
+#     #determine users most frequently watched genre 
+#     genre_counter = {}
+#     recommendations = []
+#     for movie in user_data["movie"]:
+#         genre = movie["genre"]
+#         if genre not in genre_counter:
+#             genre_counter[genre] = 0
+#         genre_counter[genre] += 1
+#     top_genre = max(genre_counter, key=genre_counter.get)
+
+#     for friend in user_data["friends"]:
+#         for movie in friend["watched"]:
+#             if movie["genre"] == top_genre and movie not in user_data["watched"]:
+#                 recommendations.append(movie)
+
+#     return recommendations
+# get_new_rec_by_genre(
+#     {
+#         "watched": [{...}, {...}, {...}, {...}, {...}, {...}],
+#         "friends": [{...}, {...}],
+#         "subscriptions": ["netflix", "hulu"],
+#         "favorites": [{...}, {...}, {...}, {...}],
+#     }
+# )
+def get_new_rec_by_genre(user_data):
+    # genre_counter = {}
+    # recommendations = []
+    for movie in user_data["favorites"]:
+        # genre = user_data["watched"]
+        print(movie)
+    #     if genre not in genre_counter:
+    #         genre_counter[genre] = 0
+    #     genre_counter[genre] += 1
+    # top_genre = max(genre_counter, key=genre_counter.get)
+
+    # for friend in user_data["friends"]:
+    #     for movie in friend["watched"]:
+    #         if movie["genre"] == top_genre and movie not in user_data["watched"]:
+    #             recommendations.append(movie)
+
+    # return recommendations
+
+    return (print(movie))
+get_new_rec_by_genre( {
+    "watched": [{
+        "title": "MOVIE_TITLE_1",
+        "genre": "GENRE_1",
+        "rating": "RATING_1" 
+        },
+        {
+        "title": "The Lord of the Functions: The Fellowship of the Function",
+        "genre": "Fantasy",
+        "rating": 4.8
+        }],
+    "subscriptions":["netflix", "hulu"], 
+    "friends":[
+        {
+            "watched": [
+                {
+                    "title": "The Lord of the Functions: The Fellowship of the Function",
+                    "genre": "Fantasy",
+                    "rating": 4.8
+                },
+                {
+                    "title": "The Programmer: An Unexpected Stack Trace",
+                    "genre": "Fantasy",
+                    "rating": 4.0
+                }
+            ]
+        }
+    ] 
+})

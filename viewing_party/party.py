@@ -134,7 +134,7 @@ def get_most_watched_genre(user_data):
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 
-def get_unique_watched(user_data):
+# def get_unique_watched(user_data):
     
     #user_data = {watched: [movies{}]}
     #return a list of dictionaries that represents a list of movies 
@@ -177,4 +177,43 @@ def get_available_recs(user_data):
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
+def get_new_rec_by_genre(user_data):
+    #Determine the user's most frequently watched genre
+    watched_movies = user_data["watched"]
+    if not watched_movies:
+        return []  # If there are no watched movies, return an empty list
+
+    # Count the genres of watched movies
+    genre_counter = {}
+    for movie in watched_movies:
+        genre = movie["genre"]
+        if genre not in genre_counter:
+            genre_counter[genre] = 0
+        genre_counter[genre] += 1
+
+    # Get the most common genre
+    top_genre = max(genre_counter, key=genre_counter.get)
+
+    recommendations = []  # List to store recommendations
+    watched_titles = []  # List to store titles the user has watched
+
+    for movie in watched_movies:
+        watched_titles.append(movie["title"])
+
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            if (movie["genre"] == top_genre and 
+                movie["title"] not in watched_titles):
+                # Check for duplicates 
+                if movie not in recommendations:
+                    recommendations.append(movie)
+
+    return recommendations
+
+# Function 2 for wave 5
+# def get_rec_from_favorites(user_data):
+#     for favorites in user_data["favorites"]: #movie = list of favorite movies
+#         for 
+
+#     return recommendation
 
