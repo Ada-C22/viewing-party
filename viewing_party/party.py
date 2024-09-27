@@ -43,6 +43,7 @@ def add_to_watchlist(user_data, movie):
         including a "watchlist" key.
         movie (dict): A dictionary representing the movie to be added to
         the user's watchlist.
+
     Returns:
         user_data (dict): The updated user_data with the movie added to
         the "watchlist" list.
@@ -60,6 +61,7 @@ def watch_movie(user_data, title):
         including "watchlist" and "watched" keys.
         title (str): The title of the movie to move from the watchlist
         to the watched list.
+
     Returns:
         user_data (dict): The updated user_data with the movie added to
         the "watchlist" list.
@@ -79,13 +81,13 @@ def get_watched_avg_rating(user_data):
     Calculates the average rating of all movies watched by the user.
 
     Parameter:
-    user_data (dict): A dictionary with a "watched" list of movie
-    dictionaries. Each movie dictionary contains information on the 
-    genre, rating, and title of the movie.
+        user_data (dict): A dictionary with a "watched" list of movie
+        dictionaries. Each movie dictionary contains information on the 
+        genre, rating, and title of the movie.
 
     Returns:
-    (float): The average rating of all movies in the watched list, 0.0
-    if the list is empty.
+        (float): The average rating of all movies in the watched list,
+        0.0 if the list is empty.
     '''
     if not user_data['watched']:
         return 0.0
@@ -94,8 +96,7 @@ def get_watched_avg_rating(user_data):
     for movie in user_data['watched']:
         total_ratings += movie['rating']
 
-    average_rating = total_ratings / len(user_data['watched'])
-    return average_rating
+    return total_ratings / len(user_data['watched'])
 
 def get_most_watched_genre(user_data):
     '''
@@ -192,15 +193,15 @@ def get_friends_unique_watched(user_data):
 
 def remove_duplicates(list_of_dicts):
     '''
-        Removes duplicate dictionaries from a list based on their contents.
+    Removes duplicate dictionaries from a list based on their contents.
 
-        Parameters:
-            list_of_dicts (list): A list of dictionaries from which
-            duplicates should be removed.
+    Parameters:
+        list_of_dicts (list): A list of dictionaries from which
+        duplicates should be removed.
 
-        Returns:
-            unique_list (list): A list of unique dictionaries. Preserves
-            the order of occurrence.
+    Returns:
+        unique_list (list): A list of unique dictionaries. Preserves
+        the order of occurrence.
     '''
     unique_list = []
     seen = set()
@@ -217,6 +218,19 @@ def remove_duplicates(list_of_dicts):
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
 def get_available_recs(user_data):
+    '''
+    Retrieves a list of recommended movies that friends have watched and
+    are available on the streaming services the user has access to.
+
+    Parameters:
+        user_data (dict): A dictionary containing the user's data, which
+        includes a "subscriptions" key. This represents the names of the
+        streaming services that the user has access to. Also has a
+        "friends" key, containing the user's friends' watched movies.
+
+    Returns:
+
+    '''
     friends_user_data = get_friends_unique_watched(user_data)
     user_rec_movie_data = []
     for movie in friends_user_data:
@@ -238,6 +252,7 @@ def get_new_rec_by_genre(user_data):
         user_data (dict): A dictionary with a "watched" list of movie
         dictionaries. Each movie dictionary contains information on the 
         genre, rating, and title of the movie.
+        
     Returns:
         recs_by_genre (list): A list of dictionaries that represents a 
         list of movies recommended for the user.
