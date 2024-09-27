@@ -14,12 +14,12 @@ def create_movie(title, genre, rating):
         None: if any of arguments are falsy
     """
     
-    if not title or not genre or not rating:
+    if not title or not genre or rating is None:
         return None
     
     # Checking if user inputs on these parameters are all valid.
     if not isinstance(title, str) or not isinstance(genre, str) \
-        or not isinstance(rating, float):
+        or not isinstance(rating, float) or not isinstance(rating, int):
         return None
     else:
         return {"title": title, "genre": genre, "rating": rating}
@@ -144,7 +144,7 @@ def get_most_watched_genre(user_data):
         else:
             genres_count[genre] += 1
             
-    # using lamblda function to get the max count and most frequent genre in genere_count dictionary       
+    # using lambda function to get the max count and most frequent genre in genere_count dictionary       
     # most_frequent_genre = max(genres_count, key=genres_count.get)    
                
     max_rate = 0
