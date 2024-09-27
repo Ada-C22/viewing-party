@@ -72,7 +72,6 @@ def get_friends_unique_watched(user_data):
     user_data_copy = deepcopy(user_data)
     unique_watched = []
     user_watched_list = []
-    #unique_list = []
     user_watched_unique = []
     for movie in user_data_copy["watched"]:
         user_watched_list.append(movie["title"])
@@ -80,19 +79,15 @@ def get_friends_unique_watched(user_data):
         for movie in friend["watched"]:
             if movie["title"] not in user_watched_list:
                 unique_watched.append(movie)
-                #unique_list.append(movie["title"])
-    #unique_list_set = set(unique_list)
-    #print(unique_list_set) 
+
     unique_list_set = set()           
 
     for movie in unique_watched:
         if movie["title"] not in unique_list_set:
             user_watched_unique.append(movie)
-            unique_list_set.add(movie["title"])
-    #print(user_watched_unique)                   
+            unique_list_set.add(movie["title"])                   
             
-    return user_watched_unique
-    pr        
+    return user_watched_unique 
 
 
 
@@ -108,7 +103,16 @@ def get_available_recs(user_data):
 # -----------------------------------------
 # No.1-A
 def get_new_rec_by_genre(user_data):
-    pass
+    fav_genre = get_most_watched_genre(user_data)
+    recommend = get_friends_unique_watched(user_data)
+    recommend_watch = []
+    if fav_genre is None:
+        recommend_watch = []
+    else:
+        for movie in recommend:
+            if fav_genre in movie["genre"]:
+                recommend_watch.append(movie)
+    return recommend_watch         
 
 # No.2-M
 def get_rec_from_favorites(user_data):
