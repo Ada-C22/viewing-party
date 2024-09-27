@@ -80,26 +80,8 @@ def get_watched_avg_rating(user_data):
 
 
 def get_most_watched_genre(user_data):
+    pass
 
-    genre_frequencies= 0
-    max_value =0
-    most_watched = {}
-    if len((user_data["watched"])) > 0:
-        for i in range(len((user_data["watched"]))-1):
-
-            if user_data["watched"][i]["genre"] in most_watched:
-                genre_frequencies += 1
-                most_watched[user_data["watched"][i]["genre"]] = genre_frequencies
-            else:
-                most_watched[user_data["watched"][i]["genre"]] = 1
-
-        for key, current_value in most_watched.items():
-            if current_value > max_value:
-                max_value = current_value
-                most_watched_genre = key
-
-        return most_watched_genre
-    return None
 
 
 # -----------------------------------------
@@ -128,6 +110,7 @@ def get_friends_unique_watched(user_data):
     user_watched = []
     friends_unique_watched = []
     
+
     for movie in user_data["watched"]:
         user_watched.append(movie)
 
@@ -138,6 +121,7 @@ def get_friends_unique_watched(user_data):
                 friends_unique_watched.append(movie)
 
     return friends_unique_watched
+    
 
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
