@@ -232,11 +232,13 @@ def get_available_recs(user_data):
 
     '''
     friends_user_data = get_friends_unique_watched(user_data)
-    user_rec_movie_data = []
+    available_recs = []
+
     for movie in friends_user_data:
         if movie["host"] in user_data["subscriptions"]:
-            user_rec_movie_data.append(movie)
-    return user_rec_movie_data
+            available_recs.append(movie)
+
+    return available_recs
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
@@ -252,7 +254,7 @@ def get_new_rec_by_genre(user_data):
         user_data (dict): A dictionary with a "watched" list of movie
         dictionaries. Each movie dictionary contains information on the 
         genre, rating, and title of the movie.
-        
+
     Returns:
         recs_by_genre (list): A list of dictionaries that represents a 
         list of movies recommended for the user.
