@@ -211,9 +211,19 @@ def get_new_rec_by_genre(user_data):
     return recommendations
 
 # Function 2 for wave 5
-# def get_rec_from_favorites(user_data):
-#     for favorites in user_data["favorites"]: #movie = list of favorite movies
-#         for 
 
-#     return recommendation
+def get_rec_from_favorites(user_data):
+    favorites = user_data.get("favorites")
+    friends_watched_titles = []  
 
+    for friend in user_data.get("friends"):
+        for movie in friend.get("watched"):
+            friends_watched_titles.append(movie["title"])
+
+    recommendations = []
+
+    for movie in favorites:
+        if movie["title"] not in friends_watched_titles:
+            recommendations.append(movie)
+
+    return recommendations
