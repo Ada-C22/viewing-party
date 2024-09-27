@@ -90,42 +90,27 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
+# Refactored
 def get_unique_watched(user_data):
-    # user_list
-    watched_user_list = []
-    for movie in user_data["watched"]:
-        watched_user_list.append(movie)
+    user_watched_list = list(user_data["watched"])
 
-    user_movies_titles = set()
-    for movie in watched_user_list:
-        user_movies_titles.add(movie["title"])
+    friends_watched_list = []
+    for friend in user_data["friends"]:
+        friends_watched_list += friend["watched"]
 
-    # friends_watched_list
-    watched_list_of_friends = []
-    for movie in user_data["friends"]:
-        if "watched" in movie:
-            watched_list_of_friends.extend(movie["watched"])
+    unique_watched = []
+    for movie in user_watched_list:
+        if movie not in friends_watched_list:
+            unique_watched.append(movie)
 
-    friends_movies_titles = set()
-    for movie in watched_list_of_friends:
-        friends_movies_titles.add(movie["title"])
-
-
-    unwatched_movies = []
-    combined_movies_lists = user_movies_titles - friends_movies_titles
-    for movie in watched_user_list:
-        if movie["title"] in combined_movies_lists:
-            unwatched_movies.append(movie)
-
-
-    return unwatched_movies
+    return unique_watched
 
 def remove_duplicates(list_of_dicts):
     unique_list = []
     seen = set()
 
     for d in list_of_dicts:
-        dict_tuple = tuple(sorted(d.items()))
+        dict_tuple = tuple(d.items())
 
         if dict_tuple not in seen:
             seen.add(dict_tuple)
@@ -134,34 +119,21 @@ def remove_duplicates(list_of_dicts):
     return unique_list
 
 def get_friends_unique_watched(user_data):
-    # user_list
-    watched_user_list = []
-    for movie in user_data["watched"]:
-        watched_user_list.append(movie)
+    user_watched_list = list(user_data["watched"])
 
-    user_movies_titles = set()
-    for movie in watched_user_list:
-        user_movies_titles.add(movie["title"])
+    friends_watched_list = []
+    for friend in user_data["friends"]:
+        friends_watched_list += friend["watched"]
 
-    # friends_watched_list
-    watched_list_of_friends = []
-    for movie in user_data["friends"]:
-        if "watched" in movie:
-            watched_list_of_friends.extend(movie["watched"])
+    unique_watched = []
+    for movie in friends_watched_list:
+        if movie not in user_watched_list:
+            unique_watched.append(movie)
 
-    watched_list_of_friends = remove_duplicates(watched_list_of_friends)
+    unique_watched = remove_duplicates(unique_watched)
 
-    friends_movies_titles = set()
-    for movie in watched_list_of_friends:
-        friends_movies_titles.add(movie["title"])
+    return unique_watched
 
-    unwatched_movies = []
-    combined_movies_lists = friends_movies_titles - user_movies_titles
-    for movie in watched_list_of_friends:
-        if movie["title"] in combined_movies_lists:
-            unwatched_movies.append(movie)
-
-    return unwatched_movies
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
