@@ -144,10 +144,10 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 
 def get_available_recs(user_data):
-    subscriptions = set(user_data.get("subscriptions", []))
+    subscriptions = set(user_data["subscriptions"])
 
-    recommended_movies = set()  # Using a set to ensure uniqueness
-    user_watched = set()  # Track movies the user has already watched
+    recommended_movies = set() 
+    user_watched = set()  
 
     # Populate user_watched set with movie titles from user_data
     for movie in user_data.get("watched"):
@@ -161,7 +161,7 @@ def get_available_recs(user_data):
             if movie["host"] in subscriptions and movie["title"] not in user_watched:
                 recommended_movies.add((movie["title"], movie["host"], movie["rating"], movie["genre"]))
 
-    # Convert the set of tuples back to a list of dictionaries, including the 'genre' key
+    # Convert to a list of dictionaries
     updated_recommendation = [
         {"title": title, "host": host, "rating": rating, "genre": genre}
         for title, host, rating, genre in recommended_movies
@@ -213,14 +213,17 @@ def get_new_rec_by_genre(user_data):
 # Function 2 for wave 5
 
 def get_rec_from_favorites(user_data):
-    favorites = user_data.get("favorites")
+
+    favorites = user_data["favorites"]
+    if not favorites:
+        return []
+
     friends_watched_titles = []  
-
-    for friend in user_data.get("friends"):
-        for movie in friend.get("watched"):
-            friends_watched_titles.append(movie["title"])
-
     recommendations = []
+
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            friends_watched_titles.append(movie["title"])
 
     for movie in favorites:
         if movie["title"] not in friends_watched_titles:
