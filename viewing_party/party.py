@@ -16,7 +16,6 @@ def create_movie(movie_title, genre, rating):
 
 def add_to_watched(user_data, movie):
 
-
     # Create a copy of user data to avoid modifying original
     updated_user_data = {
             "watched": user_data["watched"][:]}
@@ -36,6 +35,7 @@ def add_to_watchlist(user_data, movie):
 
 
 def watch_movie(user_data, title):
+
     # Create a copy of user data to avoid modifying original 
     updated_user_data = {
             "watchlist": user_data["watchlist"][:],
@@ -54,6 +54,7 @@ def watch_movie(user_data, title):
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
 def get_watched_avg_rating(user_data):
+
     # User data is a dict which contains "watched" key
     count = 0.0
     sum = 0.0
@@ -88,11 +89,11 @@ def get_most_watched_genre(user_data):
         else:
             genre_frequencies[movie["genre"]] = 1
 
-    # Check for the genre with higher frequencies   
+    # Check for the genre with highest frequencies   
     for key, current_value in genre_frequencies.items():
         if current_value > max_value:
             max_value = current_value
-            most_watched = key #retrieve the key with the higuest value
+            most_watched = key #retrieve the key with the highest value
     
     return most_watched
 
@@ -112,7 +113,6 @@ def get_unique_watched(user_data):
     
     # Get every movie from user and add it to a list
     # only if is not in friends_wacthed list
-
     for movie in user_data["watched"]:
         if movie not in friends_watched:
             user_unique_watched.append(movie)
@@ -126,10 +126,6 @@ def get_friends_unique_watched(user_data):
 
     user_watched = [movie for movie in user_data["watched"]]
     friends_unique_watched = []
-    
-    # Get every movie from user and add it to a new list - moved to line 127
-    # for movie in user_data["watched"]:
-         # user_watched.append(movie)
 
     # Get every movie from friends and add it to a new list:
     # only if is not in the movies user has watched
@@ -137,7 +133,7 @@ def get_friends_unique_watched(user_data):
     for friend in user_data["friends"]:
         for movie in friend['watched']:
             if movie not in user_watched\
-                and movie not in friends_unique_watched:
+            and movie not in friends_unique_watched:
                 friends_unique_watched.append(movie)
 
     return friends_unique_watched
@@ -168,7 +164,6 @@ def get_available_recs(user_data):
 
 def get_new_rec_by_genre(user_data):
     
-
     user_freq_genre = get_most_watched_genre(user_data)
     friends_unique_movies = get_friends_unique_watched(user_data)
     
