@@ -9,9 +9,7 @@ def add_to_watched(user_data, movie):
     return user_data
 
 def add_to_watchlist(user_data: dict, movie: dict):
-
-    movie_list = user_data["watchlist"]
-    movie_list.append(movie)
+    user_data["watchlist"].append(movie)
     return user_data
 
 def watch_movie(user_data, title):
