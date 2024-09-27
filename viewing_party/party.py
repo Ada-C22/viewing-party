@@ -111,7 +111,25 @@ def get_friends_unique_watched(user_data):
 # -----------------------------------------
 # No.1-M
 def get_available_recs(user_data):
-    pass
+    my_data = user_data["watched"]
+    my_data_titles = []
+    for movie in my_data:
+        my_data_titles.append(movie["title"])
+    the_movies = []
+    added_movies = []
+
+    friends_data = user_data["friends"]
+    subscriptions = user_data["subscriptions"]
+
+    for watched in friends_data:
+        their_watched = watched["watched"]
+        for their_movie in their_watched:
+            if their_movie["host"] not in subscriptions:
+                continue
+            if their_movie["title"] not in my_data_titles and their_movie["title"] not in added_movies:
+                the_movies.append(their_movie)
+                added_movies.append(their_movie["title"])
+    return the_movies
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
