@@ -1,4 +1,4 @@
-from copy import deepcopy 
+import copy 
 # ------------- WAVE 1 --------------------
 # No.1
 def create_movie(title, genre, rating):
@@ -60,10 +60,21 @@ def get_most_watched_genre(user_data):
 
 # No.1-M
 def get_unique_watched(user_data):
-    pass
+    my_data = user_data["watched"].copy()
+    friends_data = user_data["friends"]
+    for watched in friends_data:
+        their_watched = watched["watched"]
+        for their_movie in their_watched:
+            for i in range(0, len(my_data)):
+                if their_movie["title"] == my_data[i]["title"]:
+                    del my_data[i]
+                    break
+    return my_data
+
 # No.2-A
 def get_friends_unique_watched(user_data):
     pass
+
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
