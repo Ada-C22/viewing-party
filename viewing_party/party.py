@@ -1,19 +1,69 @@
 # ------------- WAVE 1 --------------------
-# Refactored
 def create_movie(title, genre, rating):
+    '''
+    Creates a dictionary representing a movie with the given title, genre,
+    and rating.
+
+    Parameters:
+        title (str): Movie title
+        genre (str): Movie genre
+        rating (float): Movie rating
+
+    Returns:
+        user_data (dict): A dictionary with the movie's title, genre, and
+        rating, or None if any of the inputs are falsy.
+    '''
     if not (title and genre and rating):
         return None
     return {'title': title, 'genre': genre, 'rating': rating}
 
 def add_to_watched(user_data, movie):
+    '''
+    Adds a movie to the user's watched list.
+
+    Parameters:
+        user_data (dict): A dictionary containing the user's data,
+        including a "watched" key.
+        movie (dict): A dictionary representing the movie to be added to
+        the user's "watched" list.
+
+    Returns:
+        user_data (dict): The updated user_data with the movie added to
+        the "watched" list.
+    '''
     user_data["watched"].append(movie)
     return user_data
 
-def add_to_watchlist(user_data: dict, movie: dict):
+def add_to_watchlist(user_data, movie):
+    '''
+    Adds a movie to the user's watchlist.
+
+    Parameters:
+        user_data (dict): A dictionary containing the user's data,
+        including a "watchlist" key.
+        movie (dict): A dictionary representing the movie to be added to
+        the user's watchlist.
+    Returns:
+        user_data (dict): The updated user_data with the movie added to
+        the "watchlist" list.
+    '''
     user_data["watchlist"].append(movie)
     return user_data
 
 def watch_movie(user_data, title):
+    '''
+    Moves a movie from the user's watchlist to the watched list if the
+    movie title is found.
+
+    Parameters:
+        user_data (dict): A dictionary containing the user's data,
+        including "watchlist" and "watched" keys.
+        title (str): The title of the movie to move from the watchlist
+        to the watched list.
+    Returns:
+        user_data (dict): The updated user_data with the movie added to
+        the "watchlist" list.
+    '''
     for movie in user_data['watchlist']:
         if title == movie["title"]:
             user_data['watched'].append(movie)
@@ -57,13 +107,13 @@ def get_most_watched_genre(user_data):
     Determines the genre most frequently watched by the user.
     
     Parameter:
-    user_data (dict): A dictionary with a "watched" list of movie 
-    dictionaries. Each movie dictionary contains information on the
-    genre, rating, and title of the movie.
+        user_data (dict): A dictionary with a "watched" list of movie 
+        dictionaries. Each movie dictionary contains information on the
+        genre, rating, and title of the movie.
 
     Returns:
-    most_watched_genre (string): The genre most frequently watched by
-    the user, None if the list is empty.
+        most_watched_genre (string): The genre most frequently watched by
+        the user, None if the list is empty.
     '''
     if not user_data['watched']:
         return None
@@ -87,7 +137,6 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
-# Refactored
 def get_unique_watched(user_data):
     user_watched_list = list(user_data["watched"])
 
