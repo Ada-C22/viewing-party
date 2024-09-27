@@ -1,4 +1,5 @@
 # ------------- WAVE 1 --------------------
+# Refactored
 def create_movie(title, genre, rating):
     if not (title and genre and rating):
         return None
@@ -13,12 +14,11 @@ def add_to_watchlist(user_data: dict, movie: dict):
     return user_data
 
 def watch_movie(user_data, title):
-    watchlist = user_data['watchlist']
-    watched = user_data['watched']
-    for movie in watchlist:
+    for movie in user_data['watchlist']:
         if title == movie["title"]:
-            watched.append(movie)
-            watchlist.remove(movie)
+            user_data['watched'].append(movie)
+            user_data['watchlist'].remove(movie)
+            break
     return user_data
 
 # -----------------------------------------
