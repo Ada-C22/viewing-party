@@ -70,10 +70,7 @@ def get_most_watched_genre(user_data):
     """
     Determines the most frequently watched genre from the user's watched list.
     """
-    # Check if argument and the "watched" list exist
-    if not user_data or user_data['watched'] == []:
-        return None
-
+    
     count_genres = {}
 
     for movie in user_data["watched"]:
