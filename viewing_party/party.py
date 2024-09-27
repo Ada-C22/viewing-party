@@ -2,27 +2,23 @@
 # ------------- WAVE 1 --------------------
 # -----------------------------------------
 def create_movie(movie_title, genre, rating):
+
     movie= {}
 
     if movie_title and genre and rating:
-        
-        if isinstance(movie_title,str) or isinstance(genre,str)\
-        or rating.isinstance(rating (int,float)):
-            
-            movie["title"] = movie_title
-            movie["genre"] = genre
-            movie["rating"] = rating          
-                
-        return movie
     
+        movie["title"] = movie_title
+        movie["genre"] = genre
+        movie["rating"] = rating          
+        return movie
+
     return None
 
-# ALEIDA V changes:
 def add_to_watched(user_data, movie):
-    # user_data is a DICT, ONE KEY: "watched": [list of dicts]
+    # user_data is a DICT WHERE ONE KEY is "watched": [list of dicts]
     # movie, is a single DICT with "title", "genre", "rating" keys
 
-    #Crate a copy of user data to avoid modifying original LM
+    #Crate a copy of user data to avoid modifying original
     updated_user_data = {
             "watched": user_data["watched"][:]}
 
@@ -31,10 +27,9 @@ def add_to_watched(user_data, movie):
 
 
 def add_to_watchlist(user_data, movie):
-    # user_data is a DICT with key "watchlist": 
-    #[movies user WANTS to watch]
+    # user_data is a DICT with key "watchlist":[{movies user WANTS to watch}]
 
-    #Crate a copy of user data to avoid modifying original LM
+    #Crate a copy of user data to avoid modifying original
     updated_user_data = {
             "watchlist": user_data["watchlist"][:],
         } 
@@ -47,12 +42,14 @@ def watch_movie(user_data, title):
     # "watchlist" and "watched" keys
     # title is a str
 
-    #Crate a copy of user data to avoid modifying original LM
+    #Crate a copy of user data to avoid modifying original 
     updated_user_data = {
             "watchlist": user_data["watchlist"][:],
             "watched": user_data["watched"][:]
         } 
-
+    
+    #Check if movie with the title is in watchlist 
+    # and add it to the watched list
     for movie in updated_user_data["watchlist"]:
         if movie["title"] == title:
             updated_user_data["watchlist"].remove(movie)
@@ -69,6 +66,8 @@ def get_watched_avg_rating(user_data):
 
     if len(user_data["watched"]) == 0:
         return sum
+    
+    #Count and sum rating values
     for movie in user_data["watched"]:
         if movie["rating"]:
             count += 1
@@ -76,12 +75,32 @@ def get_watched_avg_rating(user_data):
         else:
             sum = 0
 
+    #calculate average 
     return sum/count
 
 
 def get_most_watched_genre(user_data):
-    pass
 
+    max_value =0
+    genre_frequencies = {}
+
+    if len(user_data["watched"]) == 0:
+        return None
+    
+    #Create key,value pairs {"genre" : genre_frequencies} in dict.
+    for movie in  user_data["watched"]:
+        if movie["genre"] in genre_frequencies:
+            genre_frequencies[movie["genre"]] += 1
+        else:
+            genre_frequencies[movie["genre"]] = 1
+
+    #Check for the genre with higher frequencies   
+    for key, current_value in genre_frequencies.items():
+            if current_value > max_value:
+                max_value = current_value
+                most_watched = key #retrieve the key with the higuest value
+    
+    return most_watched
 
 
 # -----------------------------------------
@@ -91,11 +110,14 @@ def get_unique_watched(user_data):
     #ONLY THE USER HAS WATCHED, BUT THE FRIENDS HAVE NOT
     user_unique_watched = []
     friends_watched = []
-
+    
+    #Get every movie from friends and add it to a new list
     for friend in user_data["friends"]:
         for movie in friend['watched']:
             friends_watched.append(movie)
     
+    #Get every movie from user and add it to a list
+    #only if is not in friends_wacthed list
     for movie in user_data["watched"]:
         if movie not in friends_watched:
             user_unique_watched.append(movie)
@@ -110,10 +132,15 @@ def get_friends_unique_watched(user_data):
     user_watched = []
     friends_unique_watched = []
     
+    #Get every movie from user and add it to a new list
+    
 
     for movie in user_data["watched"]:
         user_watched.append(movie)
 
+    #Get every movie from friends and add it to a new list
+    #only if is not in the movies user has watched
+    #and if it's not already in the list
     for friend in user_data["friends"]:
         for movie in friend['watched']:
             if movie not in user_watched\
@@ -131,8 +158,11 @@ def get_available_recs(user_data):
     
     rec_list = []
 
+    #Listof movies that at least one friend has watched and user hasn't
     friends_uniques = get_friends_unique_watched(user_data)
-
+    
+    #From friends movies add the movie to the list only if 
+    #the host is in user subscriptions
     for movie in friends_uniques:
         if movie["host"] in user_data["subscriptions"]:
             rec_list.append(movie)
@@ -145,18 +175,18 @@ def get_available_recs(user_data):
 
 def get_new_rec_by_genre(user_data):
     
-    # Call function from ...
-    freq_genre = get_most_watched_genre(user_data)
+
+    user_freq_genre = get_most_watched_genre(user_data)
     friends_unique_movies = get_friends_unique_watched(user_data)
     
 
     rec_list = []
     
-    if len(friends_unique_movies) >0 :
-
-        for movie in friends_unique_movies:
-            if freq_genre in movie.values():
-                rec_list.append(movie)
+    #Check the movies in friends that correspond to the same genre
+    #the user watch the most and add it to a list
+    for movie in friends_unique_movies:
+        if user_freq_genre in movie.values():
+            rec_list.append(movie)
 
     return rec_list
     
@@ -167,6 +197,8 @@ def get_rec_from_favorites(user_data):
 
     rec_list = []
     
+    #Check user unique movies and add them to a list if
+    #were marked as favorites
     for movie in user_only_movies:
         if movie in user_data["favorites"]:
             rec_list.append(movie)
