@@ -159,7 +159,7 @@ def get_rec_from_favorites(user_data):
 def get_rec_from_favorites(user_data):
     my_data = {}
     for movie in user_data["favorites"]:
-        my_data[movie["title"]] = movie;
+        my_data[movie["title"]] = movie
 
     friends_data = user_data["friends"]
     for watched in friends_data:
@@ -167,4 +167,4 @@ def get_rec_from_favorites(user_data):
         for their_movie in their_watched:
             title = their_movie["title"]
             my_data.pop(title, None)
-    return my_data.values();
+    return my_data.values()
