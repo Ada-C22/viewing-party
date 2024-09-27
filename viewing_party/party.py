@@ -259,53 +259,53 @@ def get_new_rec_by_genre(user_data):
         recs_by_genre (list): A list of dictionaries that represents a 
         list of movies recommended for the user.
     '''
-    if not user_data['watched']:
-        return []
-        
-    for friend in user_data['friends']:
-        is_friends_empty = True
-        if friend['watched']:
-            is_friends_empty = False
-            break
-    if is_friends_empty:
-        return []
-    
+    if (not user_data['watched'] or
+            not any(friend['watched']
+                    for friend in user_data['friends'])):
+        return[]
+
     recs_by_genre = []
     available_recs = get_available_recs(user_data)
     most_watched_genre = get_most_watched_genre(user_data)
 
     for rec in available_recs:
-        if rec['genre'] == most_watched_genre:
-            is_rec_found = False
-            for movie in user_data['watched']:
-                if rec['title'] == movie['title']:
-                    is_rec_found = True
-                    break
-            if not is_rec_found:
-                recs_by_genre.append(rec)
+        if (rec['genre'] == most_watched_genre and
+                not any(movie['title'] == rec['title']
+                        for movie in user_data['watched'])):
+            recs_by_genre.append(rec)
 
     return recs_by_genre
 
 def get_rec_from_favorites(user_data):
-    # user_data['favorites'] = list of movie dictionaries
-    # ^ user's favorite movies
-    # list recommended movies. include if
-    ## movie is in user's favorites
-    ## no friends have watched it
+    '''
+    Compiles a list of recommended movies from the user's favorites that
+    no friends have watched.
+
+    Parameters:
+        user_data (dict): A dictionary with a "favorites" list of movie
+        dictionaries and a "friends" list.
+
+    Returns:
+        rec_from_favorites (list): A list of dictionaries representing
+        the user's favorite movies that have not been watched by any of
+        their friends.
+    '''
 
     if not user_data['favorites']:
         return []
-    elif not user_data['friends']:
+    
+    if not user_data['friends']:
         return user_data['favorites']
 
-    friends_watched_set = set()
-    for friend in user_data['friends']:
-        for movie in friend['watched']:
-            friends_watched_set.add(movie['title'])
+    friends_watched_titles = {
+        movie['title']
+        for friend in user_data['friends']
+        for movie in friend['watched']
+    }
 
-    favorites_recommended = []
-    for favorite in user_data['favorites']:
-        if favorite['title'] not in friends_watched_set:
-            favorites_recommended.append(favorite)
+    rec_from_favorites = [
+        favorite for favorite in user_data['favorites']
+        if favorite['title'] not in friends_watched_titles
+    ]
 
-    return favorites_recommended
+    return rec_from_favorites
