@@ -144,4 +144,27 @@ def get_new_rec_by_genre(user_data):
 
 # No.2-M
 def get_rec_from_favorites(user_data):
-    pass
+    my_data = user_data["favorites"].copy()
+
+    friends_data = user_data["friends"]
+    for watched in friends_data:
+        their_watched = watched["watched"]
+        for their_movie in their_watched:
+            for i in range(0, len(my_data)):
+                if their_movie["title"] != my_data[i]["title"]:
+                    del my_data[i]
+                    break 
+    return my_data
+
+def get_rec_from_favorites(user_data):
+    my_data = {}
+    for movie in user_data["favorites"]:
+        my_data[movie["title"]] = movie;
+
+    friends_data = user_data["friends"]
+    for watched in friends_data:
+        their_watched = watched["watched"]
+        for their_movie in their_watched:
+            title = their_movie["title"]
+            my_data.pop(title, None)
+    return my_data.values();
