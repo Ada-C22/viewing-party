@@ -1,5 +1,8 @@
 # ------------- WAVE 1 --------------------
 # create dictionary with following key value pairs. 
+import pprint
+
+
 def create_movie(title, genre, rating):
     if title is None: 
         return None
@@ -70,7 +73,6 @@ def get_most_watched_genre(user_data):
             top_genre = genre_name
         else: 
             continue
-
     return top_genre
         
 
@@ -78,6 +80,41 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
+def get_unique_watched(user_data):
+    unique_watched = []
+    my_movies = user_data.get("watched")
+    friends_list = user_data.get("friends")
+    friends_movie_list=[]
+
+    for friend in friends_list:
+        watched_movies=friend['watched']
+        for friends_movie in watched_movies: 
+            friends_movie_list.append(friends_movie)
+    
+    for my_movie in my_movies:
+        if my_movie not in friends_movie_list and my_movie not in unique_watched:
+            unique_watched.append(my_movie)
+
+    return unique_watched
+    
+
+def get_friends_unique_watched(user_data):
+    unique_watched = []
+    my_movies = user_data.get("watched")
+    friends_list = user_data.get("friends")
+    friends_movie_list=[]
+
+    for friend in friends_list:
+        watched_movies=friend['watched']
+        for friends_movie in watched_movies: 
+            if friends_movie not in my_movies and friends_movie not in unique_watched:
+                unique_watched.append(friends_movie)
+    return unique_watched
+
+
+
+
+
 
         
 # -----------------------------------------
