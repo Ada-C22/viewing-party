@@ -10,17 +10,17 @@ def create_movie(title, genre, rating):
         return None
     elif rating is None: 
         return None
-    movie_dictionary= {"title": title, "genre": genre, "rating": rating }
+    movie_dictionary = {"title": title, "genre": genre, "rating": rating }
     return movie_dictionary
 
 
 def add_to_watched(user_data,movie):
-    watched_list=user_data["watched"]
+    watched_list = user_data["watched"]
     watched_list.append(movie)
     return user_data
 
 def add_to_watchlist(user_data, movie):
-    watch_list=user_data["watchlist"]
+    watch_list = user_data["watchlist"]
     watch_list.append(movie)
     return user_data
     pass
@@ -142,7 +142,6 @@ def get_new_rec_by_genre(user_data):
         movie_genre = movie["genre"]
         if movie_genre == most_watched_genre:
             new_rec_by_genre.append(movie)
-
     return new_rec_by_genre
 
 def get_rec_from_favorites(user_data):
