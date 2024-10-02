@@ -1,6 +1,7 @@
 # ------------- WAVE 1 --------------------
 # create dictionary with following key value pairs. 
 import pprint
+import operator as op
 
 
 def create_movie(title, genre, rating):
@@ -135,10 +136,14 @@ def get_new_rec_by_genre(user_data):
 
 def get_rec_from_favorites(user_data):
     favorites = user_data["favorites"]
+    unique_watched = get_unique_watched(user_data)
+    unique_watched_set = set()
+    for movie in unique_watched:
+        unique_watched_set.add(movie["title"])
     rec_from_favorites_list = []
-    for movie in favorites:
-        if movie in get_unique_watched(user_data):
-            rec_from_favorites_list.append(movie)
-            print(movie)
+    for favorite_movie in favorites:
+        print("movie in watched")
+        if favorite_movie["title"] in unique_watched_set:
+            rec_from_favorites_list.append(favorite_movie)
 
     return rec_from_favorites_list
