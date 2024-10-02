@@ -66,13 +66,9 @@ def get_most_watched_genre(user_data):
         else: 
             genre_dict[genre] += 1
     for genre_name, genre_count in genre_dict.items(): 
-        if top_genre is None: 
+        if genre_count > top_genre_count: 
             top_genre = genre_name
             top_genre_count = genre_count
-        elif genre_count > top_genre_count: 
-            top_genre = genre_name
-        else: 
-            continue
     return top_genre
         
 
