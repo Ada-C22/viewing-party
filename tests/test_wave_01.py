@@ -154,14 +154,14 @@ def test_moves_movie_from_watchlist_to_empty_watched():
 
     # Act
     updated_data = watch_movie(janes_data, MOVIE_TITLE_1)
-
+    watched_movie = updated_data["watched"][0]
     # Assert
     assert len(updated_data["watchlist"]) == 0
     assert len(updated_data["watched"]) == 1
 
-    if updated_data["watched"]:
-        if updated_data["watched"][0]["title"] != MOVIE_TITLE_1:
-            raise ValueError("The wrong movie was moved to the watched list.")
+    assert watched_movie["title"] == MOVIE_TITLE_1
+    assert watched_movie["rating"] == RATING_1
+    assert watched_movie["genre"] == GENRE_1
 
 
 #@pytest.mark.skip()
@@ -183,10 +183,7 @@ def test_moves_movie_from_watchlist_to_watched():
     assert len(updated_data["watchlist"]) == 1
     assert len(updated_data["watched"]) == 2
     
-    if updated_data["watched"][-1]["title"] != movie_to_watch["title"]:
-        raise ValueError(f"Incorrect movie added to watched list: expected '{movie_to_watch[0]['title']}', got '{updated_data["watched"][-1]["title"]}'")
-    
-    
+    assert movie_to_watch in updated_data["watched"]
     
     
 
