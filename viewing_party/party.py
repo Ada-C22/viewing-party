@@ -138,7 +138,6 @@ def get_rec_from_favorites(user_data):
         unique_watched_set.add(movie["title"])
     rec_from_favorites_list = []
     for favorite_movie in favorites:
-        print("movie in watched")
         if favorite_movie["title"] in unique_watched_set:
             rec_from_favorites_list.append(favorite_movie)
 
