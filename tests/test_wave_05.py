@@ -53,12 +53,9 @@ def test_new_genre_rec_from_empty_friends():
         ]
     }
 
-    # raise Exception("Test needs to be completed.")
     # Act
     recommendations = get_new_rec_by_genre(sonyas_data)
-    # *********************************************************************
-    # ****** Complete the Act and Assert Portions of these tests **********
-    # *********************************************************************
+
     #Assert
     assert len(recommendations) == 0
 
