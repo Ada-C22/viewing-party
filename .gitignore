@@ -143,4 +143,3 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
-tests/test_wave_01.py

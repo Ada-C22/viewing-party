@@ -115,22 +115,13 @@ def get_friends_unique_watched(user_data):
 # -----------------------------------------
 
 def get_available_recs(user_data):
-    # list titles of movies the user has already watched 
-    user_watched_list = []
-    for movie in user_data["watched"]:
-        user_watched_list.append(movie["title"])
-    
-    # list that has rec movies
+    #calling get_friends_unique_watched from wave 3 
+    unique_movies_from_friends = get_friends_unique_watched(user_data)
     recommendations = []
 
-    # loop through each friend
-    for friend in user_data["friends"]:
-        # loop through their moviees
-        for friend_movie in friend["watched"]:
-            # check if user hasn't watched the movie and if host (streaming services) is also under user
-            if (friend_movie["title"] not in user_watched_list and friend_movie["host"] in user_data["subscriptions"] and friend_movie not in recommendations):
-                recommendations.append(friend_movie)
-
+    for movies in unique_movies_from_friends:
+        if movies["host"] in user_data["subscriptions"]:
+            recommendations.append(movies)
     return recommendations
 
 
@@ -139,50 +130,30 @@ def get_available_recs(user_data):
 # -----------------------------------------
 
 def get_new_rec_by_genre(user_data):
-    #get user's most frequently watched genre
-    genre_count = {}
-    for movie in user_data["watched"]:
-        genre = movie["genre"]
-        if genre in genre_count:
-            genre_count[genre] += 1
-        else:
-            genre_count[genre] = 1
+    #use existing function (get_most_watched_genre) to get the user's most frequently watched genre
+    most_frequent_genre = get_most_watched_genre(user_data)
 
-# Find the most frequent genre
-    most_frequent_genre = None
-    max_count = 0
+    #use existing function (get_friends_unique_watched) to get friends most frequently watched movies
+    unique_movies_from_friends = get_friends_unique_watched(user_data)
+    recommendations = []
 
-    for genre, count in genre_count.items():
-        if count > max_count:
-            most_frequent_genre = genre
-            max_count = count
-    if most_frequent_genre is None:
+    if not most_frequent_genre:
         return []
     
-    # list of movies user has already watched
-    user_watch = []
-    for movie in user_data["watched"]:
-        user_watch.append(movie["title"])
-    
-    #movie needs to be added to recommeneded list if they haven't watched it but one of their friends watched it
-    recommended_list = []
-    for friend in user_data["friends"]:
-        for friend_movie in friend["watched"]:
-            if friend_movie["genre"] == most_frequent_genre and friend_movie["title"] not in user_watch and friend_movie not in recommended_list:
-                recommended_list.append(friend_movie)
-    #returns list of recommended movies
-    return recommended_list
+    #iterates through list of movies by most watched genre
+    for movies in unique_movies_from_friends:
+        if movies["genre"] == most_frequent_genre:
+            recommendations.append(movies)
+    return recommendations
+
 
 def get_rec_from_favorites(user_data):
-    # check friends movies
-    friends_watched = []
-    for friend in user_data["friends"]:
-        for movie in friend["watched"]:
-            friends_watched.append(movie["title"])
-    #add movie to list if it's user's favorite and not in friends list
-    recommended_movies = []
-    for favorite_movie in user_data["favorites"]:
-        if favorite_movie["title"] not in friends_watched:
-            recommended_movies.append(favorite_movie)    
-    # return list of recommended movies
-    return recommended_movies
+    #use existing function (get_unique_watched) to get user's watched movies
+    unique_watched_movies = get_unique_watched(user_data)
+    recommendations = []
+
+    #iterates through user's favorite movies in unique_watched_movies 
+    for movies in user_data["favorites"]:
+        if movies in unique_watched_movies:
+            recommendations.append(movies)
+    return recommendations
