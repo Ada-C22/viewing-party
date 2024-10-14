@@ -1,24 +1,24 @@
 # ------------- WAVE 1 --------------------
 
 def create_movie(title, genre, rating):
-    movies = {}
+    if not title or  not genre or not rating:
+        return None
+    else:
 
-    movies ["title"] = title
-    movies["genre"] = genre
-    movies["rating"] = rating
+        movies = {}
+
+        movies["title"] = title
+        movies["genre"] = genre
+        movies["rating"] = rating
     
-    for movie in movies.values():
-        if movie == None:
-            return None
-        
-    return movies 
+        return movies 
 
 def add_to_watched(user_data, movie):
-    user_data["watched"] = movie
+    user_data["watched"].append(movie)
     return user_data
 
 def add_to_watchlist(user_data,movie):
-    user_data["watchedlist"] = movie
+    user_data["watchlist"].append(movie)
     return user_data
 
 def watch_movie(user_data, title):
@@ -71,18 +71,35 @@ def get_most_watched_genre(user_data):
             max_key = key
     return max_key
 
-    
-
-
-
-        
-
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
+def get_unique_watched(user_data):
+    user_movies = []
+    for movies in user_data["watched"]:
+        user_movies.append(movies)
+    #print(user_movies)
+
+    friend_movies = []
+    for items in user_data["friends"]:
+        for movies in items["watched"]:
+                friend_movies.append(movies)
+    
+
+    #print (friend_movies)
+    
+    
+    unique_movies = []
+    for movie in friend_movies:
+        if movie not in user_movies:
+            unique_movies.append(movie)
 
         
+    #list_dict =  []
+    
+    print (unique_movies)
+    return unique_movies
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
