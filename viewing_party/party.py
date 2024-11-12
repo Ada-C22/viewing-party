@@ -5,11 +5,11 @@ import operator as op
 
 
 def create_movie(title, genre, rating):
-    if title is None: 
+    if not validate_data(title,str):
         return None
-    elif genre is None: 
+    if not validate_data(genre,str):
         return None
-    elif rating is None: 
+    if not validate_data(rating,float):
         return None
     movie_dictionary = {"title": title, "genre": genre, "rating": rating }
     return movie_dictionary
@@ -142,3 +142,9 @@ def get_rec_from_favorites(user_data):
             rec_from_favorites_list.append(favorite_movie)
 
     return rec_from_favorites_list
+
+def validate_data(data_input,type_needed):
+    data_type = type(data_input)
+    if data_type != type_needed: 
+        return False
+    return True
