@@ -118,9 +118,7 @@ def test_adds_movie_to_user_watchlist():
 
     # Assert
     assert len(updated_data["watchlist"]) == 1
-    assert updated_data["watchlist"][0]["title"] == MOVIE_TITLE_1
-    assert updated_data["watchlist"][0]["genre"] == GENRE_1
-    assert updated_data["watchlist"][0]["rating"] == RATING_1
+    assert movie in updated_data["watchlist"];
 
 # @pytest.mark.skip()
 def test_adds_movie_to_non_empty_user_watchlist():
@@ -134,8 +132,10 @@ def test_adds_movie_to_non_empty_user_watchlist():
         "watchlist": [FANTASY_2]
     }
 
+
     # Act
     updated_data = add_to_watchlist(user_data, movie)
+
 
     # Assert
     assert len(updated_data["watchlist"]) == 2
