@@ -1,15 +1,11 @@
 # ------------- WAVE 1 --------------------
 # create dictionary with following key value pairs. 
-import pprint
+import print
 import operator as op
 
 
 def create_movie(title, genre, rating):
-    if not validate_data(title,str):
-        return None
-    if not validate_data(genre,str):
-        return None
-    if not validate_data(rating,float):
+    if not title or not genre or not rating: 
         return None
     movie_dictionary = {"title": title, "genre": genre, "rating": rating }
     return movie_dictionary
